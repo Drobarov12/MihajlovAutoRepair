@@ -22,9 +22,9 @@ This page will have a list of all reservations, list of users and their data, an
 
 
 The theme and colors that I want to use for the front-end are the BMW M colors.
-#33A0D1
-#16588E
-#C52B30
+**#33A0D1**  - light blue<br>
+**#16588E**  - blue<br>
+**#C52B30**  - red<br>
 
 https://www.figma.com/design/Xh7lPJXVdbnZhUKbnSRCMx/MihajlovAutoRepair?node-id=0-1&t=jOEbi9p4oqiKNXGV-0
 
@@ -44,3 +44,5 @@ https://www.figma.com/design/Xh7lPJXVdbnZhUKbnSRCMx/MihajlovAutoRepair?node-id=0
     1. Create the identity provider
     2. Crete basic API calls for the reservations
     3. Handle the users
+4. Deploy
+    1. Deploy the frontend, backend and database
