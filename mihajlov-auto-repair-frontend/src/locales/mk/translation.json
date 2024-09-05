@@ -1,0 +1,14 @@
+{
+    "header": {
+      "logo": "LOGO",
+      "home": "Дома",
+      "reservations": "Резервирај",
+      "login": "Логирај се"
+    },
+    "mainContent": {
+      "title": "MIHAJLOV AUTO REPAIR",
+      "description": "Нудиме брзи и прифатливи услуги за вашите автомобили посетете не и уверете се.",
+      "button": "Научи повеке"
+    }
+  }
+  

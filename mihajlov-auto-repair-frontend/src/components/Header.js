@@ -5,24 +5,26 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
+import { useTranslation } from 'react-i18next';
 
 const Header = () => {
+  const { t } = useTranslation();
   return (
     <AppBar position="static" color="black">
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography variant="h6" component="div">
-            LOGO
+            {t('header.logo')}
           </Typography>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Button color="inherit" href="/">Home</Button>
-          <Button color="inherit" href="/reservations">Reservations</Button>
+          <Button color="inherit" href="/">{t('header.home')}</Button>
+          <Button color="inherit" href="/reservations">{t('header.reservations')}</Button>
           <Button
             variant="contained"
             sx={{ backgroundColor: 'lightBlue.main', color: 'lightBlue.contrastText' }}
           >
-            Login
+            {t('header.login')}
           </Button>
         </Box>
       </Toolbar>
