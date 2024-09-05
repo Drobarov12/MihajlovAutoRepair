@@ -1,0 +1,14 @@
+{
+    "header": {
+      "logo": "LOGO",
+      "home": "Home",
+      "reservations": "Reservations",
+      "login": "Login"
+    },
+    "mainContent": {
+      "title": "MIHAJLOV REPAIR AUTOMOBILE",
+      "description": "Lorem ipsum dolor sit amet consectetur. Tellus morbi pretium aenean pharetra. Phasellus tristique eu malesuada non pharetra phasellus egestas gravida magna.",
+      "button": "Learn more"
+    }
+  }
+  
