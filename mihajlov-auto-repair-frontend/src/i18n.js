@@ -19,8 +19,8 @@ i18n
   .use(initReactI18next) // Connects i18next to React
   .init({
     resources,
-    lng: 'mk', // Default language
-    fallbackLng: 'mk', // Fallback language if translation is missing
+    lng: 'en', // Default language
+    fallbackLng: 'en', // Fallback language if translation is missing
     interpolation: {
       escapeValue: false, // React already escapes by default
     },

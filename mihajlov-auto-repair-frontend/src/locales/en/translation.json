@@ -6,9 +6,15 @@
       "login": "Login"
     },
     "mainContent": {
-      "title": "MIHAJLOV REPAIR AUTOMOBILE",
+      "title": "MIHAJLOV AUTOMOBILE REPAIR",
       "description": "Lorem ipsum dolor sit amet consectetur. Tellus morbi pretium aenean pharetra. Phasellus tristique eu malesuada non pharetra phasellus egestas gravida magna.",
       "button": "Learn more"
+    },
+    "aboutUs":{
+      "title": "About us",
+      "firstParagraph": "Located in Strumica, Mihajlov auto repair has been the trusted BMW specialist since 2020. Founded by Kristijan Mihajlov, our team brings over 10 years of experience, offering expert care for all BMW models.",
+      "secondParagraph": "Our certified technicians are BMW experts, providing specialized services with precision. We use the latest diagnostic tools and genuine BMW parts to ensure your vehicle receives the best care possible.",
+      "thirdParagraph": "We pride ourselves on transparency, integrity, and building lasting relationships with our clients. At MIHAJLOV AUTOMOBILE REPAIR, your BMW is in the hands of professionals who care."
     }
   }
   
