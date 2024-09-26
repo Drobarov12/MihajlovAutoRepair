@@ -3,6 +3,7 @@ import Header from './Header';
 import MainContent from './Main'; 
 import AboutUs from './AboutUs'; 
 import OurServices from './OurServices';
+import WhyChooseUs from './WhyChoseUs';
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <MainContent />
       <AboutUs />
       <OurServices />
+      <WhyChooseUs />
     </div>
   );
 }
