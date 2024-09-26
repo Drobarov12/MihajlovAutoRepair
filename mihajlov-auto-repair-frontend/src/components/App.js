@@ -2,6 +2,7 @@ import './App.css';
 import Header from './Header';
 import MainContent from './Main'; 
 import AboutUs from './AboutUs'; 
+import OurServices from './OurServices';
 
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
       <Header />
       <MainContent />
       <AboutUs />
+      <OurServices />
     </div>
   );
 }
