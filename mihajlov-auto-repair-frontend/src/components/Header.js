@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 const Header = () => {
   const { t } = useTranslation();
   return (
-    <AppBar position="static" color="black">
+    <AppBar position="sticky" color="black">
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography variant="h6" component="div">
