@@ -4,6 +4,7 @@ import MainContent from './Main';
 import AboutUs from './AboutUs'; 
 import OurServices from './OurServices';
 import WhyChooseUs from './WhyChoseUs';
+import MakeReservation from './MakeReservation';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <AboutUs />
       <OurServices />
       <WhyChooseUs />
+      <MakeReservation />
     </div>
   );
 }
