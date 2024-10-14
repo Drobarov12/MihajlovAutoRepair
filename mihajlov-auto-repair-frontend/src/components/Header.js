@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const { t } = useTranslation();
@@ -18,8 +19,8 @@ const Header = () => {
           </Typography>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Button color="inherit" href="/">{t('header.home')}</Button>
-          <Button color="inherit" href="/reservations">{t('header.reservations')}</Button>
+          <Button color="inherit" component={Link} to="/">{t('header.home')}</Button>
+          <Button color="inherit" component={Link} to="/reservations">{t('header.reservations')}</Button>
           <Button
             variant="contained"
             sx={{ backgroundColor: 'lightBlue.main', color: 'lightBlue.contrastText' }}
