@@ -150,7 +150,7 @@ const ReservationPage = () => {
             <Grid item xs={12}>
               <TextField
                 fullWidth
-                label={t('reservation.descriptionsa')}
+                label={t('reservation.description')}
                 name="description"
                 value={formData.description}
                 onChange={handleChange}

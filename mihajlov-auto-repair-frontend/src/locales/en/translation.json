@@ -55,9 +55,9 @@
       "title": "Reservation",
       "name": "Name",
       "phoneNumber": "Phone number",
-      "model": "model",
-      "type": "type",
-      "description": "description",
+      "model": "Model",
+      "type": "Type",
+      "description": "Description",
       "dateTime": "Date & time",
       "reserve": "Reserve"
     },
