@@ -23,6 +23,8 @@ const Header = () => {
           <Button color="inherit" component={Link} to="/reservations">{t('header.reservations')}</Button>
           <Button
             variant="contained"
+            component={Link} 
+            to="/login"
             sx={{ backgroundColor: 'lightBlue.main', color: 'lightBlue.contrastText' }}
           >
             {t('header.login')}

@@ -5,6 +5,7 @@ import Header from './Header';
 import MainFooter from './MainFooter';
 import HomePage from './HomePage';
 import ReservationPage from './ReservationPage';
+import LogInPage from './LogInPage';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
       <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/reservations" element={<ReservationPage />} />
+      <Route path="/login" element={<LogInPage />} />
       </Routes>
       <MainFooter />
     </Box>

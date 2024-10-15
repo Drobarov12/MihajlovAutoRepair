@@ -60,6 +60,12 @@
       "description": "description",
       "dateTime": "Date & time",
       "reserve": "Reserve"
+    },
+    "login": {
+      "title": "Login",
+      "username": "Username",
+      "password": "Password",
+      "or": "or"
     }
 
   }
