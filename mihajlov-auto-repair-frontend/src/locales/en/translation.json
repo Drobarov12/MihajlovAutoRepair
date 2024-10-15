@@ -50,6 +50,16 @@
       "title": "Make reservation today!",
       "description": "Let’s embody your beautiful ideas together, simplify the way you visualize your next big things.",
       "button": "Contact Us"
+    },
+    "reservation": {
+      "title": "Reservation",
+      "name": "Name",
+      "phoneNumber": "Phone number",
+      "model": "model",
+      "type": "type",
+      "description": "description",
+      "dateTime": "Date & time",
+      "reserve": "Reserve"
     }
 
   }

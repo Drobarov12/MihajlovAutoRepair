@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { Container, TextField, Button, MenuItem, Select, InputLabel, FormControl, Grid, Box, Typography } from '@mui/material';
-import mainPhoto from '../assets/mainphoto.png';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { useTranslation } from 'react-i18next';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(customParseFormat);
 
 const ReservationPage = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: '',
     phoneNumber: '',
     model: '',
     type: '',
     description: '',
-    dateTime: new Date(),
+    dateTime: dayjs(),
   });
 
   const handleChange = (e) => {
@@ -25,19 +30,24 @@ const ReservationPage = () => {
   const handleDateChange = (date) => {
     setFormData({
       ...formData,
-      dateTime: date,
+      dateTime: dayjs(date),
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    if (formData.dateTime.isValid()) {
+      console.log(formData);
+    } else {
+      console.log('Invalid Date');
+    }
   };
 
   return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
     <Box
       sx={{
-        backgroundImage: 'url("../assets/mainphoto.png")', // Replace with your background image
+        backgroundImage: 'url("../assets/mainphoto.png")', 
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         minHeight: '100vh',
@@ -48,7 +58,7 @@ const ReservationPage = () => {
     >
       <Box
         sx={{
-          backgroundColor: 'rgba(0, 0, 0, 0.6)', // Dark translucent background
+          backgroundColor: 'rgba(0, 0, 0, 0.6)', 
           padding: '30px',
           borderRadius: '12px',
           maxWidth: '600px',
@@ -56,14 +66,14 @@ const ReservationPage = () => {
         }}
       >
         <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 4, color: 'white' }}>
-          Reservation
+        {t('reservation.title')}
         </Typography>
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
                 fullWidth
-                label="Name"
+                label={t('reservation.name')}
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
@@ -83,7 +93,7 @@ const ReservationPage = () => {
             <Grid item xs={12}>
               <TextField
                 fullWidth
-                label="Phone number"
+                label={t('reservation.phoneNumber')}
                 name="phoneNumber"
                 value={formData.phoneNumber}
                 onChange={handleChange}
@@ -102,7 +112,7 @@ const ReservationPage = () => {
             </Grid>
             <Grid item xs={12}>
               <FormControl fullWidth variant="filled">
-                <InputLabel style={{ color: 'white' }}>Model</InputLabel>
+                <InputLabel style={{ color: 'white' }}>{t('reservation.model')}</InputLabel>
                 <Select
                   name="model"
                   value={formData.model}
@@ -121,7 +131,7 @@ const ReservationPage = () => {
             </Grid>
             <Grid item xs={12}>
               <FormControl fullWidth variant="filled">
-                <InputLabel style={{ color: 'white' }}>Type</InputLabel>
+                <InputLabel style={{ color: 'white' }}>{t('reservation.type')}</InputLabel>
                 <Select
                   name="type"
                   value={formData.type}
@@ -140,7 +150,7 @@ const ReservationPage = () => {
             <Grid item xs={12}>
               <TextField
                 fullWidth
-                label="Description"
+                label={t('reservation.descriptionsa')}
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
@@ -160,13 +170,13 @@ const ReservationPage = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              {/* <LocalizationProvider>
-                <DateTimePicker
-                  label="Date and Time"
+              <DateTimePicker
+                  label={t('reservation.dateTime')}
+                  variant="filled"
                   value={formData.dateTime}
                   onChange={handleDateChange}
                   renderInput={(params) => (
-                    <TextField
+                    <TextField 
                       {...params}
                       fullWidth
                       variant="filled"
@@ -183,21 +193,20 @@ const ReservationPage = () => {
                     />
                   )}
                 />
-              </LocalizationProvider> */}
             </Grid>
             <Grid item xs={12}>
             <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
               <Button
                 variant="contained"
                 sx={{
-                  backgroundColor: '#1976D2', // Blue button
+                  backgroundColor: '#1976D2', 
                   color: 'white',
                   padding: '10px',
                   borderRadius: '8px',
                 }}
                 type="submit"
               >
-                Reserve
+                {t('reservation.reserve')}
               </Button>
               </Box>
             </Grid>
@@ -205,6 +214,7 @@ const ReservationPage = () => {
         </form>
       </Box>
     </Box>
+    </LocalizationProvider>
   );
 };
 
