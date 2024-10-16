@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Card, Typography, Box } from '@mui/material';
-import bookmarkIcon from '../assets/services.png';
+import bookmarkIcon from '../../assets/services.png';
 import { useTranslation } from 'react-i18next';
 
 // TODO add translation 

@@ -171,28 +171,28 @@ const ReservationPage = () => {
             </Grid>
             <Grid item xs={12}>
               <DateTimePicker
-                  label={t('reservation.dateTime')}
-                  variant="filled"
-                  value={formData.dateTime}
-                  onChange={handleDateChange}
-                  renderInput={(params) => (
-                    <TextField 
-                      {...params}
-                      fullWidth
-                      variant="filled"
-                      InputProps={{
-                        sx: {
-                          backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                          color: 'white',
-                          borderRadius: '8px',
-                        },
-                      }}
-                      InputLabelProps={{
-                        style: { color: 'white' },
-                      }}
-                    />
-                  )}
-                />
+                label={t('reservation.dateTime')}
+                value={formData.dateTime}
+                onChange={handleDateChange}
+                sx={{
+                  width: '100%',
+                  '& .MuiInputBase-root': { 
+                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                    color: 'white',
+                    borderRadius: '8px',
+                  },
+                  '& .MuiInputLabel-root': { 
+                    color: 'white',
+                  },
+                  '& .MuiOutlinedInput-notchedOutline': {
+                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                  },
+                  '& .MuiSvgIcon-root': {
+                    color: 'white', 
+                  },
+                }}
+                
+              />
             </Grid>
             <Grid item xs={12}>
             <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>

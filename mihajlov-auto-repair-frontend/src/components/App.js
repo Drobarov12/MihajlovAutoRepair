@@ -2,8 +2,8 @@ import './App.css';
 import { Box } from '@mui/material';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './Header';
-import MainFooter from './MainFooter';
-import HomePage from './HomePage';
+import Footer from './Footer';
+import HomePage from './HomePage/HomePage';
 import ReservationPage from './ReservationPage';
 import LogInPage from './LogInPage';
 
@@ -25,7 +25,7 @@ function App() {
       <Route path="/reservations" element={<ReservationPage />} />
       <Route path="/login" element={<LogInPage />} />
       </Routes>
-      <MainFooter />
+      <Footer />
     </Box>
     </Router>
   );

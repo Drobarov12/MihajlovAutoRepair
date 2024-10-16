@@ -5,7 +5,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import { useTranslation } from 'react-i18next';
 
-const MainFooter = () => {
+const Footer = () => {
     const { t } = useTranslation();
   return (
     <Box
@@ -66,4 +66,4 @@ const MainFooter = () => {
   );
 };
 
-export default MainFooter;
+export default Footer;

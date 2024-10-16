@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Grid, Typography, Accordion, AccordionSummary, AccordionDetails, Box } from '@mui/material';
-import bmwWhyChoseUs from '../assets/bmwWhyChoseUs.png';
+import bmwWhyChoseUs from '../../assets/bmwWhyChoseUs.png';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useTranslation } from 'react-i18next';
 
