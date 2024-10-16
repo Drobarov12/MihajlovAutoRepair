@@ -1,0 +1,7 @@
+﻿@MihajlovAutoRepairApi_HostAddress = http://localhost:5105
+
+GET {{MihajlovAutoRepairApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
