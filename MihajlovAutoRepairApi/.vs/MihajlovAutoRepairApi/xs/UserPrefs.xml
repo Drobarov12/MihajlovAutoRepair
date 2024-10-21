@@ -1,4 +1,32 @@
 ﻿<Properties StartupConfiguration="{7D246BD1-A953-4CB0-B326-50EAAEBAC978}|https">
-  <MonoDevelop.Ide.ItemProperties.MihajlovAutoRepairApi FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.MihajlovAutoRepairApi PreferredExecutionTarget="/Applications/Opera GX.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MihajlovAutoRepairApi/Controllers/WeatherForecastController.cs">
+    <Files>
+      <File FileName="MihajlovAutoRepairApi/Program.cs" Line="21" Column="24" />
+      <File FileName="MihajlovAutoRepairApi/Controllers/WeatherForecastController.cs" Line="32" Column="2" />
+      <File FileName="MihajlovAutoRepairApi/WeatherForecast.cs" Line="12" Column="2" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="MihajlovAutoRepairApi">
+            <Node name="MihajlovAutoRepairApi">
+              <Node name="Controllers" expanded="True">
+                <Node name="WeatherForecastController.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>
