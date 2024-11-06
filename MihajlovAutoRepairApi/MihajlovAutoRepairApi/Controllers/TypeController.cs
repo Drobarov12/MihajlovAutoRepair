@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MihajlovAutoRepairApi.Models.Dtos;
 using MihajlovAutoRepairApi.Repository;
@@ -46,6 +47,7 @@ public class TypeController : ControllerBase
 
     // POST: api/Type
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> CreateType([FromBody] TypeCreateDto typeCreateDto)
     {
         if (!ModelState.IsValid)
