@@ -1,21 +1,17 @@
-using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
+using Microsoft.AspNetCore.Identity;
 
 namespace MihajlovAutoRepairApi.Models;
 
-public class User
+public class User : IdentityUser<long>
 {
-    [Key]
-    public long Id { get; set; }
-    [Required]
-    public string Username { get; set; }
     public string Name { get; set; }
-    [Required]
-    public string Email { get; set; }
-    public string Password { get; set; }
-    public int PhoneNumber { get; set; }
     public long ModelId { get; set; }
 
     // Navigation properties
-    public Model Model { get; set; }
+    [NotMapped]
+    public ICollection<Model> Model { get; set; } 
+    [NotMapped]
     public ICollection<Reservation> Reservations { get; set; }
 }

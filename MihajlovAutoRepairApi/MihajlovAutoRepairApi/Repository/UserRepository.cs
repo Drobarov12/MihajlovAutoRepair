@@ -17,7 +17,7 @@ public class UserRepository : IUserRepository
         return await _context.Users.Include(u => u.Model).ToListAsync();
     }
 
-    public async Task<User> GetByIdAsync(long id)
+    public async Task<User?> GetByIdAsync(long id)
     {
         return await _context.Users.Include(u => u.Model).FirstOrDefaultAsync(u => u.Id == id);
     }
