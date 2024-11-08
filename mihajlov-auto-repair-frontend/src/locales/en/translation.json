@@ -1,0 +1,72 @@
+{
+    "header": {
+      "logo": "LOGO",
+      "home": "Home",
+      "reservations": "Reservations",
+      "login": "Login"
+    },
+    "mainContent": {
+      "title": "MIHAJLOV AUTOMOBILE REPAIR",
+      "description": "Lorem ipsum dolor sit amet consectetur. Tellus morbi pretium aenean pharetra. Phasellus tristique eu malesuada non pharetra phasellus egestas gravida magna.",
+      "button": "Learn more"
+    },
+    "aboutUs":{
+      "title": "About us",
+      "firstParagraph": "Located in Strumica, Mihajlov auto repair has been the trusted BMW specialist since 2020. Founded by Kristijan Mihajlov, our team brings over 10 years of experience, offering expert care for all BMW models.",
+      "secondParagraph": "Our certified technicians are BMW experts, providing specialized services with precision. We use the latest diagnostic tools and genuine BMW parts to ensure your vehicle receives the best care possible.",
+      "thirdParagraph": "We pride ourselves on transparency, integrity, and building lasting relationships with our clients. At MIHAJLOV AUTOMOBILE REPAIR, your BMW is in the hands of professionals who care."
+    },
+    "ourServices":{
+      "title": "Our services",
+      "firstCardTitle": "ROUTINE MAINTENANCE",
+      "firstCardDescription": "Keep your BMW in peak condition with our comprehensive maintenance packages.",
+      "secondCardTitle": "DIAGNOSTICS AND REPAIRS",
+      "secondCardDescription": "From minor issues to major repairs, we have the expertise to diagnose and fix any problem.",
+      "thidCardTitle": "PERFORMANCE TUNING",
+      "thidCardDescription": "Unleash the full potential of your BMW with our specialized performance tuning services.",
+      "fourthCardTitle": "PRE-PURCHASE INSPECTIONS",
+      "fourthCardDescription": "Ensure peace of mind before buying a used BMW with our detailed inspection services."
+    },
+    "whyChooseUs": {
+      "title": "WHY CHOOSE US",
+      "bmwExpertise": {
+        "title": "BMW Expertise",
+        "description": "Our technicians are not just general mechanics; they are highly trained BMW specialists with years of hands-on experience. We have factory-certified training that enables us to understand the intricacies of every BMW model, from the classic series to the latest high-performance editions. Our commitment is to provide a level of service that meets BMW's high standards, ensuring that every repair and maintenance task is performed with precision. We know the engineering behind your vehicle, so you can trust that every component will be cared for as intended by BMW themselves. Your vehicle's performance and longevity are our top priority."
+      },
+      "stateOfTheArtEquipment": {
+        "title": "State-of-the-Art Equipment",
+        "description": "We take pride in using only the latest and most advanced tools and technology available in the automotive industry. Our workshop is equipped with state-of-the-art diagnostic equipment that can quickly identify issues that may not be immediately visible to the naked eye. Whether it's advanced computer diagnostics, high-quality parts, or specialized tools designed specifically for BMWs, we use the best of the best to ensure your car runs smoothly. Our approach to service is holistic: we don’t just treat the problem; we thoroughly assess every aspect of your vehicle to make sure it’s operating at peak performance."
+      },
+      "personalizedService": {
+        "title": "Personalized Service",
+        "description": "At our workshop, every BMW owner is treated like part of the family. We understand that each customer has unique needs and preferences when it comes to their vehicle, and we go the extra mile to tailor our services to meet those specific demands. From the moment you step through our doors, you'll experience a personalized approach to care and service. Our technicians take the time to understand your driving habits, maintenance preferences, and any concerns you may have about your car. We provide clear communication throughout the entire process, ensuring you are informed and comfortable with all service recommendations and decisions."
+      },
+      "transparentPricing": {
+        "title": "Transparent Pricing",
+        "description": "We believe in providing our customers with complete transparency when it comes to pricing. With us, there are no hidden fees, surprise charges, or ambiguous explanations. Before any work is performed on your BMW, we provide a detailed estimate of the costs involved, so you know exactly what you're paying for. Our commitment to honest pricing allows us to build long-lasting relationships based on trust and reliability. We use genuine BMW parts and provide a clear breakdown of labor costs, ensuring that the value you receive is aligned with the high-quality service you deserve. With transparent pricing, your investment in your car is always clear."
+      }
+    },
+    "makeReservation": {
+      "title": "Make reservation today!",
+      "description": "Let’s embody your beautiful ideas together, simplify the way you visualize your next big things.",
+      "button": "Contact Us"
+    },
+    "reservation": {
+      "title": "Reservation",
+      "name": "Name",
+      "phoneNumber": "Phone number",
+      "model": "Model",
+      "type": "Type",
+      "description": "Description",
+      "dateTime": "Date & time",
+      "reserve": "Reserve"
+    },
+    "login": {
+      "title": "Login",
+      "username": "Username",
+      "password": "Password",
+      "or": "or"
+    }
+
+  }
+  
