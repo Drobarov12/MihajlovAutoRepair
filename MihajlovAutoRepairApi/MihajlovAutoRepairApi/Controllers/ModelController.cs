@@ -79,7 +79,7 @@ public class ModelController : ControllerBase
 
         await _repository.UpdateAsync(model);
 
-        return NoContent();
+        return Ok(id);
     }
 
     // DELETE: api/Model/5
@@ -93,6 +93,6 @@ public class ModelController : ControllerBase
         }
 
         await _repository.DeleteAsync(id);
-        return NoContent();
+        return Ok(id);
     }
 }

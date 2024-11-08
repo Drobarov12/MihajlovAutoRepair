@@ -47,7 +47,6 @@ public class TypeController : ControllerBase
 
     // POST: api/Type
     [HttpPost]
-    [Authorize]
     public async Task<IActionResult> CreateType([FromBody] TypeCreateDto typeCreateDto)
     {
         if (!ModelState.IsValid)
@@ -82,7 +81,7 @@ public class TypeController : ControllerBase
 
         await _repository.UpdateAsync(type);
 
-        return NoContent();
+        return Ok(id);
     }
 
     // DELETE: api/Type/5
@@ -96,6 +95,6 @@ public class TypeController : ControllerBase
         }
 
         await _repository.DeleteAsync(id);
-        return NoContent();
+        return Ok(id);
     }
 }
