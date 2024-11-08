@@ -1,0 +1,38 @@
+# Ignore build outputs
+bin/
+obj/
+
+# Ignore user-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider-specific
+.idea/
+*.sln.iml
+
+# Auto-generated files
+.vscode/
+*.log
+*.lock.json
+*.ide/
+
+# Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# VS Code directories
+.vscode/
+
+# Logs
+*.log
+
+# DotNet Core specific
+project.lock.json
+project.fragment.lock.json
+artifacts/
