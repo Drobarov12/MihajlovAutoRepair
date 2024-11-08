@@ -1,0 +1,1005 @@
+[
+  {
+    "ModelName": "E81 116i 2007-2012 122hp (90kw)"
+  },
+  {
+    "ModelName": "E81 118i 2007-2012 143hp (105kw)"
+  },
+  {
+    "ModelName": "E81 120i 2007-2012 170hp (125kw)"
+  },
+  {
+    "ModelName": "E81 130i 2007-2012 265hp (195kw)"
+  },
+  {
+    "ModelName": "E81 116d 2009-2012 116hp (85kw)"
+  },
+  {
+    "ModelName": "E81 118d 2007-2012 143hp (105kw)"
+  },
+  {
+    "ModelName": "E81 120d 2007-2012 177hp (130kw)"
+  },
+  {
+    "ModelName": "E81 123d 2007-2012 204hp (150kw)"
+  },
+  {
+    "ModelName": "E87 116i 2004-2012 115hp (85kw)"
+  },
+  {
+    "ModelName": "E87 118i 2004-2012 129hp (95kw)"
+  },
+  {
+    "ModelName": "E87 120i 2004-2012 150hp (110kw)"
+  },
+  {
+    "ModelName": "E87 130i 2005-2012 265hp (195kw)"
+  },
+  {
+    "ModelName": "E87 116d 2009-2012 116hp (85kw)"
+  },
+  {
+    "ModelName": "E87 118d 2004-2012 143hp (105kw)"
+  },
+  {
+    "ModelName": "E87 120d 2004-2012 163hp (120kw)"
+  },
+  {
+    "ModelName": "E87 123d 2007-2012 204hp (150kw)"
+  },
+  {
+    "ModelName": "F20 116i 2011-2019 136hp (100kw)"
+  },
+  {
+    "ModelName": "F20 118i 2011-2019 170hp (125kw)"
+  },
+  {
+    "ModelName": "F20 120i 2011-2019 184hp (135kw)"
+  },
+  {
+    "ModelName": "F20 125i 2012-2019 218hp (160kw)"
+  },
+  {
+    "ModelName": "F20 M135i 2012-2015 320hp (235kw)"
+  },
+  {
+    "ModelName": "F20 M140i 2015-2019 340hp (250kw)"
+  },
+  {
+    "ModelName": "F20 116d 2011-2019 116hp (85kw)"
+  },
+  {
+    "ModelName": "F20 118d 2011-2019 150hp (110kw)"
+  },
+  {
+    "ModelName": "F20 120d 2011-2019 190hp (140kw)"
+  },
+  {
+    "ModelName": "F20 125d 2012-2019 224hp (165kw)"
+  },
+  {
+    "ModelName": "F40 118i 2019-present 140hp (103kw)"
+  },
+  {
+    "ModelName": "F40 120i 2019-present 178hp (130kw)"
+  },
+  {
+    "ModelName": "F40 M135i xDrive 2019-present 306hp (225kw)"
+  },
+  {
+    "ModelName": "F40 116d 2019-present 116hp (85kw)"
+  },
+  {
+    "ModelName": "F40 118d 2019-present 150hp (110kw)"
+  },
+  {
+    "ModelName": "F40 120d 2019-present 190hp (140kw)"
+  },
+  {
+    "ModelName": "F22 218i 2014-2021 136hp (100kw)"
+  },
+  {
+    "ModelName": "F22 220i 2014-2021 184hp (135kw)"
+  },
+  {
+    "ModelName": "F22 230i 2016-2021 252hp (185kw)"
+  },
+  {
+    "ModelName": "F22 M240i 2016-2021 340hp (250kw)"
+  },
+  {
+    "ModelName": "F22 218d 2014-2021 150hp (110kw)"
+  },
+  {
+    "ModelName": "F22 220d 2014-2021 190hp (140kw)"
+  },
+  {
+    "ModelName": "F22 225d 2014-2021 224hp (165kw)"
+  },
+  {
+    "ModelName": "F23 218i 2015-2021 136hp (100kw)"
+  },
+  {
+    "ModelName": "F23 220i 2015-2021 184hp (135kw)"
+  },
+  {
+    "ModelName": "F23 230i 2016-2021 252hp (185kw)"
+  },
+  {
+    "ModelName": "F23 M240i 2016-2021 340hp (250kw)"
+  },
+  {
+    "ModelName": "F23 218d 2015-2021 150hp (110kw)"
+  },
+  {
+    "ModelName": "F23 220d 2015-2021 190hp (140kw)"
+  },
+  {
+    "ModelName": "F23 225d 2015-2021 224hp (165kw)"
+  },
+  {
+    "ModelName": "F87 M2 2015-2021 370hp (272kw)"
+  },
+  {
+    "ModelName": "F87 M2 Competition 2018-2021 410hp (302kw)"
+  },
+  {
+    "ModelName": "F87 M2 CS 2020-2021 450hp (331kw)"
+  },
+  {
+    "ModelName": "F44 218i Gran Coupe 2019-present 140hp (103kw)"
+  },
+  {
+    "ModelName": "F44 220i Gran Coupe 2019-present 178hp (130kw)"
+  },
+  {
+    "ModelName": "F44 M235i xDrive Gran Coupe 2019-present 306hp (225kw)"
+  },
+  {
+    "ModelName": "F44 218d Gran Coupe 2019-present 150hp (110kw)"
+  },
+  {
+    "ModelName": "F44 220d Gran Coupe 2019-present 190hp (140kw)"
+  },
+  {
+    "ModelName": "G42 220i 2021-present 184hp (135kw)"
+  },
+  {
+    "ModelName": "G42 230i 2021-present 258hp (190kw)"
+  },
+  {
+    "ModelName": "G42 M240i xDrive 2021-present 374hp (275kw)"
+  },
+  {
+    "ModelName": "E30 316i 1983-1991 101hp (74kw)"
+  },
+  {
+    "ModelName": "E30 318i 1982-1991 113hp (83kw)"
+  },
+  {
+    "ModelName": "E30 320i 1982-1993 129hp (95kw)"
+  },
+  {
+    "ModelName": "E30 325i 1985-1993 170hp (125kw)"
+  },
+  {
+    "ModelName": "E30 M3 1985-1992 195hp (143kw)"
+  },
+  {
+    "ModelName": "E30 324d 1985-1993 86hp (63kw)"
+  },
+  {
+    "ModelName": "E30 324td 1987-1993 115hp (85kw)"
+  },
+  {
+    "ModelName": "E36 316i 1990-2000 102hp (75kw)"
+  },
+  {
+    "ModelName": "E36 318i 1990-2000 115hp (85kw)"
+  },
+  {
+    "ModelName": "E36 320i 1990-2000 150hp (110kw)"
+  },
+  {
+    "ModelName": "E36 323i 1995-2000 170hp (125kw)"
+  },
+  {
+    "ModelName": "E36 325i 1990-1995 192hp (141kw)"
+  },
+  {
+    "ModelName": "E36 328i 1995-2000 193hp (142kw)"
+  },
+  {
+    "ModelName": "E36 M3 1992-1999 286hp (210kw)"
+  },
+  {
+    "ModelName": "E36 318tds 1994-2000 90hp (66kw)"
+  },
+  {
+    "ModelName": "E36 325td 1990-1998 116hp (85kw)"
+  },
+  {
+    "ModelName": "E36 325tds 1993-2000 143hp (105kw)"
+  },
+  {
+    "ModelName": "E46 316i 1998-2005 105hp (77kw)"
+  },
+  {
+    "ModelName": "E46 318i 1998-2005 118hp (87kw)"
+  },
+  {
+    "ModelName": "E46 320i 1998-2005 150hp (110kw)"
+  },
+  {
+    "ModelName": "E46 325i 2000-2005 192hp (141kw)"
+  },
+  {
+    "ModelName": "E46 330i 2000-2005 231hp (170kw)"
+  },
+  {
+    "ModelName": "E46 M3 2000-2006 343hp (252kw)"
+  },
+  {
+    "ModelName": "E46 320d 1998-2005 136hp (100kw)"
+  },
+  {
+    "ModelName": "E46 330d 1999-2005 184hp (135kw)"
+  },
+  {
+    "ModelName": "E90 318i 2005-2012 143hp (105kw)"
+  },
+  {
+    "ModelName": "E90 320i 2005-2012 150hp (110kw)"
+  },
+  {
+    "ModelName": "E90 325i 2005-2012 218hp (160kw)"
+  },
+  {
+    "ModelName": "E90 330i 2005-2012 258hp (190kw)"
+  },
+  {
+    "ModelName": "E90 335i 2006-2012 306hp (225kw)"
+  },
+  {
+    "ModelName": "E90 M3 2007-2013 420hp (309kw)"
+  },
+  {
+    "ModelName": "E90 320d 2005-2012 163hp (120kw)"
+  },
+  {
+    "ModelName": "E90 330d 2005-2012 231hp (170kw)"
+  },
+  {
+    "ModelName": "E90 335d 2006-2012 286hp (210kw)"
+  },
+  {
+    "ModelName": "F30 316i 2012-2015 136hp (100kw)"
+  },
+  {
+    "ModelName": "F30 318i 2015-2019 136hp (100kw)"
+  },
+  {
+    "ModelName": "F30 320i 2012-2019 184hp (135kw)"
+  },
+  {
+    "ModelName": "F30 330i 2015-2019 252hp (185kw)"
+  },
+  {
+    "ModelName": "F30 335i 2012-2015 306hp (225kw)"
+  },
+  {
+    "ModelName": "F30 340i 2015-2019 326hp (240kw)"
+  },
+  {
+    "ModelName": "F30 M3 2014-2019 431hp (317kw)"
+  },
+  {
+    "ModelName": "F30 316d 2012-2015 116hp (85kw)"
+  },
+  {
+    "ModelName": "F30 318d 2012-2019 150hp (110kw)"
+  },
+  {
+    "ModelName": "F30 320d 2012-2019 190hp (140kw)"
+  },
+  {
+    "ModelName": "F30 330d 2012-2019 258hp (190kw)"
+  },
+  {
+    "ModelName": "F30 335d 2013-2019 313hp (230kw)"
+  },
+  {
+    "ModelName": "G20 318i 2019-present 156hp (115kw)"
+  },
+  {
+    "ModelName": "G20 320i 2019-present 184hp (135kw)"
+  },
+  {
+    "ModelName": "G20 330i 2019-present 258hp (190kw)"
+  },
+  {
+    "ModelName": "G20 M340i 2019-present 374hp (275kw)"
+  },
+  {
+    "ModelName": "G20 M3 2021-present 510hp (375kw)"
+  },
+  {
+    "ModelName": "G20 316d 2019-present 122hp (90kw)"
+  },
+  {
+    "ModelName": "G20 318d 2019-present 150hp (110kw)"
+  },
+  {
+    "ModelName": "G20 320d 2019-present 190hp (140kw)"
+  },
+  {
+    "ModelName": "G20 330d 2019-present 286hp (210kw)"
+  },
+  {
+    "ModelName": "F32 420i 2013-2020 184hp (135kw)"
+  },
+  {
+    "ModelName": "F32 428i 2013-2016 245hp (180kw)"
+  },
+  {
+    "ModelName": "F32 430i 2016-2020 252hp (185kw)"
+  },
+  {
+    "ModelName": "F32 435i 2013-2016 306hp (225kw)"
+  },
+  {
+    "ModelName": "F32 440i 2016-2020 326hp (240kw)"
+  },
+  {
+    "ModelName": "F32 420d 2013-2020 190hp (140kw)"
+  },
+  {
+    "ModelName": "F32 430d 2013-2020 258hp (190kw)"
+  },
+  {
+    "ModelName": "F32 435d xDrive 2013-2020 313hp (230kw)"
+  },
+  {
+    "ModelName": "F33 420i Convertible 2013-2020 184hp (135kw)"
+  },
+  {
+    "ModelName": "F33 428i Convertible 2013-2016 245hp (180kw)"
+  },
+  {
+    "ModelName": "F33 430i Convertible 2016-2020 252hp (185kw)"
+  },
+  {
+    "ModelName": "F33 435i Convertible 2013-2016 306hp (225kw)"
+  },
+  {
+    "ModelName": "F33 440i Convertible 2016-2020 326hp (240kw)"
+  },
+  {
+    "ModelName": "F33 420d Convertible 2013-2020 190hp (140kw)"
+  },
+  {
+    "ModelName": "F33 430d Convertible 2013-2020 258hp (190kw)"
+  },
+  {
+    "ModelName": "F33 435d xDrive Convertible 2013-2020 313hp (230kw)"
+  },
+  {
+    "ModelName": "F36 420i Gran Coupe 2014-2020 184hp (135kw)"
+  },
+  {
+    "ModelName": "F36 428i Gran Coupe 2014-2016 245hp (180kw)"
+  },
+  {
+    "ModelName": "F36 430i Gran Coupe 2016-2020 252hp (185kw)"
+  },
+  {
+    "ModelName": "F36 435i Gran Coupe 2014-2016 306hp (225kw)"
+  },
+  {
+    "ModelName": "F36 440i Gran Coupe 2016-2020 326hp (240kw)"
+  },
+  {
+    "ModelName": "F36 420d Gran Coupe 2014-2020 190hp (140kw)"
+  },
+  {
+    "ModelName": "F36 430d Gran Coupe 2014-2020 258hp (190kw)"
+  },
+  {
+    "ModelName": "F36 435d xDrive Gran Coupe 2014-2020 313hp (230kw)"
+  },
+  {
+    "ModelName": "G22 420i Coupe 2020-present 184hp (135kw)"
+  },
+  {
+    "ModelName": "G22 430i Coupe 2020-present 258hp (190kw)"
+  },
+  {
+    "ModelName": "G22 M440i xDrive Coupe 2020-present 374hp (275kw)"
+  },
+  {
+    "ModelName": "G22 420d Coupe 2020-present 190hp (140kw)"
+  },
+  {
+    "ModelName": "G22 430d xDrive Coupe 2020-present 286hp (210kw)"
+  },
+  {
+    "ModelName": "G22 M440d xDrive Coupe 2020-present 340hp (250kw)"
+  },
+  {
+    "ModelName": "G23 420i Convertible 2020-present 184hp (135kw)"
+  },
+  {
+    "ModelName": "G23 430i Convertible 2020-present 258hp (190kw)"
+  },
+  {
+    "ModelName": "G23 M440i xDrive Convertible 2020-present 374hp (275kw)"
+  },
+  {
+    "ModelName": "G23 420d Convertible 2020-present 190hp (140kw)"
+  },
+  {
+    "ModelName": "G23 430d xDrive Convertible 2020-present 286hp (210kw)"
+  },
+  {
+    "ModelName": "G23 M440d xDrive Convertible 2020-present 340hp (250kw)"
+  },
+  {
+    "ModelName": "G26 420i Gran Coupe 2021-present 184hp (135kw)"
+  },
+  {
+    "ModelName": "G26 430i Gran Coupe 2021-present 258hp (190kw)"
+  },
+  {
+    "ModelName": "G26 M440i xDrive Gran Coupe 2021-present 374hp (275kw)"
+  },
+  {
+    "ModelName": "G26 420d Gran Coupe 2021-present 190hp (140kw)"
+  },
+  {
+    "ModelName": "G26 430d xDrive Gran Coupe 2021-present 286hp (210kw)"
+  },
+  {
+    "ModelName": "G26 M440d xDrive Gran Coupe 2021-present 340hp (250kw)"
+  },
+  {
+    "ModelName": "E39 520i 1995-2000 150hp (110kw)"
+  },
+  {
+    "ModelName": "E39 520i 2000-2003 170hp (125kw)"
+  },
+  {
+    "ModelName": "E39 523i 1995-2000 170hp (125kw)"
+  },
+  {
+    "ModelName": "E39 525i 2000-2003 192hp (141kw)"
+  },
+  {
+    "ModelName": "E39 528i 1995-2001 193hp (142kw)"
+  },
+  {
+    "ModelName": "E39 530i 2000-2003 231hp (170kw)"
+  },
+  {
+    "ModelName": "E39 535i 1996-1998 235hp (173kw)"
+  },
+  {
+    "ModelName": "E39 535i 1998-2003 245hp (180kw)"
+  },
+  {
+    "ModelName": "E39 540i 1995-2003 286hp (210kw)"
+  },
+  {
+    "ModelName": "E39 M5 1998-2003 400hp (294kw)"
+  },
+  {
+    "ModelName": "E39 520d 2000-2003 136hp (100kw)"
+  },
+  {
+    "ModelName": "E39 525td 1996-2000 115hp (85kw)"
+  },
+  {
+    "ModelName": "E39 525tds 1996-2000 143hp (105kw)"
+  },
+  {
+    "ModelName": "E39 525d 2000-2003 163hp (120kw)"
+  },
+  {
+    "ModelName": "E39 530d 1998-2003 184hp (135kw)"
+  },
+  {
+    "ModelName": "E60 520i 2003-2005 170hp (125kw)"
+  },
+  {
+    "ModelName": "E60 520i 2005-2010 150hp (110kw)"
+  },
+  {
+    "ModelName": "E60 523i 2005-2010 177hp (130kw)"
+  },
+  {
+    "ModelName": "E60 525i 2003-2005 192hp (141kw)"
+  },
+  {
+    "ModelName": "E60 525i 2005-2010 218hp (160kw)"
+  },
+  {
+    "ModelName": "E60 530i 2003-2005 231hp (170kw)"
+  },
+  {
+    "ModelName": "E60 530i 2005-2010 272hp (200kw)"
+  },
+  {
+    "ModelName": "E60 535i 2007-2010 306hp (225kw)"
+  },
+  {
+    "ModelName": "E60 545i 2003-2005 333hp (245kw)"
+  },
+  {
+    "ModelName": "E60 550i 2005-2010 367hp (270kw)"
+  },
+  {
+    "ModelName": "E60 M5 2005-2010 507hp (373kw)"
+  },
+  {
+    "ModelName": "E60 520d 2005-2010 163hp (120kw)"
+  },
+  {
+    "ModelName": "E60 525d 2004-2007 177hp (130kw)"
+  },
+  {
+    "ModelName": "E60 525d 2007-2010 197hp (145kw)"
+  },
+  {
+    "ModelName": "E60 530d 2003-2007 218hp (160kw)"
+  },
+  {
+    "ModelName": "E60 530d 2007-2010 235hp (173kw)"
+  },
+  {
+    "ModelName": "E60 535d 2004-2010 272hp (200kw)"
+  },
+  {
+    "ModelName": "F10 520i 2010-2017 184hp (135kw)"
+  },
+  {
+    "ModelName": "F10 528i 2010-2015 245hp (180kw)"
+  },
+  {
+    "ModelName": "F10 530i 2010-2017 272hp (200kw)"
+  },
+  {
+    "ModelName": "F10 535i 2010-2017 306hp (225kw)"
+  },
+  {
+    "ModelName": "F10 550i 2010-2017 407hp (300kw)"
+  },
+  {
+    "ModelName": "F10 M5 2011-2017 560hp (412kw)"
+  },
+  {
+    "ModelName": "F10 518d 2013-2017 143hp (105kw)"
+  },
+  {
+    "ModelName": "F10 520d 2010-2017 184hp (135kw)"
+  },
+  {
+    "ModelName": "F10 525d 2010-2017 218hp (160kw)"
+  },
+  {
+    "ModelName": "F10 530d 2010-2017 258hp (190kw)"
+  },
+  {
+    "ModelName": "F10 535d 2010-2017 313hp (230kw)"
+  },
+  {
+    "ModelName": "G30 520i 2017-present 184hp (135kw)"
+  },
+  {
+    "ModelName": "G30 530i 2017-present 252hp (185kw)"
+  },
+  {
+    "ModelName": "G30 540i 2017-present 340hp (250kw)"
+  },
+  {
+    "ModelName": "G30 M550i xDrive 2017-present 462hp (340kw)"
+  },
+  {
+    "ModelName": "G30 M5 2018-present 600hp (441kw)"
+  },
+  {
+    "ModelName": "G30 518d 2017-present 150hp (110kw)"
+  },
+  {
+    "ModelName": "G30 520d 2017-present 190hp (140kw)"
+  },
+  {
+    "ModelName": "G30 525d 2017-present 231hp (170kw)"
+  },
+  {
+    "ModelName": "G30 530d 2017-present 265hp (195kw)"
+  },
+  {
+    "ModelName": "G30 540d xDrive 2017-present 320hp (235kw)"
+  },
+  {
+    "ModelName": "E24 628CSi 1979-1987 184hp (135kw)"
+  },
+  {
+    "ModelName": "E24 630CSi 1976-1979 185hp (136kw)"
+  },
+  {
+    "ModelName": "E24 633CSi 1976-1984 197hp (145kw)"
+  },
+  {
+    "ModelName": "E24 635CSi 1978-1989 218hp (160kw)"
+  },
+  {
+    "ModelName": "E24 M635CSi 1983-1989 286hp (210kw)"
+  },
+  {
+    "ModelName": "E63 630i Coupe 2003-2010 258hp (190kw)"
+  },
+  {
+    "ModelName": "E63 635d Coupe 2007-2010 286hp (210kw)"
+  },
+  {
+    "ModelName": "E63 645Ci Coupe 2003-2005 333hp (245kw)"
+  },
+  {
+    "ModelName": "E63 650i Coupe 2005-2010 367hp (270kw)"
+  },
+  {
+    "ModelName": "E63 M6 Coupe 2005-2010 507hp (373kw)"
+  },
+  {
+    "ModelName": "E64 630i Convertible 2004-2010 258hp (190kw)"
+  },
+  {
+    "ModelName": "E64 635d Convertible 2007-2010 286hp (210kw)"
+  },
+  {
+    "ModelName": "E64 645Ci Convertible 2004-2005 333hp (245kw)"
+  },
+  {
+    "ModelName": "E64 650i Convertible 2005-2010 367hp (270kw)"
+  },
+  {
+    "ModelName": "E64 M6 Convertible 2006-2010 507hp (373kw)"
+  },
+  {
+    "ModelName": "F06 640i Gran Coupe 2012-2018 320hp (235kw)"
+  },
+  {
+    "ModelName": "F06 650i Gran Coupe 2012-2018 450hp (330kw)"
+  },
+  {
+    "ModelName": "F06 640d Gran Coupe 2012-2018 313hp (230kw)"
+  },
+  {
+    "ModelName": "F06 M6 Gran Coupe 2013-2018 560hp (412kw)"
+  },
+  {
+    "ModelName": "F12 640i Convertible 2011-2018 320hp (235kw)"
+  },
+  {
+    "ModelName": "F12 650i Convertible 2011-2018 450hp (330kw)"
+  },
+  {
+    "ModelName": "F12 640d Convertible 2011-2018 313hp (230kw)"
+  },
+  {
+    "ModelName": "F12 M6 Convertible 2012-2018 560hp (412kw)"
+  },
+  {
+    "ModelName": "F13 640i Coupe 2011-2018 320hp (235kw)"
+  },
+  {
+    "ModelName": "F13 650i Coupe 2011-2018 450hp (330kw)"
+  },
+  {
+    "ModelName": "F13 640d Coupe 2011-2018 313hp (230kw)"
+  },
+  {
+    "ModelName": "F13 M6 Coupe 2012-2018 560hp (412kw)"
+  },
+  {
+    "ModelName": "G32 630i GT 2017-present 258hp (190kw)"
+  },
+  {
+    "ModelName": "G32 640i GT 2017-present 333hp (245kw)"
+  },
+  {
+    "ModelName": "G32 620d GT 2017-present 190hp (140kw)"
+  },
+  {
+    "ModelName": "G32 630d GT 2017-present 286hp (210kw)"
+  },
+  {
+    "ModelName": "E23 728i 1977-1986 184hp (135kw)"
+  },
+  {
+    "ModelName": "E23 730i 1977-1986 197hp (145kw)"
+  },
+  {
+    "ModelName": "E23 733i 1977-1984 197hp (145kw)"
+  },
+  {
+    "ModelName": "E23 735i 1979-1986 218hp (160kw)"
+  },
+  {
+    "ModelName": "E23 745i Turbo 1980-1986 252hp (185kw)"
+  },
+  {
+    "ModelName": "E32 730i 1986-1994 188hp (140kw)"
+  },
+  {
+    "ModelName": "E32 735i 1986-1992 211hp (155kw)"
+  },
+  {
+    "ModelName": "E32 740i 1992-1994 286hp (210kw)"
+  },
+  {
+    "ModelName": "E32 750i 1987-1994 300hp (220kw)"
+  },
+  {
+    "ModelName": "E38 728i 1994-2001 193hp (142kw)"
+  },
+  {
+    "ModelName": "E38 730i 1994-2001 218hp (160kw)"
+  },
+  {
+    "ModelName": "E38 735i 1996-2001 238hp (175kw)"
+  },
+  {
+    "ModelName": "E38 740i 1994-2001 286hp (210kw)"
+  },
+  {
+    "ModelName": "E38 750i 1994-2001 326hp (240kw)"
+  },
+  {
+    "ModelName": "E65 730i 2001-2008 258hp (190kw)"
+  },
+  {
+    "ModelName": "E65 735i 2001-2005 272hp (200kw)"
+  },
+  {
+    "ModelName": "E65 740i 2005-2008 306hp (225kw)"
+  },
+  {
+    "ModelName": "E65 745i 2001-2005 333hp (245kw)"
+  },
+  {
+    "ModelName": "E65 750i 2005-2008 367hp (270kw)"
+  },
+  {
+    "ModelName": "E65 760i 2003-2008 445hp (327kw)"
+  },
+  {
+    "ModelName": "F01 730i 2008-2015 258hp (190kw)"
+  },
+  {
+    "ModelName": "F01 740i 2008-2015 326hp (240kw)"
+  },
+  {
+    "ModelName": "F01 750i 2008-2015 450hp (330kw)"
+  },
+  {
+    "ModelName": "F01 760i 2009-2015 544hp (400kw)"
+  },
+  {
+    "ModelName": "F01 730d 2008-2015 258hp (190kw)"
+  },
+  {
+    "ModelName": "F01 740d 2009-2015 313hp (230kw)"
+  },
+  {
+    "ModelName": "F01 750d 2012-2015 381hp (280kw)"
+  },
+  {
+    "ModelName": "G11 730i 2015-2022 258hp (190kw)"
+  },
+  {
+    "ModelName": "G11 740i 2015-2022 340hp (250kw)"
+  },
+  {
+    "ModelName": "G11 750i 2015-2022 530hp (390kw)"
+  },
+  {
+    "ModelName": "G11 M760Li xDrive 2017-2022 610hp (448kw)"
+  },
+  {
+    "ModelName": "G11 730d 2015-2022 265hp (195kw)"
+  },
+  {
+    "ModelName": "G11 740d 2015-2022 320hp (235kw)"
+  },
+  {
+    "ModelName": "G11 750d xDrive 2016-2022 400hp (294kw)"
+  },
+  {
+    "ModelName": "G70 740i 2022-present 380hp (280kw)"
+  },
+  {
+    "ModelName": "G70 760i xDrive 2022-present 536hp (400kw)"
+  },
+  {
+    "ModelName": "G70 i7 xDrive60 2022-present 544hp (400kw)"
+  },
+  {
+    "ModelName": "G70 i7 M70 xDrive 2023-present 660hp (485kw)"
+  },
+  {
+    "ModelName": "E31 830i 1992-1994 218hp (160kw)"
+  },
+  {
+    "ModelName": "E31 840Ci 1993-1999 286hp (210kw)"
+  },
+  {
+    "ModelName": "E31 850i 1990-1994 300hp (220kw)"
+  },
+  {
+    "ModelName": "E31 850Ci 1992-1999 326hp (240kw)"
+  },
+  {
+    "ModelName": "E31 850CSi 1992-1996 380hp (280kw)"
+  },
+  {
+    "ModelName": "G14 840i Convertible 2019-present 340hp (250kw)"
+  },
+  {
+    "ModelName": "G14 M850i xDrive Convertible 2019-present 530hp (390kw)"
+  },
+  {
+    "ModelName": "G14 840d xDrive Convertible 2019-present 320hp (235kw)"
+  },
+  {
+    "ModelName": "G15 840i Coupe 2018-present 340hp (250kw)"
+  },
+  {
+    "ModelName": "G15 M850i xDrive Coupe 2018-present 530hp (390kw)"
+  },
+  {
+    "ModelName": "G15 840d xDrive Coupe 2018-present 320hp (235kw)"
+  },
+  {
+    "ModelName": "G15 M8 Coupe 2019-present 600hp (441kw)"
+  },
+  {
+    "ModelName": "G15 M8 Competition Coupe 2019-present 625hp (460kw)"
+  },
+  {
+    "ModelName": "G16 840i Gran Coupe 2019-present 340hp (250kw)"
+  },
+  {
+    "ModelName": "G16 M850i xDrive Gran Coupe 2019-present 530hp (390kw)"
+  },
+  {
+    "ModelName": "G16 840d xDrive Gran Coupe 2019-present 320hp (235kw)"
+  },
+  {
+    "ModelName": "G16 M8 Gran Coupe 2019-present 600hp (441kw)"
+  },
+  {
+    "ModelName": "G16 M8 Competition Gran Coupe 2019-present 625hp (460kw)"
+  },
+  {
+    "ModelName": "E84 X1 sDrive18i 2009-2015 150hp (110kw)"
+  },
+  {
+    "ModelName": "E84 X1 xDrive20i 2009-2015 184hp (135kw)"
+  },
+  {
+    "ModelName": "E84 X1 xDrive28i 2009-2015 245hp (180kw)"
+  },
+  {
+    "ModelName": "E84 X1 sDrive18d 2009-2015 143hp (105kw)"
+  },
+  {
+    "ModelName": "E84 X1 xDrive20d 2009-2015 184hp (135kw)"
+  },
+  {
+    "ModelName": "F48 X1 sDrive18i 2015-present 136hp (100kw)"
+  },
+  {
+    "ModelName": "F48 X1 xDrive25i 2015-present 231hp (170kw)"
+  },
+  {
+    "ModelName": "F48 X1 xDrive25d 2015-present 231hp (170kw)"
+  },
+  {
+    "ModelName": "F39 X2 sDrive18i 2018-present 140hp (103kw)"
+  },
+  {
+    "ModelName": "F39 X2 xDrive20i 2018-present 192hp (141kw)"
+  },
+  {
+    "ModelName": "F39 X2 xDrive25i 2018-present 231hp (170kw)"
+  },
+  {
+    "ModelName": "F39 X2 sDrive18d 2018-present 150hp (110kw)"
+  },
+  {
+    "ModelName": "F39 X2 xDrive20d 2018-present 190hp (140kw)"
+  },
+  {
+    "ModelName": "F39 X2 M35i 2019-present 306hp (225kw)"
+  },
+  {
+    "ModelName": "E83 X3 xDrive20i 2003-2010 150hp (110kw)"
+  },
+  {
+    "ModelName": "E83 X3 xDrive30i 2003-2010 231hp (170kw)"
+  },
+  {
+    "ModelName": "F25 X3 sDrive18d 2010-2017 150hp (110kw)"
+  },
+  {
+    "ModelName": "F25 X3 xDrive35i 2010-2017 306hp (225kw)"
+  },
+  {
+    "ModelName": "G01 X3 xDrive20i 2017-present 184hp (135kw)"
+  },
+  {
+    "ModelName": "G01 X3 M40i 2018-present 360hp (265kw)"
+  },
+  {
+    "ModelName": "F26 X4 xDrive20i 2014-2018 184hp (135kw)"
+  },
+  {
+    "ModelName": "F26 X4 xDrive35i 2014-2018 306hp (225kw)"
+  },
+  {
+    "ModelName": "G02 X4 M40i 2018-present 360hp (265kw)"
+  },
+  {
+    "ModelName": "G02 X4 xDrive20d 2018-present 190hp (140kw)"
+  },
+  {
+    "ModelName": "E53 X5 3.0i 1999-2006 231hp (170kw)"
+  },
+  {
+    "ModelName": "E53 X5 4.4i 1999-2006 286hp (210kw)"
+  },
+  {
+    "ModelName": "E53 X5 4.8is 2004-2006 360hp (265kw)"
+  },
+  {
+    "ModelName": "F15 X5 xDrive40e 2013-2018 313hp (230kw)"
+  },
+  {
+    "ModelName": "G05 X5 xDrive40i 2018-present 340hp (250kw)"
+  },
+  {
+    "ModelName": "G05 X5 M50i 2019-present 530hp (390kw)"
+  },
+  {
+    "ModelName": "E71 X6 xDrive35i 2008-2014 306hp (225kw)"
+  },
+  {
+    "ModelName": "E71 X6 xDrive50i 2008-2014 407hp (300kw)"
+  },
+  {
+    "ModelName": "F16 X6 xDrive30d 2014-2019 258hp (190kw)"
+  },
+  {
+    "ModelName": "G06 X6 xDrive40i 2019-present 340hp (250kw)"
+  },
+  {
+    "ModelName": "G06 X6 M50i 2019-present 530hp (390kw)"
+  },
+  {
+    "ModelName": "G07 X7 xDrive40i 2018-present 340hp (250kw)"
+  },
+  {
+    "ModelName": "G07 X7 M50i 2019-present 530hp (390kw)"
+  },
+  {
+    "ModelName": "G07 X7 xDrive30d 2018-present 265hp (195kw)"
+  },
+  {
+    "ModelName": "G07 X7 M60i xDrive 2023-present 530hp (390kw)"
+  }
+]
+                        
+                    
+            
+        
