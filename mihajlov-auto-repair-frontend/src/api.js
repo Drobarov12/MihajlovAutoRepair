@@ -25,3 +25,20 @@ export const fetchTypes = async () => {
       throw error;
     }
   };
+
+  export const createReservation = async (formData) => {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/Reservation`, {
+        username: formData.name, // Replace with actual userId if needed
+        modelId: formData.modelId,
+        typeId: formData.typeId,
+        description: formData.description,
+        dateTime: formData.dateTime,
+      });
+  
+      return response.data; // Return the created reservation or success response
+    } catch (error) {
+      console.error("Error creating reservation:", error);
+      throw error;
+    }
+  };

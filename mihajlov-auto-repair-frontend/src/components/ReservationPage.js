@@ -6,7 +6,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
-import { fetchModels, fetchTypes } from '../api';
+import { fetchModels, fetchTypes, createReservation } from '../api';
 
 dayjs.extend(customParseFormat);
 
@@ -15,8 +15,8 @@ const ReservationPage = () => {
   const [formData, setFormData] = useState({
     name: '',
     phoneNumber: '',
-    model: '',
-    type: '',
+    modelId: '',
+    typeId: '',
     description: '',
     dateTime: dayjs(),
   });
@@ -57,12 +57,25 @@ const ReservationPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!formData.modelId || !formData.typeId) {
+      console.log("Model and Type must be selected.");
+      return;
+    }
+  
     if (formData.dateTime.isValid()) {
-      console.log(formData);
+      try {
+        const response = await createReservation(formData);
+        console.log("Reservation created:", response);
+        alert("Reservation successfully created!");
+      } catch (error) {
+        console.error("Error creating reservation:", error);
+        alert("Failed to create reservation. Please try again.");
+      }
     } else {
-      console.log('Invalid Date');
+      console.log("Invalid Date");
     }
   };
 
@@ -137,6 +150,9 @@ const ReservationPage = () => {
               <Autocomplete
                 options={filteredModels}
                 getOptionLabel={(option) => option.modelName}
+                onChange={(event, value) => {
+                  setFormData({ ...formData, modelId: value ? value.id : '' });
+                }}
                 filterOptions={(options, { inputValue }) =>
                   options.filter((option) =>
                     option.modelName.toLowerCase().includes(inputValue.toLowerCase())
@@ -206,8 +222,10 @@ const ReservationPage = () => {
                 <InputLabel style={{ color: 'white' }}>{t('reservation.type')}</InputLabel>
                 <Select
                   name="type"
-                  value={formData.type}
-                  onChange={handleChange}
+                  value={formData.typeId}
+                  onChange={(e) => {
+                    setFormData({ ...formData, typeId: e.target.value });
+                  }}
                   sx={{
                     backgroundColor: 'rgba(255, 255, 255, 0.1)',
                     color: 'white',
@@ -215,7 +233,7 @@ const ReservationPage = () => {
                   }}
                 >
                   {types.map((type) => (
-                      <MenuItem key={type.id} value={type.typeName}>
+                      <MenuItem key={type.id} value={type.id}>
                         {type.typeName}
                       </MenuItem>
                     ))}
