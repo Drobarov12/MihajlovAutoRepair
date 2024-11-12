@@ -29,7 +29,8 @@ export const fetchTypes = async () => {
   export const createReservation = async (formData) => {
     try {
       const response = await axios.post(`${API_BASE_URL}/Reservation`, {
-        username: formData.name, // Replace with actual userId if needed
+        userId: formData.userId,
+        username: formData.name,
         modelId: formData.modelId,
         typeId: formData.typeId,
         description: formData.description,

@@ -70,7 +70,7 @@ public class AccountController : ControllerBase
                 Expires = DateTime.UtcNow.AddMinutes(30)
             });
 
-            return Ok(new { user = new { user.Id, user.UserName, user.PhoneNumber } });
+            return Ok(new { user = new { user.Id, user.UserName, user.PhoneNumber, user.ModelId } });
             // return Ok(new { token });
         }
 

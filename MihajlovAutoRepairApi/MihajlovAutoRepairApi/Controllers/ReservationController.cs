@@ -63,13 +63,22 @@ public class ReservationController : ControllerBase
             var guestUser = new User
             {
                 Name = dto.Username,
-                Email = "guest@example.com", 
+                Email = dto.Username,
                 ModelId = dto.ModelId
             };
 
             await _userRepository.AddAsync(guestUser);
 
             userId = guestUser.Id;
+        }
+        else
+        {
+            var user = await _userRepository.GetByIdAsync(userId);
+            if (user is not null)
+            {
+                user.ModelId = dto.ModelId;
+                await _userRepository.UpdateAsync(user);
+            }
         }
 
         var reservation = _mapper.Map<Reservation>(dto);

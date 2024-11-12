@@ -16,6 +16,7 @@ const ReservationPage = () => {
   const { t } = useTranslation();
   const { userInfo } = useUser();
   const [formData, setFormData] = useState({
+    userId: 0,
     name: '',
     phoneNumber: '',
     modelId: '',
@@ -27,24 +28,26 @@ const ReservationPage = () => {
   const [models, setModels] = useState([]); 
   const [types, setTypes] = useState([]); 
   const [filteredModels, setFilteredModels] = useState([]); 
+  const [isTyping, setIsTyping] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
       try {
         const modelsData = await fetchModels();
         setModels(modelsData);
-        setFilteredModels(modelsData); 
 
         const tyoesData = await fetchTypes();
         setTypes(tyoesData)
 
         if(userInfo)
         {
+          formData.userId = userInfo.id;
           formData.name = userInfo.userName;
           formData.phoneNumber = userInfo.phoneNumber;
-          if(userInfo.model)
+          if(userInfo.modelId)
           {
-            setFilteredModels(userInfo.model);
+            const userModel = modelsData.find(model => model.id === userInfo.modelId);
+            setFilteredModels(userModel ? [userModel] : modelsData);
           }
         }
       } catch (error) {
@@ -67,6 +70,18 @@ const ReservationPage = () => {
       ...formData,
       dateTime: dayjs(date),
     });
+  };
+
+  const handleInputChange = (event, value) => {
+    setIsTyping(!!value); // Set typing state based on input
+    setFormData({ ...formData, model: value });
+
+    // Dynamically update filteredModels while typing
+    setFilteredModels(
+      models.filter((option) =>
+        option.modelName.toLowerCase().includes(value.toLowerCase())
+      )
+    );
   };
 
   const handleSubmit = async (e) => {
@@ -160,19 +175,12 @@ const ReservationPage = () => {
             </Grid>
             <Grid item xs={12}>
               <Autocomplete
-                options={filteredModels}
+                options={isTyping ? models : filteredModels}
                 getOptionLabel={(option) => option.modelName}
                 onChange={(event, value) => {
                   setFormData({ ...formData, modelId: value ? value.id : '' });
                 }}
-                filterOptions={(options, { inputValue }) =>
-                  options.filter((option) =>
-                    option.modelName.toLowerCase().includes(inputValue.toLowerCase())
-                  )
-                }
-                onInputChange={(event, value) => {
-                  setFormData({ ...formData, model: value });
-                }}
+                onInputChange={handleInputChange}
                 renderInput={(params) => (
                   <TextField
                     {...params}
