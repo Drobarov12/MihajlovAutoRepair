@@ -5,10 +5,14 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import { ToastContext } from "./App";
+import { useUser } from "../UserContext";
+import { useNavigate } from "react-router-dom"; 
 
 
 const LogInPage = () => {
   const showToast = useContext(ToastContext);
+  const { setUserInfo } = useUser();
+  const navigate = useNavigate()
 
   const [email, setEmail] = useState("");
   const [error, setError] = useState(false);
@@ -85,10 +89,10 @@ const LogInPage = () => {
       }
 
       const data = await response.json();
-      const token = data.token;
-      localStorage.setItem('token', token); 
+      const userInfo = data.user; // Example
+      setUserInfo(userInfo);
       showToast("You are logged in!", "success");
-
+      navigate("/reservations");
       // Redirect or perform other actions after successful login
       } catch (error) {
       showToast('An error occurred. Please try again.', "error");

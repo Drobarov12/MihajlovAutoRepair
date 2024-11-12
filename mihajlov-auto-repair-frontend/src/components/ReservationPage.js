@@ -7,11 +7,14 @@ import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { fetchModels, fetchTypes, createReservation } from '../api';
+import { useUser } from "../UserContext";
+import { use } from 'i18next';
 
 dayjs.extend(customParseFormat);
 
 const ReservationPage = () => {
   const { t } = useTranslation();
+  const { userInfo } = useUser();
   const [formData, setFormData] = useState({
     name: '',
     phoneNumber: '',
@@ -21,20 +24,29 @@ const ReservationPage = () => {
     dateTime: dayjs(),
   });
 
-  const [models, setModels] = useState([]); // Holds all models
-  const [types, setTypes] = useState([]); // Holds all models
-  const [filteredModels, setFilteredModels] = useState([]); // Holds filtered models
-  const [searchQuery, setSearchQuery] = useState(''); // Holds search query
+  const [models, setModels] = useState([]); 
+  const [types, setTypes] = useState([]); 
+  const [filteredModels, setFilteredModels] = useState([]); 
 
   useEffect(() => {
     const getData = async () => {
       try {
         const modelsData = await fetchModels();
         setModels(modelsData);
-        setFilteredModels(modelsData); // Initially, show all models
+        setFilteredModels(modelsData); 
 
         const tyoesData = await fetchTypes();
         setTypes(tyoesData)
+
+        if(userInfo)
+        {
+          formData.name = userInfo.userName;
+          formData.phoneNumber = userInfo.phoneNumber;
+          if(userInfo.model)
+          {
+            setFilteredModels(userInfo.model);
+          }
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
