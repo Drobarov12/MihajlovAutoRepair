@@ -1,9 +1,15 @@
 {
     "header": {
       "logo": "LOGO",
+      "welcome": "Welcome: ",
       "home": "Home",
       "reservations": "Reservations",
-      "login": "Login"
+      "login": "Login",
+      "logout": "Logout"
+    },
+    "footer": {
+      "languageEn": "English",
+      "languageMk": "Македонски"
     },
     "mainContent": {
       "title": "MIHAJLOV AUTOMOBILE REPAIR",
