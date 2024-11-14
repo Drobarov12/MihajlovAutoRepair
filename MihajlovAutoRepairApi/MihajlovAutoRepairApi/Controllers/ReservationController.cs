@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MihajlovAutoRepairApi.Models;
 using MihajlovAutoRepairApi.Models.Dtos;
@@ -22,6 +23,7 @@ public class ReservationController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<ActionResult<List<ReservationDto>>> GetAllReservations()
     {
         var reservations = await _repository.GetAllAsync();
@@ -36,6 +38,7 @@ public class ReservationController : ControllerBase
     }
     
     [HttpGet("{id}")]
+    [Authorize]
     public async Task<ActionResult<ReservationDto>> GetReservationById(long id)
     {
         var reservation = await _repository.GetByIdAsync(id);
@@ -90,6 +93,7 @@ public class ReservationController : ControllerBase
     }
     
     [HttpPut("{id}")]
+    [Authorize]
     public async Task<IActionResult> UpdateReservation(long id, [FromBody] ReservationDto reservationDto)
     {
         if (id != reservationDto.Id)
@@ -112,6 +116,7 @@ public class ReservationController : ControllerBase
     }
     
     [HttpDelete("{id}")]
+    [Authorize]
     public async Task<IActionResult> DeleteReservation(long id)
     {
         var userExists = await _repository.ReservationExistsAsync(id);

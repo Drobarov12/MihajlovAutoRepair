@@ -62,15 +62,15 @@ public class AccountController : ControllerBase
             var user = await _userManager.FindByEmailAsync(model.Email);
             var token = GenerateJwtToken(user);
             
-            Response.Cookies.Append("AuthToken", token, new CookieOptions
-            {
-                HttpOnly = true,
-                Secure = true, // Use only HTTPS
-                SameSite = SameSiteMode.Strict, // Prevent CSRF
-                Expires = DateTime.UtcNow.AddMinutes(30)
-            });
+            // Response.Cookies.Append("AuthToken", token, new CookieOptions // TODO for feature inprovements
+            // {
+            //     HttpOnly = true,
+            //     Secure = false, // Use only HTTPS set to false for debugg
+            //     SameSite = SameSiteMode.Strict, // Prevent CSRF
+            //     Expires = DateTime.UtcNow.AddMinutes(30)
+            // });
 
-            return Ok(new { user = new { user.Id, user.UserName, user.PhoneNumber, user.ModelId } });
+            return Ok(new { user = new { user.Id, user.UserName, user.PhoneNumber, user.ModelId }, token });
             // return Ok(new { token });
         }
 

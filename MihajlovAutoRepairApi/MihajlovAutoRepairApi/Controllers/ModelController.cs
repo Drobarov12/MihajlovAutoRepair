@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MihajlovAutoRepairApi.Models;
 using MihajlovAutoRepairApi.Models.Dtos;
@@ -45,6 +46,7 @@ public class ModelController : ControllerBase
 
     // POST: api/Model
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> CreateModel([FromBody] ModelCreateDto modelCreateDto)
     {
         if (!ModelState.IsValid)
@@ -61,6 +63,7 @@ public class ModelController : ControllerBase
 
     // PUT: api/Model/5
     [HttpPut("{id}")]
+    [Authorize]
     public async Task<IActionResult> UpdateModel(long id, [FromBody] ModelCreateDto modelCreateDto)
     {
         if (!ModelState.IsValid || id == 0)
@@ -84,6 +87,7 @@ public class ModelController : ControllerBase
 
     // DELETE: api/Model/5
     [HttpDelete("{id}")]
+    [Authorize]
     public async Task<IActionResult> DeleteModel(long id)
     {
         var modelExists = await _repository.ModelExistsAsync(id);
