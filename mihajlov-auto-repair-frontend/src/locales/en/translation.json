@@ -72,6 +72,14 @@
       "username": "Username",
       "password": "Password",
       "or": "or"
+    },
+    "register": {
+      "title": "Register",
+      "username": "Username",
+      "phoneNumber":"Phone number",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "or": "or"
     }
 
   }

@@ -72,6 +72,14 @@
       "username": "Корисничко име",
       "password": "Лозинка",
       "or": "или"
+    },
+    "register": {
+      "title": "Регистрирај се",
+      "username": "Корисничко име",
+      "phoneNumber":" Телефон",
+      "password": "Лозинка",
+      "confirmPassword": "Потврди лозинка",
+      "or": "или"
     }
     
   }

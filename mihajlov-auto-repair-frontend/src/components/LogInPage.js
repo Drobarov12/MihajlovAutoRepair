@@ -6,11 +6,12 @@ import GoogleIcon from '@mui/icons-material/Google';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import { ToastContext } from "./App";
 import { useUser } from "../UserContext";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate, useLocation } from "react-router-dom"; 
 
 
 const LogInPage = () => {
   const showToast = useContext(ToastContext);
+  const location = useLocation();
   const { setUserInfo } = useUser();
   const navigate = useNavigate()
 
@@ -19,8 +20,10 @@ const LogInPage = () => {
   const [helperText, setHelperText] = useState("");
 
   const { t } = useTranslation();
+
+  const initialUsername = location.state?.username || ""; // Default to empty if no state
   const [formData, setFormData] = useState({
-    username: '',
+    username: initialUsername,
     password: '',
   });
 
@@ -203,19 +206,31 @@ const LogInPage = () => {
             </Box>
             </Grid>
             <Grid item xs={12}>
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: '#1976D2', 
-                  color: 'white',
-                  padding: '10px',
-                  borderRadius: '8px',
-                }}
-                type="submit"
-              >
-                {t('login.title')}
-              </Button>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Button
+              variant="outlined"
+              sx={{
+                color: 'white',
+                borderColor: 'white',
+                padding: '10px',
+                borderRadius: '8px',
+              }}
+              onClick={() => navigate('/register')}
+            >
+              {t('register.title')}
+            </Button>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: '#1976D2',
+                color: 'white',
+                padding: '10px',
+                borderRadius: '8px',
+              }}
+              type="submit"
+            >
+              {t('login.title')}
+            </Button>
               </Box>
             </Grid>
           </Grid>

@@ -7,6 +7,7 @@ import Footer from './Footer';
 import HomePage from './HomePage/HomePage';
 import ReservationPage from './ReservationPage';
 import LogInPage from './LogInPage';
+import RegisterPage from './RegisterPage';
 import Toast from './CustomComponents/Toast'
 
 export const ToastContext = createContext();
@@ -45,6 +46,7 @@ function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/reservations" element={<ReservationPage />} />
       <Route path="/login" element={<LogInPage />} />
+      <Route path="/register" element={<RegisterPage />} />
       </Routes>
       <Footer />
     </Box>

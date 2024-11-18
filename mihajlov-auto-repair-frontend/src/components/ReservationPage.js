@@ -35,6 +35,7 @@ const ReservationPage = () => {
       try {
         const modelsData = await fetchModels();
         setModels(modelsData);
+        setFilteredModels(modelsData)
 
         const tyoesData = await fetchTypes();
         setTypes(tyoesData)
