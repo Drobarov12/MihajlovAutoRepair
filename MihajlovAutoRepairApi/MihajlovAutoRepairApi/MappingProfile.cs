@@ -10,7 +10,7 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<Reservation, ReservationDto>()
-            .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName))
+            .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User != null ? src.User.Name : "Guest"))
             .ForMember(dest => dest.ModelName, opt => opt.MapFrom(src => src.Model.ModelName))
             .ForMember(dest => dest.TypeName, opt => opt.MapFrom(src => src.Type.TypeName));
 

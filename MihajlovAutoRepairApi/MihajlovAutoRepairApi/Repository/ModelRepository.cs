@@ -46,7 +46,6 @@ public class ModelRepository : IModelRepository
 
     public async Task<bool> ModelExistsAsync(long id)
     {
-        return await _context.Types.AnyAsync(t => t.Id == id);
-
+        return await _context.Models.AnyAsync(t => t.Id == id);
     }
 }

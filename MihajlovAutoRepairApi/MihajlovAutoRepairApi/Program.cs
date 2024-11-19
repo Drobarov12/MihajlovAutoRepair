@@ -57,6 +57,16 @@ builder.Services.AddScoped<IModelRepository, ModelRepository>();
 builder.Services.AddAutoMapper(typeof(Program));
 // Add services to the container.
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost", policy =>
+        policy.WithOrigins("http://localhost:3000") 
+            .AllowAnyMethod() 
+            .WithHeaders("Authorization", "Content-Type") 
+            .AllowCredentials()); 
+});
+
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -72,11 +82,23 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    context.Database.EnsureCreated(); // Ensure the database is created
+
+    // File path to the JSON file
+    var filePath = Path.Combine(AppContext.BaseDirectory, "bmw_models.json");
+    DbSeeder.SeedFromFile(context, filePath);
+}
+
+app.UseCors("AllowLocalhost");
+
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
-

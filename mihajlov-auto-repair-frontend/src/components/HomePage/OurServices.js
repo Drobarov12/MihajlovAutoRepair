@@ -3,9 +3,6 @@ import { Grid, Card, Typography, Box } from '@mui/material';
 import bookmarkIcon from '../../assets/services.png';
 import { useTranslation } from 'react-i18next';
 
-// TODO add translation 
-
-
 const OurServices = () => {
   const { t } = useTranslation();
 
@@ -19,8 +16,8 @@ const OurServices = () => {
       description: t('ourServices.secondCardDescription'),
     },
     {
-      title: t('ourServices.thidCardTitle'),
-      description: t('ourServices.thidCardDescription'),
+      title: t('ourServices.thirdCardTitle'),
+      description: t('ourServices.thirdCardDescription'),
     },
     {
       title: t('ourServices.fourthCardTitle'),
@@ -31,26 +28,45 @@ const OurServices = () => {
   return (
     <Box
       sx={{
-        padding: '40px 80px', // Increased padding from the sides
+        padding: { xs: '20px 10px', sm: '40px 20px', md: '40px 80px' }, // Responsive padding
         backgroundColor: '#fff',
         textAlign: 'center',
-        height: '80vh', // Slightly taller height to accommodate larger cards
+        minHeight: { xs: 'auto', md: '80vh' }, // Adjust height for mobile
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
       }}
     >
-      <Typography variant="h3" sx={{ fontWeight: 'bold', mb: 4, textTransform: 'uppercase' }}>
-      {t('ourServices.title')}
+      <Typography
+        variant="h3"
+        sx={{
+          fontWeight: 'bold',
+          mb: 4,
+          textTransform: 'uppercase',
+          fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' }, // Responsive font size
+        }}
+      >
+        {t('ourServices.title')}
       </Typography>
 
       <Grid container spacing={4}>
         {services.map((service, index) => (
-          <Grid item xs={12} md={6} key={index}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={6}
+            key={index}
+            sx={{
+              display: 'flex',
+              justifyContent: 'center', // Center cards on smaller screens
+            }}
+          >
             <Card
               sx={{
-                padding: '30px', // Increased padding inside the card
-                height: '200px', // Ensures more square-like shape
+                padding: { xs: '20px', sm: '30px' }, // Responsive card padding
+                width: { xs: '100%', sm: '90%', md: '80%' }, // Adjust width for mobile
+                height: { xs: 'auto', sm: '200px' }, // Adjust height for mobile
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -60,18 +76,37 @@ const OurServices = () => {
                 boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.1)',
               }}
             >
-            <Box
+              <Box
                 component="img"
-                src={bookmarkIcon} 
-                alt="Mechanic working on car"
-                sx={{ fontSize: '60px', color: '#90caf9', mb: 2 }}
-            />
-            <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1, textTransform: 'uppercase' }}>
+                src={bookmarkIcon}
+                alt="Service icon"
+                sx={{
+                  width: '60px',
+                  height: '60px',
+                  color: '#90caf9',
+                  mb: 2,
+                }}
+              />
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 'bold',
+                  mb: 1,
+                  textTransform: 'uppercase',
+                  fontSize: { xs: '1rem', sm: '1.2rem' }, // Responsive font size
+                }}
+              >
                 {service.title}
-            </Typography>
-            <Typography variant="body1" color="textSecondary">
+              </Typography>
+              <Typography
+                variant="body1"
+                color="textSecondary"
+                sx={{
+                  fontSize: { xs: '0.9rem', sm: '1rem' }, // Adjust font size
+                }}
+              >
                 {service.description}
-            </Typography>
+              </Typography>
             </Card>
           </Grid>
         ))}

@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MihajlovAutoRepairApi.Models.Dtos;
 using MihajlovAutoRepairApi.Repository;
@@ -46,6 +47,7 @@ public class TypeController : ControllerBase
 
     // POST: api/Type
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> CreateType([FromBody] TypeCreateDto typeCreateDto)
     {
         if (!ModelState.IsValid)
@@ -62,6 +64,7 @@ public class TypeController : ControllerBase
 
     // PUT: api/Type/5
     [HttpPut("{id}")]
+    [Authorize]
     public async Task<IActionResult> UpdateType(long id, [FromBody] TypeCreateDto typeCreateDto)
     {
         if (!ModelState.IsValid || id == 0)
@@ -80,11 +83,12 @@ public class TypeController : ControllerBase
 
         await _repository.UpdateAsync(type);
 
-        return NoContent();
+        return Ok(id);
     }
 
     // DELETE: api/Type/5
     [HttpDelete("{id}")]
+    [Authorize]
     public async Task<IActionResult> DeleteType(long id)
     {
         var typeExists = await _repository.TypeExistsAsync(id);
@@ -94,6 +98,6 @@ public class TypeController : ControllerBase
         }
 
         await _repository.DeleteAsync(id);
-        return NoContent();
+        return Ok(id);
     }
 }

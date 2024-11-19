@@ -14,12 +14,21 @@ public class UserRepository : IUserRepository
 
     public async Task<IEnumerable<User>> GetAllAsync()
     {
-        return await _context.Users.Include(u => u.Model).ToListAsync();
+        return await _context.Users.ToListAsync();
     }
 
     public async Task<User?> GetByIdAsync(long id)
     {
+        return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+    }
+    public async Task<User?> GetByIdWithModelAsync(long id)
+    {
         return await _context.Users.Include(u => u.Model).FirstOrDefaultAsync(u => u.Id == id);
+    }
+
+    public async Task<User?> GetByUsernameAsync(string username)
+    {
+        return await _context.Users.FirstOrDefaultAsync(u => u.UserName == username);
     }
 
     public async Task AddAsync(User user)

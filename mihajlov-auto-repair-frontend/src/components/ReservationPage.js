@@ -1,24 +1,63 @@
-import React, { useState } from 'react';
-import { Container, TextField, Button, MenuItem, Select, InputLabel, FormControl, Grid, Box, Typography } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Container, TextField, Button, MenuItem, Select, InputLabel, FormControl, Grid, Box, Typography, Autocomplete } from '@mui/material';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { fetchModels, fetchTypes, createReservation } from '../api';
+import { useUser } from "../UserContext";
+import { use } from 'i18next';
 
 dayjs.extend(customParseFormat);
 
 const ReservationPage = () => {
   const { t } = useTranslation();
+  const { userInfo } = useUser();
   const [formData, setFormData] = useState({
+    userId: 0,
     name: '',
     phoneNumber: '',
-    model: '',
-    type: '',
+    modelId: '',
+    typeId: '',
     description: '',
     dateTime: dayjs(),
   });
+
+  const [models, setModels] = useState([]); 
+  const [types, setTypes] = useState([]); 
+  const [filteredModels, setFilteredModels] = useState([]); 
+  const [isTyping, setIsTyping] = useState(false);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const modelsData = await fetchModels();
+        setModels(modelsData);
+        setFilteredModels(modelsData)
+
+        const tyoesData = await fetchTypes();
+        setTypes(tyoesData)
+
+        if(userInfo)
+        {
+          formData.userId = userInfo.id;
+          formData.name = userInfo.userName;
+          formData.phoneNumber = userInfo.phoneNumber;
+          if(userInfo.modelId)
+          {
+            const userModel = modelsData.find(model => model.id === userInfo.modelId);
+            setFilteredModels(userModel ? [userModel] : modelsData);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    getData();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -34,12 +73,37 @@ const ReservationPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleInputChange = (event, value) => {
+    setIsTyping(!!value); // Set typing state based on input
+    setFormData({ ...formData, model: value });
+
+    // Dynamically update filteredModels while typing
+    setFilteredModels(
+      models.filter((option) =>
+        option.modelName.toLowerCase().includes(value.toLowerCase())
+      )
+    );
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!formData.modelId || !formData.typeId) {
+      console.log("Model and Type must be selected.");
+      return;
+    }
+  
     if (formData.dateTime.isValid()) {
-      console.log(formData);
+      try {
+        const response = await createReservation(formData);
+        console.log("Reservation created:", response);
+        alert("Reservation successfully created!");
+      } catch (error) {
+        console.error("Error creating reservation:", error);
+        alert("Failed to create reservation. Please try again.");
+      }
     } else {
-      console.log('Invalid Date');
+      console.log("Invalid Date");
     }
   };
 
@@ -111,39 +175,89 @@ const ReservationPage = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <FormControl fullWidth variant="filled">
+              <Autocomplete
+                options={isTyping ? models : filteredModels}
+                getOptionLabel={(option) => option.modelName}
+                onChange={(event, value) => {
+                  setFormData({ ...formData, modelId: value ? value.id : '' });
+                }}
+                onInputChange={handleInputChange}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label={t('reservation.model')}
+                    variant="filled"
+                    name="model"
+                    InputProps={{
+                      ...params.InputProps,
+                      sx: {
+                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                        color: 'white',
+                        borderRadius: '8px',
+                      },
+                    }}
+                    InputLabelProps={{
+                      style: { color: 'white' },
+                    }}
+                  />
+                )}
+              />
+              {/* <FormControl fullWidth variant="filled">
                 <InputLabel style={{ color: 'white' }}>{t('reservation.model')}</InputLabel>
                 <Select
                   name="model"
                   value={formData.model}
-                  onChange={handleChange}
+                  onChange={handleSearch}
+                  MenuProps={{
+                    PaperProps: {
+                      style: {
+                        maxHeight: 200, // Limit dropdown height to 200px
+                        overflowY: 'auto', // Add scroll for overflow
+                      },
+                    },
+                    anchorOrigin: {
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    },
+                    transformOrigin: {
+                      vertical: 'top',
+                      horizontal: 'left',
+                    },
+                  }}
                   sx={{
                     backgroundColor: 'rgba(255, 255, 255, 0.1)',
                     color: 'white',
                     borderRadius: '8px',
                   }}
                 >
-                  <MenuItem value="Model A">Model A</MenuItem>
-                  <MenuItem value="Model B">Model B</MenuItem>
-                  <MenuItem value="Model C">Model C</MenuItem>
+                  {filteredModels.map((model) => (
+                      <MenuItem key={model.id} value={model.modelName}>
+                        {model.modelName}
+                      </MenuItem>
+                    ))}
                 </Select>
-              </FormControl>
+              </FormControl> */}
             </Grid>
             <Grid item xs={12}>
               <FormControl fullWidth variant="filled">
                 <InputLabel style={{ color: 'white' }}>{t('reservation.type')}</InputLabel>
                 <Select
                   name="type"
-                  value={formData.type}
-                  onChange={handleChange}
+                  value={formData.typeId}
+                  onChange={(e) => {
+                    setFormData({ ...formData, typeId: e.target.value });
+                  }}
                   sx={{
                     backgroundColor: 'rgba(255, 255, 255, 0.1)',
                     color: 'white',
                     borderRadius: '8px',
                   }}
                 >
-                  <MenuItem value="Repair">Repair</MenuItem>
-                  <MenuItem value="Maintenance">Maintenance</MenuItem>
+                  {types.map((type) => (
+                      <MenuItem key={type.id} value={type.id}>
+                        {type.typeName}
+                      </MenuItem>
+                    ))}
                 </Select>
               </FormControl>
             </Grid>

@@ -6,8 +6,7 @@ public class Reservation
 {
     [Key]
     public long Id { get; set; }
-    [Required]
-    public long UserId { get; set; }
+    public long? UserId { get; set; }
     [Required]
     public long ModelId { get; set; }
     [Required]

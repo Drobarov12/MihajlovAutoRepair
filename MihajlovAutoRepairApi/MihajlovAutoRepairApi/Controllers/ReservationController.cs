@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MihajlovAutoRepairApi.Models;
 using MihajlovAutoRepairApi.Models.Dtos;
@@ -11,15 +12,33 @@ namespace MihajlovAutoRepairApi.Controllers;
 public class ReservationController : ControllerBase
 {
     private readonly IReservationRepository _repository;
+    private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
 
-    public ReservationController(IReservationRepository repository, IMapper mapper)
+    public ReservationController(IReservationRepository repository, IUserRepository userRepository, IMapper mapper)
     {
         _repository = repository;
+        _userRepository = userRepository;
         _mapper = mapper;
     }
 
+    [HttpGet]
+    [Authorize]
+    public async Task<ActionResult<List<ReservationDto>>> GetAllReservations()
+    {
+        var reservations = await _repository.GetAllAsync();
+
+        if (reservations == null || !reservations.Any())
+        {
+            return NotFound("No reservations found.");
+        }
+        
+        var reservationDto = _mapper.Map<List<ReservationDto>>(reservations);
+        return Ok(reservationDto);
+    }
+    
     [HttpGet("{id}")]
+    [Authorize]
     public async Task<ActionResult<ReservationDto>> GetReservationById(long id)
     {
         var reservation = await _repository.GetByIdAsync(id);
@@ -40,13 +59,41 @@ public class ReservationController : ControllerBase
             return BadRequest(ModelState);
         }
 
+        // Handle guest users
+        var userId = dto.UserId;
+        if (userId == null || userId == 0)
+        {
+            var guestUser = new User
+            {
+                Name = dto.Username,
+                Email = dto.Username,
+                ModelId = dto.ModelId
+            };
+
+            await _userRepository.AddAsync(guestUser);
+
+            userId = guestUser.Id;
+        }
+        else
+        {
+            var user = await _userRepository.GetByIdAsync(userId);
+            if (user is not null)
+            {
+                user.ModelId = dto.ModelId;
+                await _userRepository.UpdateAsync(user);
+            }
+        }
+
         var reservation = _mapper.Map<Reservation>(dto);
+        reservation.UserId = userId;
+
         await _repository.AddAsync(reservation);
 
         return CreatedAtAction(nameof(GetReservationById), new { id = reservation.Id }, reservation);
     }
     
     [HttpPut("{id}")]
+    [Authorize]
     public async Task<IActionResult> UpdateReservation(long id, [FromBody] ReservationDto reservationDto)
     {
         if (id != reservationDto.Id)
@@ -69,6 +116,7 @@ public class ReservationController : ControllerBase
     }
     
     [HttpDelete("{id}")]
+    [Authorize]
     public async Task<IActionResult> DeleteReservation(long id)
     {
         var userExists = await _repository.ReservationExistsAsync(id);

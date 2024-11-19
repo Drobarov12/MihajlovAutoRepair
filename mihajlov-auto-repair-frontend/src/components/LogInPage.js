@@ -1,15 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {  TextField, Button, IconButton, Grid, Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import { ToastContext } from "./App";
+import { useUser } from "../UserContext";
+import { useNavigate, useLocation } from "react-router-dom"; 
 
 
 const LogInPage = () => {
+  const showToast = useContext(ToastContext);
+  const location = useLocation();
+  const { setUserInfo } = useUser();
+  const navigate = useNavigate()
+
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState(false);
+  const [helperText, setHelperText] = useState("");
+
   const { t } = useTranslation();
+
+  const initialUsername = location.state?.username || ""; // Default to empty if no state
   const [formData, setFormData] = useState({
-    username: '',
+    username: initialUsername,
     password: '',
   });
 
@@ -20,8 +34,75 @@ const LogInPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleEmailChange = (e) => {
+    const input = e.target.value;
+    setEmail(input);
+
+    if (isValidEmail(input)) {
+      setError(false);
+      setHelperText("");
+    } else {
+      setError(true);
+      setHelperText("Invalid email format");
+    }
+  };
+
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!isValidEmail(formData.username)) {
+      showToast("Invalid email!", "error");
+      return
+    } 
+    
+    if(formData.password == "")
+    {
+      showToast("Enter password!", "error");
+      return
+    }
+    
+    try {
+      const response = await fetch('http://127.0.0.1:5105/api/Account/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          Email: formData.username,
+          Password: formData.password,
+        }),
+      });
+
+      console.log('Response status:', response.status);
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          showToast('Invalid username or password', "error");
+          formData.password = '';
+        } else {
+          showToast('An error occurred. Please try again.', "error");
+          formData.password = '';
+        }
+        return;
+      }
+
+      const data = await response.json();
+      const userInfo = data.user; // Example
+      setUserInfo(userInfo);
+      localStorage.setItem("token", data.token);
+      showToast("You are logged in!", "success");
+      navigate("/reservations");
+      // Redirect or perform other actions after successful login
+      } catch (error) {
+      showToast('An error occurred. Please try again.', "error");
+      console.error('Login error:', error);
+      formData.password = '';
+    }
 
   };
 
@@ -58,6 +139,9 @@ const LogInPage = () => {
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
+                onBlur={handleEmailChange}
+                error={error} // Highlight red if error
+                helperText={helperText}
                 variant="filled"
                 InputProps={{
                   sx: {
@@ -122,19 +206,31 @@ const LogInPage = () => {
             </Box>
             </Grid>
             <Grid item xs={12}>
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: '#1976D2', 
-                  color: 'white',
-                  padding: '10px',
-                  borderRadius: '8px',
-                }}
-                type="submit"
-              >
-                {t('login.title')}
-              </Button>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Button
+              variant="outlined"
+              sx={{
+                color: 'white',
+                borderColor: 'white',
+                padding: '10px',
+                borderRadius: '8px',
+              }}
+              onClick={() => navigate('/register')}
+            >
+              {t('register.title')}
+            </Button>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: '#1976D2',
+                color: 'white',
+                padding: '10px',
+                borderRadius: '8px',
+              }}
+              type="submit"
+            >
+              {t('login.title')}
+            </Button>
               </Box>
             </Grid>
           </Grid>

@@ -4,13 +4,16 @@ import './index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from '@mui/material/styles';
+import { UserProvider } from "./UserContext";
 import theme from './theme';
 import './i18n';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ThemeProvider theme={theme}>
-    <App />
+    <UserProvider >
+      <App />
+    </UserProvider>
   </ThemeProvider>,
 );
 
