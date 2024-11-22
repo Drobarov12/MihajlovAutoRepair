@@ -87,7 +87,7 @@ For the JWT signing key, we generated a secure 32-character key to ensure it met
 ```json
 {
   "Jwt": {
-    "Key": "Y2Fkc2FkYXV2aGVjYXNkZ2FzZGZoamtsZ25ncQ==", // A secure key we generated
+    "Key": "`==key==", // A secure key we generated
     "Issuer": "localhost",
     "Audience": "localhost",
     "ExpiryInMinutes": 60
@@ -293,7 +293,7 @@ The `User` entity is managed through the `AccountController` for registration an
 
 ### 2. `Reservation` Entity
 
-The `Reservation` entity allows users to create and manage reservations. Only administrators can perform create, update, and delete operations.
+The `Reservation` entity allows users to create and manage reservations. Only administrators can perform update and delete operations.
 
 #### ReservationController Actions
 
@@ -313,11 +313,11 @@ The `Reservation` entity allows users to create and manage reservations. Only ad
 
 2. **Get Reservation by ID**: Retrieves a specific reservation by ID.
    - **Endpoint**: `GET /api/Reservation/{id}`
-   - **Access**: Authenticated users.
+   - **Access**: Admin only.
 
 3. **Create Reservation**: Adds a new reservation.
    - **Endpoint**: `POST /api/Reservation`
-   - **Access**: Admin only.
+   - **Access**: Public (no authorization required).
 
 4. **Update Reservation**: Modifies an existing reservation.
    - **Endpoint**: `PUT /api/Reservation/{id}`
