@@ -52,6 +52,13 @@ public class ReservationRepository : IReservationRepository
         }
     }
 
+    public async Task DeleteAllFromUserAsync(long id)
+    {
+        var reservations = _context.Reservations.Where(res => res.UserId == id).ToList();
+        reservations.ForEach(res => _context.Reservations.Remove(res));
+        await _context.SaveChangesAsync();
+    }
+
     public async Task<bool> ReservationExistsAsync(long id)
     {
         return await _context.Reservations.AnyAsync(e => e.Id == id);

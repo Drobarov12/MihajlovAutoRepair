@@ -236,27 +236,27 @@ const ReservationsAdminPage = () => {
                 </TableCell>
                 <TableCell>
                 <Autocomplete
-                options={isTyping ? models : filteredModels}
-                getOptionLabel={(option) => option.modelName}
-                onChange={(event, value) => {
-                    setEditData({ ...editData, modelName: value ? value.modelName : '' });
-                  }}
-                onInputChange={handleAutocompleteChange}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label={editData.modelName}
-                    variant="filled"
-                    name="model"
-                    InputProps={{
-                      ...params.InputProps,
+                  options={isTyping ? models : filteredModels}
+                  getOptionLabel={(option) => option.modelName}
+                  onChange={(event, value) => {
+                      setEditData({ ...editData, modelName: value ? value.modelName : '' });
                     }}
-                    InputLabelProps={{
-                      style: { color: 'white' },
-                    }}
-                  />
-                )}
-              />
+                  onInputChange={handleAutocompleteChange}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label={editData.modelName}
+                      variant="filled"
+                      name="model"
+                      InputProps={{
+                        ...params.InputProps,
+                      }}
+                      InputLabelProps={{
+                        style: { color: 'white' },
+                      }}
+                    />
+                  )}
+                />
                 </TableCell>
                   <TableCell>
                     <TextField

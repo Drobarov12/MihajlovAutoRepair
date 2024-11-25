@@ -4,7 +4,7 @@ namespace MihajlovAutoRepairApi.Repository;
 
 public interface IUserRepository
 {
-    Task<IEnumerable<User>> GetAllAsync();
+    Task<List<User>> GetAllAsync();
     Task<User?> GetByIdAsync(long id);
     Task<User?> GetByIdWithModelAsync(long id);
     Task<User> GetByUsernameAsync(string username);

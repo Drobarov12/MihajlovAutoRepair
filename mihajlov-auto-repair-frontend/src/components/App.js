@@ -11,6 +11,7 @@ import LogInPage from './LogInPage';
 import RegisterPage from './RegisterPage';
 import Toast from './CustomComponents/Toast'
 import ModelsAndTypesPage from './ReservationPages/ModelsAndTypesPage';
+import UsersPage from './ReservationPages/UsersPage';
 
 export const ToastContext = createContext();
 
@@ -53,6 +54,7 @@ function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/reservations" element={<RoleBasedRoute adminComponent={ReservationAdminPage} userComponent={ReservationPage} />} />
       <Route path="/modelsandtypes" element={<RoleBasedRoute adminComponent={ModelsAndTypesPage} userComponent={ReservationPage} />} />
+      <Route path="/users" element={<RoleBasedRoute adminComponent={UsersPage} userComponent={ReservationPage} />} />
       <Route path="/login" element={<LogInPage />} />
       <Route path="/register" element={<RegisterPage />} />
       </Routes>

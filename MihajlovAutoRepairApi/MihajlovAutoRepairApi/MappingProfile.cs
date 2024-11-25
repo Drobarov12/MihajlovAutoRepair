@@ -17,9 +17,11 @@ public class MappingProfile : Profile
 
         CreateMap<ReservationCreateDto, Reservation>();
         CreateMap<ReservationDto, Reservation>();
-        
-        
-        CreateMap<User, UserDto>();
+
+
+        CreateMap<User, UserDto>()
+            .ForMember(dest => dest.ModelName, 
+                opt => opt.MapFrom(src => src.Model != null && src.Model.Any() ? src.Model.First().ModelName : string.Empty));
         CreateMap<UserCreateDto, User>();
 
         CreateMap<Type, TypeDto>();
