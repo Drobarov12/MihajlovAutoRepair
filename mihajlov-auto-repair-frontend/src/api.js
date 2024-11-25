@@ -14,8 +14,55 @@ export const fetchModels = async () => {
   }
 };
 
+export const addModel = async (newModel) => {
+  try {
+    var token = localStorage.getItem("token");
+    const response = await axios.post(`${API_BASE_URL}/Model`, newModel,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`, // Add the token to the Authorization header
+      },
+    } );
 
-// Fetch types from the backend
+    return response.data; // Return the created reservation or success response
+  } catch (error) {
+    console.error("Error creating model:", error);
+    throw error;
+  }
+};
+
+export const editModel = async (model) => {
+  try {
+    var token = localStorage.getItem("token");
+    await axios.put(
+      `${API_BASE_URL}/Model/${model.id}`, 
+    model, 
+    {
+      headers: {
+        Authorization: `Bearer ${token}`, // Add the token to the Authorization header
+      },
+    });
+  } catch (error) {
+    console.error("Error editing model:", error);
+    throw error;
+  }
+};
+
+export const deleteModel = async (id) => {
+  try {
+    var token = localStorage.getItem("token");
+    await axios.delete(`${API_BASE_URL}/Model/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Add the token to the Authorization header
+      },
+    });
+  } catch (error) {
+    console.error("Error deleting model:", error);
+    throw error;
+  }
+};
+
+
 export const fetchTypes = async () => {
     try {
       const response = await axios.get(`${API_BASE_URL}/Type`);
@@ -25,6 +72,55 @@ export const fetchTypes = async () => {
       throw error;
     }
   };
+
+  export const addType = async (newType) => {
+    try {
+      var token = localStorage.getItem("token");
+      const response = await axios.post(`${API_BASE_URL}/Type`, newType,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Add the token to the Authorization header
+        },
+      } );
+  
+      return response.data; // Return the created reservation or success response
+    } catch (error) {
+      console.error("Error creating type:", error);
+      throw error;
+    }
+  };
+
+  export const editType = async (type) => {
+    try {
+      var token = localStorage.getItem("token");
+      await axios.put(
+        `${API_BASE_URL}/Type/${type.id}`, 
+        type, 
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Add the token to the Authorization header
+        },
+      });
+    } catch (error) {
+      console.error("Error editing type:", error);
+      throw error;
+    }
+  };
+
+  export const deleteType = async (id) => {
+    try {
+      var token = localStorage.getItem("token");
+      await axios.delete(`${API_BASE_URL}/Type/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, 
+        },
+      });
+    } catch (error) {
+      console.error("Error deleting type:", error);
+      throw error;
+    }
+  };
+  
 
   export const createReservation = async (formData) => {
     try {
@@ -53,9 +149,12 @@ export const fetchTypes = async () => {
           Authorization: `Bearer ${token}`, // Add the token to the Authorization header
         },
       });
+      if(!response.ok){
+
+      }
       return response.data;
     } catch (error) {
-      console.error("Error fetching models:", error);
+      console.error("Error fetching reservations:", error);
       throw error;
     }
   };
@@ -63,13 +162,13 @@ export const fetchTypes = async () => {
   export const deleteReservation = async (id) => {
     try {
       var token = localStorage.getItem("token");
-      const response = await axios.delete(`${API_BASE_URL}/Reservation/${id}`, {
+      await axios.delete(`${API_BASE_URL}/Reservation/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`, // Add the token to the Authorization header
         },
       });
     } catch (error) {
-      console.error("Error fetching models:", error);
+      console.error("Error deleting reservation:", error);
       throw error;
     }
   };
@@ -77,7 +176,7 @@ export const fetchTypes = async () => {
   export const editReservation = async (reservation) => {
     try {
       var token = localStorage.getItem("token");
-      const response = await axios.put(
+      await axios.put(
         `${API_BASE_URL}/Reservation/${reservation.id}`, 
       reservation, 
       {
@@ -86,7 +185,7 @@ export const fetchTypes = async () => {
         },
       });
     } catch (error) {
-      console.error("Error fetching models:", error);
+      console.error("Error editing reservation:", error);
       throw error;
     }
   };

@@ -18,11 +18,13 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SaveIcon from "@mui/icons-material/Save";
-import { fetchReservations, deleteReservation, editReservation, fetchModels, fetchTypes } from '../api';
-import { ToastContext } from "./App";
+import { fetchReservations, deleteReservation, editReservation, fetchModels, fetchTypes } from '../../api';
+import { ToastContext } from "../App";
+import { useNavigate } from "react-router-dom"; 
 
 const ReservationsAdminPage = () => {
   const showToast = useContext(ToastContext);
+  const navigate = useNavigate();
   const [editingRow, setEditingRow] = useState(null); // Track the row being edited
   const [editData, setEditData] = useState({}); // Store the current data being edited
   const [reservations, setReservations] = useState([]); 
@@ -37,6 +39,7 @@ const ReservationsAdminPage = () => {
   const getData = async () => {
     try {
       const reservations = await fetchReservations();
+      reservations.sort((a, b) =>  new Date(b.dateTime) -  new Date(a.dateTime));
       setReservations(reservations);
       setFilteredReservations(reservations);
 
@@ -52,7 +55,7 @@ const ReservationsAdminPage = () => {
             showToast("Please log in again", "error");
             return;
         }
-
+        showToast("Error getting data, please try again", "error")
       console.error("Error fetching data:", error);
     }
   };
@@ -76,6 +79,7 @@ const ReservationsAdminPage = () => {
             showToast("Please log in again", "error");
             return;
         }
+        showToast("Error deleting data, please try again", "error")
         console.error("Error deleting data:", error);
     }
   };
@@ -90,6 +94,7 @@ const ReservationsAdminPage = () => {
             showToast("Please log in again", "error");
             return;
         }
+        showToast("Error updating data, please try again", "error")
         console.error("Error edit data:", error);
     }
     setEditingRow(null); // Exit edit mode
@@ -128,8 +133,6 @@ const ReservationsAdminPage = () => {
     } else {
         setFilteredModels(models);
     }
-
-    
   };
 
   return (
@@ -186,14 +189,22 @@ const ReservationsAdminPage = () => {
           />
           
           {/* Model & Types Button */}
+          <Box>
           <Button
             variant="contained"
             color="primary"
-            
-            sx={{ minWidth: "150px" }}
-          >
+            onClick={() => navigate("/users")}
+            sx={{ minWidth: "150px", margin:'10px' }}>
+            Users
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() =>  navigate("/modelsandtypes")}
+            sx={{ minWidth: "150px", margin:'10px' }}>
             Models & Types
           </Button>
+          </Box>
         </Box>
     <TableContainer component={Paper} sx={{ maxHeight: '70vh' }}>
       <Table sx={{ minWidth: 650}} stickyHeader >

@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { Container, TextField, Button, MenuItem, Select, InputLabel, FormControl, Grid, Box, Typography, Autocomplete } from '@mui/material';
+import React, { useState, useEffect, useContext } from 'react';
+import { TextField, Button, MenuItem, Select, InputLabel, FormControl, Grid, Box, Typography, Autocomplete } from '@mui/material';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
-import { fetchModels, fetchTypes, createReservation } from '../api';
-import { useUser } from "../UserContext";
-import { use } from 'i18next';
+import { fetchModels, fetchTypes, createReservation } from '../../api';
+import { useUser } from "../../UserContext";
+import { ToastContext } from "../App";
 
 dayjs.extend(customParseFormat);
 
 const ReservationPage = () => {
+  const showToast = useContext(ToastContext);
   const { t } = useTranslation();
   const { userInfo } = useUser();
   const [formData, setFormData] = useState({
@@ -97,13 +98,13 @@ const ReservationPage = () => {
       try {
         const response = await createReservation(formData);
         console.log("Reservation created:", response);
-        alert("Reservation successfully created!");
+        showToast("Reservation successfully created!", "success");
       } catch (error) {
         console.error("Error creating reservation:", error);
-        alert("Failed to create reservation. Please try again.");
+        showToast("Failed to create reservation. Please try again.", "error");
       }
     } else {
-      console.log("Invalid Date");
+      showToast("Invalid Date", "error");
     }
   };
 

@@ -5,11 +5,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import HomePage from './HomePage/HomePage';
-import ReservationPage from './ReservationPage';
-import ReservationAdminPage from './ReservationAdminPage';
+import ReservationPage from './ReservationPages/ReservationPage';
+import ReservationAdminPage from './ReservationPages/ReservationAdminPage';
 import LogInPage from './LogInPage';
 import RegisterPage from './RegisterPage';
 import Toast from './CustomComponents/Toast'
+import ModelsAndTypesPage from './ReservationPages/ModelsAndTypesPage';
 
 export const ToastContext = createContext();
 
@@ -51,6 +52,7 @@ function App() {
       <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/reservations" element={<RoleBasedRoute adminComponent={ReservationAdminPage} userComponent={ReservationPage} />} />
+      <Route path="/modelsandtypes" element={<RoleBasedRoute adminComponent={ModelsAndTypesPage} userComponent={ReservationPage} />} />
       <Route path="/login" element={<LogInPage />} />
       <Route path="/register" element={<RegisterPage />} />
       </Routes>
