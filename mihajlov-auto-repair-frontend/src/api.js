@@ -43,3 +43,50 @@ export const fetchTypes = async () => {
       throw error;
     }
   };
+
+  export const fetchReservations = async () => {
+    try {
+      var token = localStorage.getItem("token");
+      const response = await axios.get(`${API_BASE_URL}/Reservation`, {
+        
+        headers: {
+          Authorization: `Bearer ${token}`, // Add the token to the Authorization header
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching models:", error);
+      throw error;
+    }
+  };
+
+  export const deleteReservation = async (id) => {
+    try {
+      var token = localStorage.getItem("token");
+      const response = await axios.delete(`${API_BASE_URL}/Reservation/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Add the token to the Authorization header
+        },
+      });
+    } catch (error) {
+      console.error("Error fetching models:", error);
+      throw error;
+    }
+  };
+
+  export const editReservation = async (reservation) => {
+    try {
+      var token = localStorage.getItem("token");
+      const response = await axios.put(
+        `${API_BASE_URL}/Reservation/${reservation.id}`, 
+      reservation, 
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Add the token to the Authorization header
+        },
+      });
+    } catch (error) {
+      console.error("Error fetching models:", error);
+      throw error;
+    }
+  };

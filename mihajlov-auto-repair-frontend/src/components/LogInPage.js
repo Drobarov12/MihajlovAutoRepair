@@ -95,6 +95,7 @@ const LogInPage = () => {
       const userInfo = data.user; // Example
       setUserInfo(userInfo);
       localStorage.setItem("token", data.token);
+      localStorage.setItem("role", data.role);
       showToast("You are logged in!", "success");
       navigate("/reservations");
       // Redirect or perform other actions after successful login

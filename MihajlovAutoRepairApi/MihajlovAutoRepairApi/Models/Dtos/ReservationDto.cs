@@ -6,6 +6,7 @@ public class ReservationDto
     public string Description { get; set; }
     public DateTime DateTime { get; set; }
     public string UserName { get; set; }
+    public string UserPhoneNumber { get; set; }
     public string ModelName { get; set; }
     public string TypeName { get; set; }
 }

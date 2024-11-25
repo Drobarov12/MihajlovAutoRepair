@@ -47,7 +47,7 @@ public class TypeController : ControllerBase
 
     // POST: api/Type
     [HttpPost]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> CreateType([FromBody] TypeCreateDto typeCreateDto)
     {
         if (!ModelState.IsValid)
@@ -64,7 +64,7 @@ public class TypeController : ControllerBase
 
     // PUT: api/Type/5
     [HttpPut("{id}")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> UpdateType(long id, [FromBody] TypeCreateDto typeCreateDto)
     {
         if (!ModelState.IsValid || id == 0)
@@ -88,7 +88,7 @@ public class TypeController : ControllerBase
 
     // DELETE: api/Type/5
     [HttpDelete("{id}")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteType(long id)
     {
         var typeExists = await _repository.TypeExistsAsync(id);

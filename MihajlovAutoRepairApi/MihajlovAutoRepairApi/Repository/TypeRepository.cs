@@ -22,6 +22,11 @@ public class TypeRepository : ITypeRepository
         return await _context.Types.FindAsync(id);
     }
 
+    public async Task<Type> GetByNameAsync(string name)
+    {
+        return await _context.Types.FirstOrDefaultAsync(type => type.TypeName == name);
+    }
+
     public async Task AddAsync(Models.Type type)
     {
         await _context.Types.AddAsync(type);

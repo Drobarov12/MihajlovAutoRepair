@@ -1,4 +1,6 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MihajlovAutoRepairApi.Models;
 using MihajlovAutoRepairApi.Models.Dtos;
@@ -11,11 +13,13 @@ namespace MihajlovAutoRepairApi.Controllers;
 public class UserController : ControllerBase
 {
     private readonly IUserRepository _repository;
+    private readonly UserManager<User> _userManager;
     private readonly IMapper _mapper;
 
-    public UserController(IUserRepository repository, IMapper mapper)
+    public UserController(IUserRepository repository, UserManager<User> userManager,IMapper mapper)
     {
         _repository = repository;
+        _userManager = userManager;
         _mapper = mapper;
     }
 
@@ -78,6 +82,27 @@ public class UserController : ControllerBase
         user.Id = id;
 
         await _repository.UpdateAsync(user);
+
+        return NoContent();
+    }
+    
+    // PUT: api/User/5
+    [HttpPut("role/{id}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> UpdateUser(long id, string role)
+    {
+        if (!ModelState.IsValid || id == 0)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var user = await _repository.GetByIdAsync(id);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        await _userManager.AddToRoleAsync(user, role);
 
         return NoContent();
     }

@@ -6,11 +6,17 @@ import Header from './Header';
 import Footer from './Footer';
 import HomePage from './HomePage/HomePage';
 import ReservationPage from './ReservationPage';
+import ReservationAdminPage from './ReservationAdminPage';
 import LogInPage from './LogInPage';
 import RegisterPage from './RegisterPage';
 import Toast from './CustomComponents/Toast'
 
 export const ToastContext = createContext();
+
+const RoleBasedRoute = ({ adminComponent: AdminComponent, userComponent: UserComponent }) => {
+  const role = localStorage.getItem('role');
+  return role === 'Admin' ? <AdminComponent /> : <UserComponent />;
+};
 
 function App() {
 
@@ -44,7 +50,7 @@ function App() {
       <Header />
       <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/reservations" element={<ReservationPage />} />
+      <Route path="/reservations" element={<RoleBasedRoute adminComponent={ReservationAdminPage} userComponent={ReservationPage} />} />
       <Route path="/login" element={<LogInPage />} />
       <Route path="/register" element={<RegisterPage />} />
       </Routes>

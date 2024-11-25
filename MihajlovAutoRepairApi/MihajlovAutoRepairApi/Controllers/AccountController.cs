@@ -40,6 +40,7 @@ public class AccountController : ControllerBase
 
         if (result.Succeeded)
         {
+            await _userManager.AddToRoleAsync(user, "User");
             return Ok("User created successfully");
         }
 
@@ -57,33 +58,34 @@ public class AccountController : ControllerBase
 
         var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
 
-        if (result.Succeeded)
-        {
-            var user = await _userManager.FindByEmailAsync(model.Email);
-            var token = GenerateJwtToken(user);
+        if (!result.Succeeded) return Unauthorized();
+        
+        var user = await _userManager.FindByEmailAsync(model.Email);
+        var roleList = await _userManager.GetRolesAsync(user!);
+        var role = roleList.FirstOrDefault() ?? "User";
+        var token = GenerateJwtToken(user!, role);
             
-            // Response.Cookies.Append("AuthToken", token, new CookieOptions // TODO for feature inprovements
-            // {
-            //     HttpOnly = true,
-            //     Secure = false, // Use only HTTPS set to false for debugg
-            //     SameSite = SameSiteMode.Strict, // Prevent CSRF
-            //     Expires = DateTime.UtcNow.AddMinutes(30)
-            // });
+        // Response.Cookies.Append("AuthToken", token, new CookieOptions // TODO for feature inprovements
+        // {
+        //     HttpOnly = true,
+        //     Secure = false, // Use only HTTPS set to false for debugg
+        //     SameSite = SameSiteMode.Strict, // Prevent CSRF
+        //     Expires = DateTime.UtcNow.AddMinutes(30)
+        // });
 
-            return Ok(new { user = new { user.Id, user.UserName, user.PhoneNumber, user.ModelId }, token });
-            // return Ok(new { token });
-        }
+        return Ok(new { user = new { user.Id, user.UserName, user.PhoneNumber, user.ModelId }, token, role });
+        // return Ok(new { token });
 
-        return Unauthorized();
     }
 
-    private string GenerateJwtToken(User user)
+    private string GenerateJwtToken(User user, string role)
     {
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Sub, user.Email),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim(ClaimTypes.NameIdentifier, user.UserName)
+            new Claim(ClaimTypes.NameIdentifier, user.UserName),
+            new Claim(ClaimTypes.Role, role)
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));

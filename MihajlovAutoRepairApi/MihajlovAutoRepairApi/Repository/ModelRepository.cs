@@ -22,6 +22,11 @@ public class ModelRepository : IModelRepository
         return await _context.Models.FindAsync(id);
     }
 
+    public async Task<Model> GetByNameAsync(string name)
+    {
+        return await _context.Models.FirstOrDefaultAsync(model => model.ModelName == name);;
+    }
+
     public async Task AddAsync(Model type)
     {
         await _context.Models.AddAsync(type);

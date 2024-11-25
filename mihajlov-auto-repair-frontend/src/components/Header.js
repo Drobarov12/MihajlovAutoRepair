@@ -35,6 +35,8 @@ const Header = () => {
 
   const handleLogout = () => {
     setUserInfo(null);
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
     navigate('/login');
   };
 
@@ -185,7 +187,7 @@ const Header = () => {
           </Box>
         </Drawer>
 
-        <Box sx={{ display: 'flex', alignItems: 'center', display: { xs: 'none', md: 'flex' }, }}>
+        <Box sx={{ alignItems: 'center', display:{ xs: 'none', md: 'flex' }, }}>
         <ToggleButtonGroup
         value={selectedLanguage}
         exclusive
