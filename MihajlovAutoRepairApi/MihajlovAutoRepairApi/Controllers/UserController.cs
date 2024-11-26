@@ -35,7 +35,7 @@ public class UserController : ControllerBase
         for (int i = 0; i < users.Count; i++)
         {
             var role = await _userManager.GetRolesAsync(users[i]);
-            userDtos[i].UserRole = role.FirstOrDefault() ?? "";
+            userDtos[i].UserRole = role.LastOrDefault() ?? "";
         }
         return Ok(userDtos);
     }
@@ -95,7 +95,6 @@ public class UserController : ControllerBase
         return NoContent();
     }
     
-    // PUT: api/User/5
     [HttpPut("{id}/{role}")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> UpdateUser(long id, string role)
@@ -111,6 +110,9 @@ public class UserController : ControllerBase
             return NotFound();
         }
 
+        var currentRoles = await _userManager.GetRolesAsync(user);
+        await _userManager.RemoveFromRolesAsync(user, currentRoles);
+        
         await _userManager.AddToRoleAsync(user, role);
 
         return NoContent();

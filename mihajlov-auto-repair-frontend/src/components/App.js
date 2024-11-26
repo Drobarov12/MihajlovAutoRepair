@@ -12,11 +12,12 @@ import RegisterPage from './RegisterPage';
 import Toast from './CustomComponents/Toast'
 import ModelsAndTypesPage from './ReservationPages/ModelsAndTypesPage';
 import UsersPage from './ReservationPages/UsersPage';
+import { ConfirmationDialogProvider } from '../contexts/ConfirmationDialogContext';
 
 export const ToastContext = createContext();
 
 const RoleBasedRoute = ({ adminComponent: AdminComponent, userComponent: UserComponent }) => {
-  const role = localStorage.getItem('role');
+  const role = sessionStorage.getItem('role');
   return role === 'Admin' ? <AdminComponent /> : <UserComponent />;
 };
 
@@ -40,6 +41,7 @@ function App() {
 
   return (
     <ToastContext.Provider value={showToast}>
+    <ConfirmationDialogProvider>
     <Router>
     <Box
       sx={{
@@ -67,6 +69,7 @@ function App() {
           severity={toast.severity}
         />
     </Router>
+    </ConfirmationDialogProvider>
     </ToastContext.Provider>
   );
 }

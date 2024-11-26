@@ -16,7 +16,7 @@ export const fetchModels = async () => {
 
 export const addModel = async (newModel) => {
   try {
-    var token = localStorage.getItem("token");
+    var token = sessionStorage.getItem("token");
     const response = await axios.post(`${API_BASE_URL}/Model`, newModel,
     {
       headers: {
@@ -33,7 +33,7 @@ export const addModel = async (newModel) => {
 
 export const editModel = async (model) => {
   try {
-    var token = localStorage.getItem("token");
+    var token = sessionStorage.getItem("token");
     await axios.put(
       `${API_BASE_URL}/Model/${model.id}`, 
     model, 
@@ -50,7 +50,7 @@ export const editModel = async (model) => {
 
 export const deleteModel = async (id) => {
   try {
-    var token = localStorage.getItem("token");
+    var token = sessionStorage.getItem("token");
     await axios.delete(`${API_BASE_URL}/Model/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -75,7 +75,7 @@ export const fetchTypes = async () => {
 
   export const addType = async (newType) => {
     try {
-      var token = localStorage.getItem("token");
+      var token = sessionStorage.getItem("token");
       const response = await axios.post(`${API_BASE_URL}/Type`, newType,
       {
         headers: {
@@ -92,7 +92,7 @@ export const fetchTypes = async () => {
 
   export const editType = async (type) => {
     try {
-      var token = localStorage.getItem("token");
+      var token = sessionStorage.getItem("token");
       await axios.put(
         `${API_BASE_URL}/Type/${type.id}`, 
         type, 
@@ -109,7 +109,7 @@ export const fetchTypes = async () => {
 
   export const deleteType = async (id) => {
     try {
-      var token = localStorage.getItem("token");
+      var token = sessionStorage.getItem("token");
       await axios.delete(`${API_BASE_URL}/Type/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`, 
@@ -142,7 +142,7 @@ export const fetchTypes = async () => {
 
   export const fetchReservations = async () => {
     try {
-      var token = localStorage.getItem("token");
+      var token = sessionStorage.getItem("token");
       const response = await axios.get(`${API_BASE_URL}/Reservation`, {
         
         headers: {
@@ -161,7 +161,7 @@ export const fetchTypes = async () => {
 
   export const deleteReservation = async (id) => {
     try {
-      var token = localStorage.getItem("token");
+      var token = sessionStorage.getItem("token");
       await axios.delete(`${API_BASE_URL}/Reservation/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`, 
@@ -175,7 +175,7 @@ export const fetchTypes = async () => {
 
   export const editReservation = async (reservation) => {
     try {
-      var token = localStorage.getItem("token");
+      var token = sessionStorage.getItem("token");
       await axios.put(
         `${API_BASE_URL}/Reservation/${reservation.id}`, 
       reservation, 
@@ -192,7 +192,7 @@ export const fetchTypes = async () => {
 
   export const fetchUsers = async () => {
     try{
-      var token = localStorage.getItem("token");
+      var token = sessionStorage.getItem("token");
       const response = await axios.get(
         `${API_BASE_URL}/User/`,
       {
@@ -210,7 +210,7 @@ export const fetchTypes = async () => {
 
   export const updateUser = async (user) => {
     try {
-      var token = localStorage.getItem("token");
+      var token = sessionStorage.getItem("token");
       await axios.put(
         `${API_BASE_URL}/User/${user.id}`, 
         user, 
@@ -227,7 +227,7 @@ export const fetchTypes = async () => {
 
   export const deleteUser = async (id) => {
     try {
-      var token = localStorage.getItem("token");
+      var token = sessionStorage.getItem("token");
       await axios.delete(`${API_BASE_URL}/User/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`, 
@@ -241,9 +241,10 @@ export const fetchTypes = async () => {
 
   export const updateUserRole = async (id, role) => {
     try {
-      var token = localStorage.getItem("token");
+      var token = sessionStorage.getItem("token");
       await axios.put(
         `${API_BASE_URL}/User/${id}/${role}`,
+        {}, 
       {
         headers: {
           Authorization: `Bearer ${token}`,

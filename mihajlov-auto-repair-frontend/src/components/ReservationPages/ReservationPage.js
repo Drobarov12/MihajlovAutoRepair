@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { fetchModels, fetchTypes, createReservation } from '../../api';
-import { useUser } from "../../UserContext";
+import { useUser } from "../../contexts/UserContext";
 import { ToastContext } from "../App";
 
 dayjs.extend(customParseFormat);

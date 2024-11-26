@@ -19,9 +19,11 @@ import SaveIcon from "@mui/icons-material/Save";
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import { fetchUsers, fetchModels, updateUser, deleteUser, updateUserRole } from "../../api"
 import { ToastContext } from "../App";
+import { useConfirmationDialog } from '../../contexts/ConfirmationDialogContext';
 
 const UsersPage = () =>
 {
+    const { showConfirmationDialog } = useConfirmationDialog();
     const showToast = useContext(ToastContext);
     const [users, setUsers] = useState([]);
     const [editRow, setEditRow] = useState([]);
@@ -77,41 +79,56 @@ const UsersPage = () =>
 
     const handleAdmin = async (user) => {
         try{
+            
             if(user.userRole !== "Admin"){
-                // await updateUserRole(user.id, "Admin");
-                // user.userRole = "Admin";
-                // setUsers((prev) => prev.map((user) => user));
+                showConfirmationDialog(
+                    'Change the role',
+                    `Are you sure you want add ${user.username} as Admin`,
+                    async () => {
+                        try{
+                            await updateUserRole(user.id, "Admin")
+                            user.userRole = "Admin";
+                            setUsers((prev) => prev.map((user) => user));
+                        } catch (error){
+                            if(error.status === 401){
+                                showToast("Please log in again", "error");
+                                return;
+                            }
+                            showToast("Error changing role, please try again", "error")
+                        }
+                    },
+                    'Yes'
+                  );
             }
             else{
-                
-                // confirmAlert({
-                //     title: 'Change the role',
-                //     message: `Are you sure you want to remve Admin role from user ${user.username}`,
-                //     buttons: [
-                //       {
-                //         label: 'Yes',
-                //         onClick: async () => await updateUserRole(user.id, "User"),
-                //       },
-                //       {
-                //         label: 'No',
-                //       },
-                //     ],
-                //   });
+                showConfirmationDialog(
+                    'Change the role',
+                    `Are you sure you want to remve Admin role from user ${user.username}`,
+                    async () => {
+                        try{
+                            await updateUserRole(user.id, "User")
+                            user.userRole = "User";
+                            setUsers((prev) => prev.map((user) => user));
+                        } catch (error){
+                            if(error.status === 401){
+                                showToast("Please log in again", "error");
+                                return;
+                            }
+                            showToast("Error changing role, please try again", "error")
+                        }
+                    },
+                    'Yes'
+                  );
             }
         } catch (error){
-            if(error.status === 401){
-                showToast("Please log in again", "error");
-                return;
-            }
-            showToast("Error changing role, please try again", "error")
+            
         }
     }
 
     const handleAutocompleteChange = (event, value) => {
-        setIsTyping(!!value); // Set typing state based on input
+        setIsTyping(!!value); 
         setEditRow({ ...editRow, modelName: value });
     
-        // Dynamically update filteredModels while typing
         if(value){
             setFilteredModels(
                 models.filter((option) =>
@@ -214,7 +231,8 @@ const UsersPage = () =>
                                         <IconButton onClick={() => handleDelete(user.id)} sx={{ color:'Red' }}>
                                             <DeleteIcon />
                                         </IconButton>
-                                        <IconButton onClick={() => handleAdmin(user)} sx={{ color:'green' }}>
+                                        <IconButton onClick={() => handleAdmin(user)} sx={{ 
+                                            color: user.userRole === 'Admin' ? 'green' : 'yellow' }}>
                                             <SupervisorAccountIcon />
                                         </IconButton>
                                         </TableCell>

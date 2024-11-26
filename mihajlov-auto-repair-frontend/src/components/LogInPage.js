@@ -5,7 +5,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import { ToastContext } from "./App";
-import { useUser } from "../UserContext";
+import { useUser } from "../contexts/UserContext";
 import { useNavigate, useLocation } from "react-router-dom"; 
 
 
@@ -94,8 +94,8 @@ const LogInPage = () => {
       const data = await response.json();
       const userInfo = data.user; // Example
       setUserInfo(userInfo);
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("role", data.role);
+      sessionStorage.setItem("token", data.token);
+      sessionStorage.setItem("role", data.role);
       showToast("You are logged in!", "success");
       navigate("/reservations");
       // Redirect or perform other actions after successful login
