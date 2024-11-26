@@ -94,7 +94,7 @@ const LogInPage = () => {
       setUserInfo(userInfo);
       sessionStorage.setItem("token", data.token);
       sessionStorage.setItem("role", data.role);
-      showToast(t('message.loginSuccessful'), "success");
+      showToast(t('messages.loginSuccessful'), "success");
       navigate("/reservations");
       // Redirect or perform other actions after successful login
       } catch (error) {

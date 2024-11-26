@@ -16,6 +16,7 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SaveIcon from "@mui/icons-material/Save";
+import ClearIcon from '@mui/icons-material/Clear';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import { fetchUsers, fetchModels, updateUser, deleteUser, updateUserRole } from "../../api"
 import { ToastContext } from "../App";
@@ -52,17 +53,23 @@ const UsersPage = () =>
         setEditRow(user)
     };
 
-    const handleDelete = async (id) =>{
-        try{
-            await deleteUser(id);
-            setUsers((prev) => prev.filter((user) => user.id !== id));
-        } catch (error){
-            if(error.status === 401){
-                showToast(t('messages.loginAgain'), "error");
-                return;
+    const handleDelete = async (user) =>{
+        showConfirmationDialog(
+            t('dialog.deleteTitle'),
+            `${t('dialog.deleteUserDescription')} ${user.username}`,
+            async () => {
+                try{
+                    await deleteUser(user.id);
+                    setUsers((prev) => prev.filter((u) => u.id !== user.id));
+                } catch (error){
+                    if(error.status === 401){
+                        showToast(t('messages.loginAgain'), "error");
+                        return;
+                    }
+                    showToast(`${t('message.errorDeletingData')}, ${t('messages.tryAgain')}`, "error")
+                }
             }
-            showToast(`${t('message.errorDeletingData')}, ${t('messages.tryAgain')}`, "error")
-        }
+        );
     };
     const handleSave = async () =>{
         try{
@@ -79,6 +86,10 @@ const UsersPage = () =>
             showToast(`${t('message.errorSavingData')}, ${t('messages.tryAgain')}`, "error")
         }
     };
+
+    const handleClear = () => {
+        setEditRow({});
+    }
 
     const handleAdmin = async (user) => {
         const isAdmin = user.userRole === "Admin"
@@ -99,8 +110,7 @@ const UsersPage = () =>
                     }
                     showToast(`${t('message.errorChangingRole')}, ${t('messages.tryAgain')}`, "error");
                 }
-            },
-            'Yes'
+            }
         );
     }
 
@@ -196,6 +206,9 @@ const UsersPage = () =>
                                         <IconButton onClick={() => handleSave()} sx={{ color:'green'}}>
                                             <SaveIcon />
                                         </IconButton>
+                                        <IconButton onClick={() => handleClear()} sx={{ color:'Red'}}>
+                                            <ClearIcon />
+                                        </IconButton>
                                     </TableCell>
                                 </TableRow>
                             ):(
@@ -207,7 +220,7 @@ const UsersPage = () =>
                                         <IconButton onClick={() => handleEdit(user)} sx={{ color:'orange'}}>
                                             <EditIcon />
                                         </IconButton>
-                                        <IconButton onClick={() => handleDelete(user.id)} sx={{ color:'Red' }}>
+                                        <IconButton onClick={() => handleDelete(user)} sx={{ color:'Red' }}>
                                             <DeleteIcon />
                                         </IconButton>
                                         <IconButton onClick={() => handleAdmin(user)} sx={{ 

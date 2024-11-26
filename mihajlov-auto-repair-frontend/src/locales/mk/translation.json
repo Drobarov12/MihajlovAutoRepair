@@ -123,9 +123,16 @@
       "deletingSuccessful": "Бришењето е успешно"
     },
     "dialog": {
-      "roleTitle": "Change user role",
-      "roleRemoveAdminDescription": "Are you sure you want to remve Admin role from user",
-      "roleAddAdminDescription": "You want to add Admin role to"
+      "confirm": "Потврди",
+      "cancel": "Откажи",
+      "yes": "Да",
+      "no": "Не",
+      "roleTitle": "Промени привилегија на корисник",
+      "roleRemoveAdminDescription": "Далисте сигурни дека сакате да му ја одземете Админ привилегијата на корисникот",
+      "roleAddAdminDescription": "Дали сте сигурни дека сакате да има Админ привилегија корисникот",
+      "deleteTitle": "Избриши?",
+      "deleteUserDescription": "Избриши корисник со име",
+      "deleteReservationDescription": "Избриши резервација"
     }
   }
   

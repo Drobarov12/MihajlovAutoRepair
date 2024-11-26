@@ -17,11 +17,15 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SaveIcon from "@mui/icons-material/Save";
 import AddIcon from "@mui/icons-material/Add";
+import ClearIcon from '@mui/icons-material/Clear';
 import { fetchModels, fetchTypes, deleteModel, deleteType, editModel, editType, addModel, addType } from "../../api";
 import { ToastContext } from "../App";
 import { useTranslation } from 'react-i18next';
+import { useConfirmationDialog } from '../../contexts/ConfirmationDialogContext';
+
 
 const ModelsAndTypesPage = () => {
+  const { showConfirmationDialog } = useConfirmationDialog();
   const showToast = useContext(ToastContext);
   const { t } = useTranslation();
 
@@ -109,24 +113,37 @@ const ModelsAndTypesPage = () => {
     }
   };
 
+  const handleClear = (type) =>{
+    if(type === "type"){
+      setEditTypeRow(0);
+      setEditModelObj({});
+    } else {
+      setEditModelRow(0);
+      setEditModelObj({});
+    }
+  }
+
   // Handle Delete
   const handleDelete = async (id, type) => {
     const deleteFn = type === "model" ? deleteModel : deleteType;
-    try {
-      await deleteFn(id);
-      if (type === "model") {
-        setModels((prev) => prev.filter((model) => model.id !== id));
-      } else {
-        setTypes((prev) => prev.filter((type) => type.id !== id));
-      }
-    } catch (error) {
+    showConfirmationDialog(t('dialog.deleteTitle'),'', 
+    async () =>{
+      try {
+        await deleteFn(id);
+        if (type === "model") {
+          setModels((prev) => prev.filter((model) => model.id !== id));
+        } else {
+          setTypes((prev) => prev.filter((type) => type.id !== id));
+        }
+      } catch (error) {
         if(error.status === 401){
           showToast(t('messages.loginAgain'), "error");
           return;
         }
         showToast(`${t('message.errorDeletingData')}, ${t('messages.tryAgain')}`, "error")
         console.error("Error deleting data:", error);
-    }
+      }
+    });
   };
 
   return (
@@ -202,6 +219,9 @@ const ModelsAndTypesPage = () => {
                       <IconButton onClick={() => handleSave("type")} sx={{ color:'green'}}>
                         <SaveIcon />
                       </IconButton>
+                      <IconButton onClick={() => handleClear("type")} sx={{ color:'Red'}}>
+                        <ClearIcon />
+                      </IconButton>
                     </TableCell>
                   </TableRow>
                 ) : (
@@ -272,6 +292,9 @@ const ModelsAndTypesPage = () => {
                     <TableCell sx={{ backgroundColor:'Black', color:'white'}}>
                       <IconButton onClick={() => handleSave("model")} sx={{ color:'green'}}>
                         <SaveIcon />
+                      </IconButton>
+                      <IconButton onClick={() => handleClear("model")} sx={{ color:'Red'}}>
+                        <ClearIcon />
                       </IconButton>
                     </TableCell>
                   </TableRow>

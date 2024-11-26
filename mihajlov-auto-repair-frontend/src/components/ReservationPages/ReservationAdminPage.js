@@ -18,17 +18,21 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SaveIcon from "@mui/icons-material/Save";
+import ClearIcon from '@mui/icons-material/Clear';
 import { fetchReservations, deleteReservation, editReservation, fetchModels, fetchTypes } from '../../api';
 import { ToastContext } from "../App";
 import { useNavigate } from "react-router-dom"; 
 import { useTranslation } from 'react-i18next';
+import { useConfirmationDialog } from '../../contexts/ConfirmationDialogContext';
+
 
 const ReservationsAdminPage = () => {
+  const { showConfirmationDialog } = useConfirmationDialog();
   const { t } = useTranslation();
   const showToast = useContext(ToastContext);
   const navigate = useNavigate();
-  const [editingRow, setEditingRow] = useState(null); // Track the row being edited
-  const [editData, setEditData] = useState({}); // Store the current data being edited
+  const [editingRow, setEditingRow] = useState(null); 
+  const [editData, setEditData] = useState({}); 
   const [reservations, setReservations] = useState([]); 
   const [filteredReservations, setFilteredReservations] = useState([]); 
   const [searchQuery, setSearchQuery] = useState(""); 
@@ -72,24 +76,32 @@ const ReservationsAdminPage = () => {
   };
 
   const handleDelete = async (id) => {
-    try{
-        await deleteReservation(id);
-        await getData();
-        showToast(t('messages.deletingSuccessful'), "success")
-    } catch (error){
-        if(error.status === 401){
-          showToast(t('messages.loginAgain'), "error");
-          return;
-        }
-        showToast(`${t('message.errorDeletingData')}, ${t('messages.tryAgain')}`, "error")
-        console.error("Error deleting data:", error);
-    }
+    showConfirmationDialog(
+      t('dialog.deleteTitle'),
+      t('dialog.deleteReservationDescription'),
+      async () => {
+          try{
+            await deleteReservation(id);
+            setReservations((prev) => prev.filter((rez) => rez.id !== id));
+            setFilteredReservations((prev) => prev.filter((rez) => rez.id !== id));
+            showToast(t('messages.deletingSuccessful'), "success")
+          } catch (error){
+            if(error.status === 401){
+              showToast(t('messages.loginAgain'), "error");
+              return;
+            }
+            showToast(`${t('message.errorDeletingData')}, ${t('messages.tryAgain')}`, "error")
+            console.error("Error deleting data:", error);
+          }
+      }
+    );
   };
 
   const handleSave = async() => {
     try{
         await editReservation(editData);
-        await getData();
+        setReservations((prev) => prev.map((rez) => (rez.id === editingRow ? editData : rez)));
+        setFilteredReservations((prev) => prev.map((rez) => (rez.id === editingRow ? editData : rez)));
         showToast(t('messages.updatingSuccessful'), "success")
     } catch (error){
         if(error.status === 401){
@@ -99,8 +111,14 @@ const ReservationsAdminPage = () => {
         showToast(`${t('message.errorUpdatingData')}, ${t('messages.tryAgain')}`, "error")
         console.error("Error edit data:", error);
     }
-    setEditingRow(null); // Exit edit mode
+    setEditData({});
+    setEditingRow(null); 
   };
+
+  const handelClear = () => {
+    setEditData({});
+    setEditingRow(null);
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -122,10 +140,10 @@ const ReservationsAdminPage = () => {
 
 
   const handleAutocompleteChange = (event, value) => {
-    setIsTyping(!!value); // Set typing state based on input
+    setIsTyping(!!value); 
     setEditData({ ...editData, modelName: value });
 
-    // Dynamically update filteredModels while typing
+    
     if(value){
         setFilteredModels(
             models.filter((option) =>
@@ -301,6 +319,9 @@ const ReservationsAdminPage = () => {
                   <TableCell>
                     <IconButton onClick={handleSave} sx={{ color: 'green' }}>
                       <SaveIcon />
+                    </IconButton>
+                    <IconButton onClick={handelClear} sx={{ color: 'Red' }}>
+                      <ClearIcon />
                     </IconButton>
                   </TableCell>
                 </>
