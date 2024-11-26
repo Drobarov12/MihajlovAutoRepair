@@ -20,11 +20,14 @@ import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import { fetchUsers, fetchModels, updateUser, deleteUser, updateUserRole } from "../../api"
 import { ToastContext } from "../App";
 import { useConfirmationDialog } from '../../contexts/ConfirmationDialogContext';
+import { useTranslation } from 'react-i18next';
 
 const UsersPage = () =>
 {
     const { showConfirmationDialog } = useConfirmationDialog();
     const showToast = useContext(ToastContext);
+    const { t } = useTranslation();
+
     const [users, setUsers] = useState([]);
     const [editRow, setEditRow] = useState([]);
 
@@ -55,10 +58,10 @@ const UsersPage = () =>
             setUsers((prev) => prev.filter((user) => user.id !== id));
         } catch (error){
             if(error.status === 401){
-                showToast("Please log in again", "error");
+                showToast(t('messages.loginAgain'), "error");
                 return;
             }
-            showToast("Error deleting data, please try again", "error")
+            showToast(`${t('message.errorDeletingData')}, ${t('messages.tryAgain')}`, "error")
         }
     };
     const handleSave = async () =>{
@@ -70,59 +73,35 @@ const UsersPage = () =>
             setEditRow({});
         } catch (error){
             if(error.status === 401){
-                showToast("Please log in again", "error");
+                showToast(t('messages.loginAgain'), "error");
                 return;
             }
-            showToast("Error saving data, please try again", "error")
+            showToast(`${t('message.errorSavingData')}, ${t('messages.tryAgain')}`, "error")
         }
     };
 
     const handleAdmin = async (user) => {
-        try{
-            
-            if(user.userRole !== "Admin"){
-                showConfirmationDialog(
-                    'Change the role',
-                    `Are you sure you want add ${user.username} as Admin`,
-                    async () => {
-                        try{
-                            await updateUserRole(user.id, "Admin")
-                            user.userRole = "Admin";
-                            setUsers((prev) => prev.map((user) => user));
-                        } catch (error){
-                            if(error.status === 401){
-                                showToast("Please log in again", "error");
-                                return;
-                            }
-                            showToast("Error changing role, please try again", "error")
-                        }
-                    },
-                    'Yes'
-                  );
-            }
-            else{
-                showConfirmationDialog(
-                    'Change the role',
-                    `Are you sure you want to remve Admin role from user ${user.username}`,
-                    async () => {
-                        try{
-                            await updateUserRole(user.id, "User")
-                            user.userRole = "User";
-                            setUsers((prev) => prev.map((user) => user));
-                        } catch (error){
-                            if(error.status === 401){
-                                showToast("Please log in again", "error");
-                                return;
-                            }
-                            showToast("Error changing role, please try again", "error")
-                        }
-                    },
-                    'Yes'
-                  );
-            }
-        } catch (error){
-            
-        }
+        const isAdmin = user.userRole === "Admin"
+        const dialogDesc = isAdmin ? t('dialog.roleRemoveAdminDescription') : t('dialog.roleAddAdminDescription');
+        const roleStirng = isAdmin ? "User" : "Admin";
+        showConfirmationDialog(
+            t('dialog.roleTitle'),
+            `${dialogDesc} ${user.username}`,
+            async () => {
+                try{
+                    await updateUserRole(user.id, roleStirng)
+                    user.userRole = roleStirng;
+                    setUsers((prev) => prev.map((user) => user));
+                } catch (error){
+                    if(error.status === 401){
+                        showToast(t('messages.loginAgain'), "error");
+                        return;
+                    }
+                    showToast(`${t('message.errorChangingRole')}, ${t('messages.tryAgain')}`, "error");
+                }
+            },
+            'Yes'
+        );
     }
 
     const handleAutocompleteChange = (event, value) => {
@@ -165,16 +144,16 @@ const UsersPage = () =>
                     variant="h5"
                     component="div"
                     sx={{color: 'white', fontWeight: 'bold', marginBottom:'10px'}}>
-                    Users
+                    {t('users.title')}
                 </Typography>
                 <TableContainer component={Paper} sx={{ maxHeight: '70vh' }}>
                     <Table stickyHeader>
                         <TableHead>
                             <TableRow>
-                                <TableCell sx={{ backgroundColor:'Black', color:'white'}}>Username</TableCell>
-                                <TableCell sx={{ backgroundColor:'Black', color:'white'}}>PhoneNumber</TableCell>
-                                <TableCell sx={{ backgroundColor:'Black', color:'white', minWidth: '180px'}}>Model</TableCell>
-                                <TableCell sx={{ backgroundColor:'Black', color:'white'}}>Actions</TableCell>
+                                <TableCell sx={{ backgroundColor:'Black', color:'white'}}>{t('users.name')}</TableCell>
+                                <TableCell sx={{ backgroundColor:'Black', color:'white'}}>{t('users.phoneNumber')}</TableCell>
+                                <TableCell sx={{ backgroundColor:'Black', color:'white', minWidth: '180px'}}>{t('users.model')}</TableCell>
+                                <TableCell sx={{ backgroundColor:'Black', color:'white'}}>{t('users.actions')}</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

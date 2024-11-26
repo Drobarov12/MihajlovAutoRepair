@@ -59,13 +59,29 @@
     },
     "reservation": {
       "title": "Reservation",
-      "name": "Name",
+      "name": "Username",
       "phoneNumber": "Phone number",
       "model": "Model",
       "type": "Type",
       "description": "Description",
       "dateTime": "Date & time",
-      "reserve": "Reserve"
+      "reserve": "Reserve",
+      "actions": "Actions",
+      "search": "Search",
+      "modelsAndTypes": "Models & Types"
+    },
+    "users": {
+      "title": "Users",
+      "name": "Username",
+      "phoneNumber": "Phone number",
+      "model": "Model",
+      "actions": "Actions"
+    },
+    "mAndT": {
+      "models": "Models",
+      "types": "Types",
+      "name": "Name",
+      "actions": "Actions"
     },
     "login": {
       "title": "Login",
@@ -80,7 +96,35 @@
       "password": "Password",
       "confirmPassword": "Confirm password",
       "or": "or"
+    },
+    "messages": {
+      "invalidEmail": "Invalid email!",
+      "enterPassword": "Enter password!",
+      "invalidCred": "Invalid username or password",
+      "loginSuccessful": "You are logged in!",
+      "registerSuccessful": "Registration successful!",
+      "passwordNotMatch": "Passwords do not match",
+      "loginAgain": "Please log in again",
+      "tryAgain": "please try again",
+      "missingModelsAndTypes": "Model and Type must be selected.",
+      "reservationCreated": "Reservation successfully created!",
+      "reservationCreateFail": "Failed to create reservation",
+      "invalidDate": "Invalid Date",
+      "errorHappedn": "An error occurred",
+      "errorSavingData": "Error saving data",
+      "errorUpdatingData": "Error updating data",
+      "errorDeletingData": "Error deleting data",
+      "errorAddingData": "Error adding data",
+      "errorGettingData": "Error getting data",
+      "errorChangingRole": "Error changing role",
+      "updatingSuccessful": "Update was successful",
+      "addingSuccessful": "Adding new element was successful",
+      "deletingSuccessful": "Delete was successful"
+    },
+    "dialog": {
+      "roleTitle": "Change user role",
+      "roleRemoveAdminDescription": "Are you sure you want to remve Admin role from user",
+      "roleAddAdminDescription": "You want to add Admin role to"
     }
-
   }
   

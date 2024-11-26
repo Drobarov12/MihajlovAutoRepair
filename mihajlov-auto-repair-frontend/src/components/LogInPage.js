@@ -15,7 +15,6 @@ const LogInPage = () => {
   const { setUserInfo } = useUser();
   const navigate = useNavigate()
 
-  const [email, setEmail] = useState("");
   const [error, setError] = useState(false);
   const [helperText, setHelperText] = useState("");
 
@@ -36,7 +35,6 @@ const LogInPage = () => {
 
   const handleEmailChange = (e) => {
     const input = e.target.value;
-    setEmail(input);
 
     if (isValidEmail(input)) {
       setError(false);
@@ -56,13 +54,13 @@ const LogInPage = () => {
     e.preventDefault();
 
     if (!isValidEmail(formData.username)) {
-      showToast("Invalid email!", "error");
+      showToast(t('messages.invalidEmail'), "error");
       return
     } 
     
-    if(formData.password == "")
+    if(formData.password === "")
     {
-      showToast("Enter password!", "error");
+      showToast(t('messages.enterPassword'), "error");
       return
     }
     
@@ -82,10 +80,10 @@ const LogInPage = () => {
 
       if (!response.ok) {
         if (response.status === 401) {
-          showToast('Invalid username or password', "error");
+          showToast(t('messages.invalidCred'), "error");
           formData.password = '';
         } else {
-          showToast('An error occurred. Please try again.', "error");
+          showToast(`${t('messages.errorHappedn')}, ${t('messages.tryAgain')}.`, "error");
           formData.password = '';
         }
         return;
@@ -96,13 +94,13 @@ const LogInPage = () => {
       setUserInfo(userInfo);
       sessionStorage.setItem("token", data.token);
       sessionStorage.setItem("role", data.role);
-      showToast("You are logged in!", "success");
+      showToast(t('message.loginSuccessful'), "success");
       navigate("/reservations");
       // Redirect or perform other actions after successful login
       } catch (error) {
-      showToast('An error occurred. Please try again.', "error");
-      console.error('Login error:', error);
-      formData.password = '';
+        showToast(`${t('messages.errorHappedn')}, ${t('messages.tryAgain')}.`, "error");
+        console.error('Login error:', error);
+        formData.password = '';
     }
 
   };

@@ -21,8 +21,10 @@ import SaveIcon from "@mui/icons-material/Save";
 import { fetchReservations, deleteReservation, editReservation, fetchModels, fetchTypes } from '../../api';
 import { ToastContext } from "../App";
 import { useNavigate } from "react-router-dom"; 
+import { useTranslation } from 'react-i18next';
 
 const ReservationsAdminPage = () => {
+  const { t } = useTranslation();
   const showToast = useContext(ToastContext);
   const navigate = useNavigate();
   const [editingRow, setEditingRow] = useState(null); // Track the row being edited
@@ -51,11 +53,11 @@ const ReservationsAdminPage = () => {
       setTypes(tyoesData);
     }
     catch (error) {
-        if(error.status === 401){
-            showToast("Please log in again", "error");
-            return;
-        }
-        showToast("Error getting data, please try again", "error")
+      if(error.status === 401){
+          showToast(t('messages.loginAgain'), "error");
+          return;
+      }
+      showToast(`${t('message.errorGettingData')}, ${t('messages.tryAgain')}`, "error")
       console.error("Error fetching data:", error);
     }
   };
@@ -73,13 +75,13 @@ const ReservationsAdminPage = () => {
     try{
         await deleteReservation(id);
         await getData();
-        showToast("Delete was successful", "success")
+        showToast(t('messages.deletingSuccessful'), "success")
     } catch (error){
         if(error.status === 401){
-            showToast("Please log in again", "error");
-            return;
+          showToast(t('messages.loginAgain'), "error");
+          return;
         }
-        showToast("Error deleting data, please try again", "error")
+        showToast(`${t('message.errorDeletingData')}, ${t('messages.tryAgain')}`, "error")
         console.error("Error deleting data:", error);
     }
   };
@@ -88,13 +90,13 @@ const ReservationsAdminPage = () => {
     try{
         await editReservation(editData);
         await getData();
-        showToast("Update was successful", "success")
+        showToast(t('messages.updatingSuccessful'), "success")
     } catch (error){
         if(error.status === 401){
-            showToast("Please log in again", "error");
+          showToast(t('messages.loginAgain'), "error");
             return;
         }
-        showToast("Error updating data, please try again", "error")
+        showToast(`${t('message.errorUpdatingData')}, ${t('messages.tryAgain')}`, "error")
         console.error("Error edit data:", error);
     }
     setEditingRow(null); // Exit edit mode
@@ -167,7 +169,7 @@ const ReservationsAdminPage = () => {
         >
           {/* Search Field */}
           <TextField
-            label="Search"
+            label={t('reservation.search')}
             variant="outlined"
             value={searchQuery}
             onChange={handleFilterChange}
@@ -195,14 +197,14 @@ const ReservationsAdminPage = () => {
             color="primary"
             onClick={() => navigate("/users")}
             sx={{ minWidth: "150px", margin:'10px' }}>
-            Users
+            {t('users.title')}
           </Button>
           <Button
             variant="contained"
             color="primary"
             onClick={() =>  navigate("/modelsandtypes")}
             sx={{ minWidth: "150px", margin:'10px' }}>
-            Models & Types
+            {t('reservation.modelsAndTypes')}
           </Button>
           </Box>
         </Box>
@@ -210,13 +212,13 @@ const ReservationsAdminPage = () => {
       <Table sx={{ minWidth: 650}} stickyHeader >
         <TableHead>
           <TableRow >
-            <TableCell sx={{ backgroundColor:'Black', color:'white'}}>User</TableCell>
-            <TableCell sx={{ backgroundColor:'Black', color:'white', minWidth: '120px', position: 'center'}}>Phone</TableCell>
-            <TableCell sx={{ backgroundColor:'Black', color:'white', minWidth: '170px'}}>Model</TableCell>
-            <TableCell sx={{ backgroundColor:'Black', color:'white', minWidth: '170px'}}>Description</TableCell>
-            <TableCell sx={{ backgroundColor:'Black', color:'white', minWidth: '110px'}}>Type</TableCell>
-            <TableCell sx={{ backgroundColor:'Black', color:'white'}}>Date & Time</TableCell>
-            <TableCell sx={{ backgroundColor:'Black', color:'white'}}>Actions</TableCell>
+            <TableCell sx={{ backgroundColor:'Black', color:'white'}}>{t('reservation.name')}</TableCell>
+            <TableCell sx={{ backgroundColor:'Black', color:'white', minWidth: '120px', position: 'center'}}>{t('reservation.phoneNumber')}</TableCell>
+            <TableCell sx={{ backgroundColor:'Black', color:'white', minWidth: '170px'}}>{t('reservation.model')}</TableCell>
+            <TableCell sx={{ backgroundColor:'Black', color:'white', minWidth: '170px'}}>{t('reservation.description')}</TableCell>
+            <TableCell sx={{ backgroundColor:'Black', color:'white', minWidth: '110px'}}>{t('reservation.type')}</TableCell>
+            <TableCell sx={{ backgroundColor:'Black', color:'white'}}>{t('reservation.dateTime')}</TableCell>
+            <TableCell sx={{ backgroundColor:'Black', color:'white'}}>{t('reservation.actions')}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

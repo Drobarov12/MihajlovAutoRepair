@@ -59,13 +59,30 @@
     },
     "reservation": {
       "title": "Резервација",
-      "name": "Име",
+      "name": "Kорисничко име",
       "phoneNumber": "Телефон",
       "model": "Модел",
       "type": "Тип",
       "description": "Краток опис",
       "dateTime": "Датум и време",
-      "reserve": "Резервирај"
+      "reserve": "Резервирај",
+      "actions": "Акции",
+      "search": "Барај",
+      "users": "Корисници",
+      "modelsAndTypes": "Модели & Типови"
+    },
+    "users": {
+      "title": "Корисници",
+      "name": "Kорисничко име",
+      "phoneNumber": "Телефон",
+      "model": "Модел",
+      "actions": "Акции"
+    },
+    "mAndT": {
+      "models": "Модели",
+      "types": "Типови",
+      "name": "Име",
+      "actions": "Акции"
     },
     "login": {
       "title": "Најави се",
@@ -80,7 +97,35 @@
       "password": "Лозинка",
       "confirmPassword": "Потврди лозинка",
       "or": "или"
+    },
+    "messages": {
+      "invalidEmail": "Невалиден е-маил!",
+      "enterPassword": "Внесете лозинка!",
+      "invalidCred": "Невалидно корисничко име или лозинка",
+      "loginSuccessful": "Најавени сте!",
+      "registerSuccessful": "Регистрацијата е успешна!",
+      "passwordNotMatch": "Лозинките не се совпаѓаат!",
+      "loginAgain": "Ве молам најавете се повторно",
+      "tryAgain": "ве молам пробајте повторно",
+      "missingModelsAndTypes": "Модел и тип мора да се селектира",
+      "reservationCreated": "Резервацијата беше успешно направена!",
+      "reservationCreateFail": "Неуспеавме да направиме резервација.",
+      "invalidDate": "Невалиден датум",
+      "errorHappedn": "Настана грешка",
+      "errorSavingData": "Грешка во зачување на податоците",
+      "errorUpdatingData": "Грешка во ажурирање на податоците",
+      "errorDeletingData": "Грешка во бришење на податоците",
+      "errorAddingData": "Грешка во додавање на податоците",
+      "errorGettingData": "Грешка при добивање податоци",
+      "errorChangingRole": "Грешка при промена на улога",
+      "updatingSuccessful": "Aжурирањето беше успешно",
+      "addingSuccessful": "Додавањето на елемент е успешно",
+      "deletingSuccessful": "Бришењето е успешно"
+    },
+    "dialog": {
+      "roleTitle": "Change user role",
+      "roleRemoveAdminDescription": "Are you sure you want to remve Admin role from user",
+      "roleAddAdminDescription": "You want to add Admin role to"
     }
-    
   }
   

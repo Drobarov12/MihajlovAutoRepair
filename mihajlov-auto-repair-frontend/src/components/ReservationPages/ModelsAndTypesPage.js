@@ -19,9 +19,12 @@ import SaveIcon from "@mui/icons-material/Save";
 import AddIcon from "@mui/icons-material/Add";
 import { fetchModels, fetchTypes, deleteModel, deleteType, editModel, editType, addModel, addType } from "../../api";
 import { ToastContext } from "../App";
+import { useTranslation } from 'react-i18next';
 
 const ModelsAndTypesPage = () => {
   const showToast = useContext(ToastContext);
+  const { t } = useTranslation();
+
   const [models, setModels] = useState([]);
   const [types, setTypes] = useState([]);
 
@@ -58,13 +61,13 @@ const ModelsAndTypesPage = () => {
       }
       setNewRowModel({});
       setNewRowType({});
-      showToast("Adding new element was successful", "success")
+      showToast(t('messages.addingSuccessful'), "success")
     } catch (error) {
         if(error.status === 401){
-            showToast("Please log in again", "error");
+          showToast(t('messages.loginAgain'), "error");
             return;
         }
-        showToast("Error adding data, please try again", "error")
+        showToast(`${t('message.errorAddingData')}, ${t('messages.tryAgain')}`, "error")
       console.error("Error adding data:", error);
     }
   };
@@ -95,13 +98,13 @@ const ModelsAndTypesPage = () => {
       }
       setEditTypeRow(0);
       setEditModelRow(0);
-      showToast("Update was successful", "success")
+      showToast(t('messages.updatingSuccessful'), "success")
     } catch (error) {
         if(error.status === 401){
-            showToast("Please log in again", "error");
+            showToast(t('messages.loginAgain'), "error");
             return;
         }
-        showToast("Error saving data, please try again", "error")
+        showToast(`${t('message.errorSavingData')}, ${t('messages.tryAgain')}`, "error")
       console.error("Error saving data:", error);
     }
   };
@@ -118,11 +121,11 @@ const ModelsAndTypesPage = () => {
       }
     } catch (error) {
         if(error.status === 401){
-            showToast("Please log in again", "error");
-            return;
+          showToast(t('messages.loginAgain'), "error");
+          return;
         }
-        showToast("Error deleting data, please try again", "error")
-      console.error("Error deleting data:", error);
+        showToast(`${t('message.errorDeletingData')}, ${t('messages.tryAgain')}`, "error")
+        console.error("Error deleting data:", error);
     }
   };
 
@@ -155,21 +158,21 @@ const ModelsAndTypesPage = () => {
             variant="h5"
             component="div"
             sx={{color: 'white', fontWeight: 'bold', marginBottom:'10px'}}>
-                Types
+                {t('mAndT.types')}
             </Typography>
         <TableContainer component={Paper} sx={{ maxHeight: '70vh' }}>
           <Table stickyHeader>
             <TableHead>
               <TableRow>
-                <TableCell sx={{ backgroundColor:'Black', color:'white'}}>Name</TableCell>
-                <TableCell sx={{ backgroundColor:'Black', color:'white'}}>Actions</TableCell>
+                <TableCell sx={{ backgroundColor:'Black', color:'white'}}>{t('mAndT.name')}</TableCell>
+                <TableCell sx={{ backgroundColor:'Black', color:'white'}}>{t('mAndT.actions')}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               <TableRow>
                 <TableCell sx={{ backgroundColor:'Black'}}>
                   <TextField
-                    placeholder="Name"
+                    placeholder={t('mAndT.name')}
                     value={newRowType.typeName || ""}
                     sx={{ backgroundColor:'white' }}
                     onChange={(e) =>
@@ -226,21 +229,21 @@ const ModelsAndTypesPage = () => {
             variant="h5"
             component="div"
             sx={{color: 'white', fontWeight: 'bold', marginBottom:'10px'}}>
-                Models
+                {t('mAndT.models')}
             </Typography>
         <TableContainer component={Paper} sx={{ maxHeight: '65vh' }}>
           <Table stickyHeader>
             <TableHead>
               <TableRow>
-                <TableCell sx={{ backgroundColor:'Black', color:'white'}}>Name</TableCell>
-                <TableCell sx={{ backgroundColor:'Black', color:'white'}}>Actions</TableCell>
+                <TableCell sx={{ backgroundColor:'Black', color:'white'}}>{t('mAndT.name')}</TableCell>
+                <TableCell sx={{ backgroundColor:'Black', color:'white'}}>{t('mAndT.actions')}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               <TableRow>
                 <TableCell sx={{ backgroundColor:'Black', color:'white'}}>
                   <TextField
-                    placeholder="Name"
+                    placeholder={t('mAndT.name')}
                     value={newRowModel.modelName || ""}
                     sx={{ backgroundColor:'white' }}
                     onChange={(e) =>

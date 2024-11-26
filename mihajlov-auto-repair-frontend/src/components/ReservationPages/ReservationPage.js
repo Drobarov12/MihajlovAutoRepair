@@ -90,21 +90,20 @@ const ReservationPage = () => {
     e.preventDefault();
 
     if (!formData.modelId || !formData.typeId) {
-      console.log("Model and Type must be selected.");
+      showToast(t('messages.missingModelsAndTypes'));
       return;
     }
   
     if (formData.dateTime.isValid()) {
       try {
         const response = await createReservation(formData);
-        console.log("Reservation created:", response);
-        showToast("Reservation successfully created!", "success");
+        showToast(t('messages.reservationCreated'), "success");
       } catch (error) {
         console.error("Error creating reservation:", error);
-        showToast("Failed to create reservation. Please try again.", "error");
+        showToast(`${t('messages.reservationCreateFail')}. ${t('messages.tryAgain')}`, "error");
       }
     } else {
-      showToast("Invalid Date", "error");
+      showToast(t('messages.invalidDate'), "error");
     }
   };
 
