@@ -9,5 +9,6 @@ public interface IReservationRepository
     Task AddAsync(Reservation reservation);
     Task UpdateAsync(Reservation reservation);
     Task DeleteAsync(long id);
+    Task DeleteAllFromUserAsync(long id);
     Task<bool> ReservationExistsAsync(long id);
 }

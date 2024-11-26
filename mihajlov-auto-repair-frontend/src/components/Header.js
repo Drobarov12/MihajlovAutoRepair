@@ -16,7 +16,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import { useUser } from '../UserContext';
+import { useUser } from '../contexts/UserContext';
 
 const Header = () => {
   const { t, i18n } = useTranslation();
@@ -35,6 +35,8 @@ const Header = () => {
 
   const handleLogout = () => {
     setUserInfo(null);
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("role");
     navigate('/login');
   };
 
@@ -185,7 +187,7 @@ const Header = () => {
           </Box>
         </Drawer>
 
-        <Box sx={{ display: 'flex', alignItems: 'center', display: { xs: 'none', md: 'flex' }, }}>
+        <Box sx={{ alignItems: 'center', display:{ xs: 'none', md: 'flex' }, }}>
         <ToggleButtonGroup
         value={selectedLanguage}
         exclusive

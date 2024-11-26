@@ -4,7 +4,7 @@ import './index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from '@mui/material/styles';
-import { UserProvider } from "./UserContext";
+import { UserProvider } from "./contexts/UserContext";
 import theme from './theme';
 import './i18n';
 

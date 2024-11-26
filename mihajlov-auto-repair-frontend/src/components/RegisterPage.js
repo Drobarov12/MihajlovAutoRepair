@@ -34,7 +34,7 @@ const RegisterPage = () => {
 
     if (formData.password !== formData.confirmPassword) {
       setPasswordError(true);
-      setHelperText("Passwords do not match");
+      setHelperText(t('messages.passwordNotMatch'));
       return;
     }
 
@@ -52,14 +52,14 @@ const RegisterPage = () => {
       });
 
       if (!response.ok) {
-        showToast('An error occurred. Please try again.', "error");
+        showToast(`${t('messages.errorHappedn')}, ${t('messages.tryAgain')}.`, "error");
         return;
       }
 
-      showToast("Registration successful!", "success");
+      showToast(t('message.registerSuccessful'), "success");
       navigate('/login', { state: { username: formData.username } });
     } catch (error) {
-      showToast('An error occurred. Please try again.', "error");
+      showToast(`${t('messages.errorHappedn')}, ${t('messages.tryAgain')}.`, "error");
     }
   };
 
