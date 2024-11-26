@@ -1,4 +1,6 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MihajlovAutoRepairApi.Models;
 using MihajlovAutoRepairApi.Models.Dtos;
@@ -11,20 +13,30 @@ namespace MihajlovAutoRepairApi.Controllers;
 public class UserController : ControllerBase
 {
     private readonly IUserRepository _repository;
+    private readonly IReservationRepository _reservationRepository;
+    private readonly UserManager<User> _userManager;
     private readonly IMapper _mapper;
 
-    public UserController(IUserRepository repository, IMapper mapper)
+    public UserController(IUserRepository repository, IReservationRepository reservationRepository, UserManager<User> userManager,IMapper mapper)
     {
         _repository = repository;
+        _reservationRepository = reservationRepository;
+        _userManager = userManager;
         _mapper = mapper;
     }
 
     // GET: api/User
     [HttpGet]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
     {
         var users = await _repository.GetAllAsync();
-        var userDtos = _mapper.Map<IEnumerable<UserDto>>(users);
+        var userDtos = _mapper.Map<List<UserDto>>(users);
+        for (int i = 0; i < users.Count; i++)
+        {
+            var role = await _userManager.GetRolesAsync(users[i]);
+            userDtos[i].UserRole = role.LastOrDefault() ?? "";
+        }
         return Ok(userDtos);
     }
 
@@ -68,16 +80,40 @@ public class UserController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var userExists = await _repository.UserExistsAsync(id);
-        if (!userExists)
+        var user = await _repository.GetByIdAsync(id);
+        if (user == null )
         {
             return NotFound();
         }
 
-        var user = _mapper.Map<User>(userCreateDto);
-        user.Id = id;
-
+        user.UserName = userCreateDto.UserName;
+        user.PhoneNumber = userCreateDto.PhoneNumber;
+        user.ModelId = userCreateDto.ModelId;
+        
         await _repository.UpdateAsync(user);
+
+        return NoContent();
+    }
+    
+    [HttpPut("{id}/{role}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> UpdateUser(long id, string role)
+    {
+        if (!ModelState.IsValid || id == 0)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var user = await _repository.GetByIdAsync(id);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        var currentRoles = await _userManager.GetRolesAsync(user);
+        await _userManager.RemoveFromRolesAsync(user, currentRoles);
+        
+        await _userManager.AddToRoleAsync(user, role);
 
         return NoContent();
     }
@@ -92,6 +128,7 @@ public class UserController : ControllerBase
             return NotFound();
         }
 
+        await _reservationRepository.DeleteAllFromUserAsync(id);
         await _repository.DeleteAsync(id);
         return NoContent();
     }

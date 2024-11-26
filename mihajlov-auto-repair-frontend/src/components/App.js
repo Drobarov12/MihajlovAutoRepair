@@ -5,12 +5,21 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import HomePage from './HomePage/HomePage';
-import ReservationPage from './ReservationPage';
+import ReservationPage from './ReservationPages/ReservationPage';
+import ReservationAdminPage from './ReservationPages/ReservationAdminPage';
 import LogInPage from './LogInPage';
 import RegisterPage from './RegisterPage';
 import Toast from './CustomComponents/Toast'
+import ModelsAndTypesPage from './ReservationPages/ModelsAndTypesPage';
+import UsersPage from './ReservationPages/UsersPage';
+import { ConfirmationDialogProvider } from '../contexts/ConfirmationDialogContext';
 
 export const ToastContext = createContext();
+
+const RoleBasedRoute = ({ adminComponent: AdminComponent, userComponent: UserComponent }) => {
+  const role = sessionStorage.getItem('role');
+  return role === 'Admin' ? <AdminComponent /> : <UserComponent />;
+};
 
 function App() {
 
@@ -32,6 +41,7 @@ function App() {
 
   return (
     <ToastContext.Provider value={showToast}>
+    <ConfirmationDialogProvider>
     <Router>
     <Box
       sx={{
@@ -44,7 +54,9 @@ function App() {
       <Header />
       <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/reservations" element={<ReservationPage />} />
+      <Route path="/reservations" element={<RoleBasedRoute adminComponent={ReservationAdminPage} userComponent={ReservationPage} />} />
+      <Route path="/modelsandtypes" element={<RoleBasedRoute adminComponent={ModelsAndTypesPage} userComponent={ReservationPage} />} />
+      <Route path="/users" element={<RoleBasedRoute adminComponent={UsersPage} userComponent={ReservationPage} />} />
       <Route path="/login" element={<LogInPage />} />
       <Route path="/register" element={<RegisterPage />} />
       </Routes>
@@ -57,6 +69,7 @@ function App() {
           severity={toast.severity}
         />
     </Router>
+    </ConfirmationDialogProvider>
     </ToastContext.Provider>
   );
 }

@@ -84,6 +84,12 @@ if (app.Environment.IsDevelopment())
 
 using (var scope = app.Services.CreateScope())
 {
+    var services = scope.ServiceProvider;
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole<long>>>();
+    var userManager = services.GetRequiredService<UserManager<User>>();
+
+    await SeedRolesAndUsersAsync(roleManager, userManager);
+
     var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     context.Database.EnsureCreated(); // Ensure the database is created
 
@@ -102,3 +108,37 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+async Task SeedRolesAndUsersAsync(RoleManager<IdentityRole<long>> roleManager, UserManager<User> userManager)
+{
+    var roles = new[] { "User", "Admin" };
+
+    // Ensure roles exist
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole<long> { Name = role });
+        }
+    }
+
+    // Seed an admin user (optional)
+    var adminEmail = "admin@example.com";
+    var adminPassword = "Admin123!";
+
+    if (await userManager.FindByEmailAsync(adminEmail) == null)
+    {
+        var adminUser = new User
+        {
+            Name = adminEmail,
+            Email = adminEmail,
+            EmailConfirmed = true
+        };
+
+        var result = await userManager.CreateAsync(adminUser, adminPassword);
+        if (result.Succeeded)
+        {
+            await userManager.AddToRoleAsync(adminUser, "Admin");
+        }
+    }
+}

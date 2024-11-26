@@ -12,9 +12,17 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<User>> GetAllAsync()
+    public async Task<List<User>> GetAllAsync()
     {
-        return await _context.Users.ToListAsync();
+        var users = await _context.Users.ToListAsync();
+        users.ForEach(user =>
+        {
+            if (user.Model == null)
+                user.Model = new List<Model>();
+            if (user.ModelId == 0 || user.Model.Count > 0) return;
+            user.Model.Add(_context.Models.FirstOrDefault(x=> x.Id == user.ModelId));
+        });
+        return users;
     }
 
     public async Task<User?> GetByIdAsync(long id)

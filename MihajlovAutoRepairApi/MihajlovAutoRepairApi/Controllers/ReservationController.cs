@@ -12,18 +12,23 @@ namespace MihajlovAutoRepairApi.Controllers;
 public class ReservationController : ControllerBase
 {
     private readonly IReservationRepository _repository;
+    private readonly ITypeRepository _typeRepository;
+    private readonly IModelRepository _modelRepository;
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
 
-    public ReservationController(IReservationRepository repository, IUserRepository userRepository, IMapper mapper)
+    public ReservationController(IReservationRepository repository, ITypeRepository typeRepository,
+        IModelRepository modelRepository, IUserRepository userRepository, IMapper mapper)
     {
         _repository = repository;
+        _typeRepository = typeRepository;
+        _modelRepository = modelRepository;
         _userRepository = userRepository;
         _mapper = mapper;
     }
 
     [HttpGet]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult<List<ReservationDto>>> GetAllReservations()
     {
         var reservations = await _repository.GetAllAsync();
@@ -32,13 +37,13 @@ public class ReservationController : ControllerBase
         {
             return NotFound("No reservations found.");
         }
-        
+
         var reservationDto = _mapper.Map<List<ReservationDto>>(reservations);
         return Ok(reservationDto);
     }
-    
+
     [HttpGet("{id}")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult<ReservationDto>> GetReservationById(long id)
     {
         var reservation = await _repository.GetByIdAsync(id);
@@ -60,6 +65,7 @@ public class ReservationController : ControllerBase
         }
 
         // Handle guest users
+        User user;
         var userId = dto.UserId;
         if (userId == null || userId == 0)
         {
@@ -73,10 +79,11 @@ public class ReservationController : ControllerBase
             await _userRepository.AddAsync(guestUser);
 
             userId = guestUser.Id;
+            user = guestUser;
         }
         else
         {
-            var user = await _userRepository.GetByIdAsync(userId);
+            user = await _userRepository.GetByIdAsync(userId);
             if (user is not null)
             {
                 user.ModelId = dto.ModelId;
@@ -85,6 +92,7 @@ public class ReservationController : ControllerBase
         }
 
         var reservation = _mapper.Map<Reservation>(dto);
+        reservation.User = user;
         reservation.UserId = userId;
 
         await _repository.AddAsync(reservation);
@@ -93,7 +101,7 @@ public class ReservationController : ControllerBase
     }
     
     [HttpPut("{id}")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> UpdateReservation(long id, [FromBody] ReservationDto reservationDto)
     {
         if (id != reservationDto.Id)
@@ -106,17 +114,23 @@ public class ReservationController : ControllerBase
         {
             return NotFound();
         }
-        
-        var  reservation = _mapper.Map<Reservation>(reservationDto);
+
+        var reservation = _mapper.Map<Reservation>(reservationDto);
         reservation.Id = id;
         
+        var user = await _userRepository.GetByUsernameAsync(reservationDto.UserName);
+        reservation.User = user;
+        reservation.UserId = user.Id;
+
+        reservation = await SetReservationInfo(reservation, reservationDto);
+
         await _repository.UpdateAsync(reservation);
-        
+
         return NoContent();
     }
-    
+
     [HttpDelete("{id}")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteReservation(long id)
     {
         var userExists = await _repository.ReservationExistsAsync(id);
@@ -127,5 +141,18 @@ public class ReservationController : ControllerBase
 
         await _repository.DeleteAsync(id);
         return NoContent();
+    }
+    
+    private async Task<Reservation> SetReservationInfo(Reservation reservation, ReservationDto reservationDto)
+    {
+        var model = await _modelRepository.GetByNameAsync(reservationDto.ModelName);
+        reservation.Model = model;
+        reservation.ModelId = model.Id;
+
+        var type = await _typeRepository.GetByNameAsync(reservationDto.TypeName);
+        reservation.Type = type;
+        reservation.TypeId = type.Id;
+
+        return reservation;
     }
 }
