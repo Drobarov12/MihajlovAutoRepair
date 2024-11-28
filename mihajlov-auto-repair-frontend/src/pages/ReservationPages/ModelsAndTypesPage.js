@@ -18,8 +18,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import SaveIcon from "@mui/icons-material/Save";
 import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from '@mui/icons-material/Clear';
-import { fetchModels, fetchTypes, deleteModel, deleteType, editModel, editType, addModel, addType } from "../../api";
-import { ToastContext } from "../App";
+import { fetchModels, fetchTypes, deleteModel, deleteType, editModel, editType, addModel, addType } from "../../services/api";
+import { ToastContext } from "../../components/App";
 import { useTranslation } from 'react-i18next';
 import { useConfirmationDialog } from '../../contexts/ConfirmationDialogContext';
 
