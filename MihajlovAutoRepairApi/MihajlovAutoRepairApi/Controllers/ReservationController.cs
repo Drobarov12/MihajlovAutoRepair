@@ -41,6 +41,21 @@ public class ReservationController : ControllerBase
         var reservationDto = _mapper.Map<List<ReservationDto>>(reservations);
         return Ok(reservationDto);
     }
+    
+    [HttpGet("user/{id}")]
+    [Authorize]
+    public async Task<ActionResult<List<ReservationDto>>> GetAllUserReservations(long id)
+    {
+        var reservations = await _repository.GetAllForUserAsync(id);
+
+        if (reservations == null || !reservations.Any())
+        {
+            return NotFound("No reservations found.");
+        }
+
+        var reservationDto = _mapper.Map<List<ReservationDto>>(reservations);
+        return Ok(reservationDto);
+    }
 
     [HttpGet("{id}")]
     [Authorize(Roles = "Admin")]
