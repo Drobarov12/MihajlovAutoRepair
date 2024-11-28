@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useState, createContext } from "react";
 import { Box } from '@mui/material';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import HomePage from '../pages/HomePage/HomePage';
@@ -12,6 +12,7 @@ import RegisterPage from '../pages/RegisterPage';
 import Toast from './CustomComponents/Toast'
 import ModelsAndTypesPage from '../pages/ReservationPages/ModelsAndTypesPage';
 import UsersPage from '../pages/ReservationPages/UsersPage';
+import UserReservationsPage from '../pages/ReservationPages/UserReservationsPage'
 import { ConfirmationDialogProvider } from '../contexts/ConfirmationDialogContext';
 
 export const ToastContext = createContext();
@@ -19,6 +20,11 @@ export const ToastContext = createContext();
 const RoleBasedRoute = ({ adminComponent: AdminComponent, userComponent: UserComponent }) => {
   const role = sessionStorage.getItem('role');
   return role === 'Admin' ? <AdminComponent /> : <UserComponent />;
+};
+
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  const isLoggedIn = sessionStorage.getItem('token') !== null;
+  return isLoggedIn ? <Component {...rest} /> : <Navigate to="/login" />;
 };
 
 function App() {
@@ -57,6 +63,7 @@ function App() {
       <Route path="/reservations" element={<RoleBasedRoute adminComponent={ReservationAdminPage} userComponent={ReservationPage} />} />
       <Route path="/modelsandtypes" element={<RoleBasedRoute adminComponent={ModelsAndTypesPage} userComponent={ReservationPage} />} />
       <Route path="/users" element={<RoleBasedRoute adminComponent={UsersPage} userComponent={ReservationPage} />} />
+      <Route path="/userreservations" element={<PrivateRoute component={UserReservationsPage} />} />
       <Route path="/login" element={<LogInPage />} />
       <Route path="/register" element={<RegisterPage />} />
       </Routes>

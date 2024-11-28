@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { TextField, Button, MenuItem, Select, InputLabel, FormControl, Grid, Box, Typography, Autocomplete } from '@mui/material';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { addDays, setHours, setMinutes } from 'date-fns';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +10,7 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { fetchModels, fetchTypes, createReservation } from '../../services/api';
 import { useUser } from "../../contexts/UserContext";
 import { ToastContext } from "../../components/App";
+import { useNavigate } from "react-router-dom"; 
 
 dayjs.extend(customParseFormat);
 
@@ -16,6 +18,7 @@ const ReservationPage = () => {
   const showToast = useContext(ToastContext);
   const { t } = useTranslation();
   const { userInfo } = useUser();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     userId: 0,
     name: '',
@@ -30,6 +33,15 @@ const ReservationPage = () => {
   const [types, setTypes] = useState([]); 
   const [filteredModels, setFilteredModels] = useState([]); 
   const [isTyping, setIsTyping] = useState(false);
+
+  const now = dayjs();
+  const minDateTime = now;  // current date
+  const maxDateTime = dayjs(addDays(now.toDate(), 7));;  // 7 days from now
+
+  const shouldDisableTime = (time) => {
+    const hour = time.hour();
+    return hour < 8 || hour >= 17;  // Disable times outside 8 AM to 5 PM
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -129,9 +141,28 @@ const ReservationPage = () => {
           width: '100%',
         }}
       >
-        <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 4, color: 'white' }}>
-        {t('reservation.title')}
-        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: "10px"
+          }}
+        >
+          <Typography variant="h5" sx={{ fontWeight: 'bold',  color: 'white' }}>
+            {t('reservation.title')}
+          </Typography>
+          {sessionStorage.getItem('token') ? (
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => navigate("/userreservations")}
+            sx={{ minWidth: "100px" }}
+          >
+            {t('reservation.reservations')}
+          </Button>
+        ) : null}
+        </Box>
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -288,6 +319,9 @@ const ReservationPage = () => {
                 label={t('reservation.dateTime')}
                 value={formData.dateTime}
                 onChange={handleDateChange}
+                minDateTime={minDateTime}
+  maxDateTime={maxDateTime}
+  shouldDisableTime={shouldDisableTime}
                 sx={{
                   width: '100%',
                   '& .MuiInputBase-root': { 

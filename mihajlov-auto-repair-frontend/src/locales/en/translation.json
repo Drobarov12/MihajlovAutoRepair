@@ -3,7 +3,7 @@
       "logo": "LOGO",
       "welcome": "Welcome: ",
       "home": "Home",
-      "reservations": "Reservations",
+      "reservations": "Make reservation",
       "login": "Login",
       "logout": "Logout"
     },
@@ -68,7 +68,8 @@
       "reserve": "Reserve",
       "actions": "Actions",
       "search": "Search",
-      "modelsAndTypes": "Models & Types"
+      "modelsAndTypes": "Models & Types",
+      "reservations": "Reservations"
     },
     "users": {
       "title": "Users",
