@@ -3,7 +3,7 @@
       "logo": "LOGO",
       "welcome": "Добредојде: ",
       "home": "Дома",
-      "reservations": "Резервирај",
+      "reservations": "Направете резервација",
       "login": "Логирај се",
       "logout": "Одјави се"
     },
@@ -69,7 +69,8 @@
       "actions": "Акции",
       "search": "Барај",
       "users": "Корисници",
-      "modelsAndTypes": "Модели & Типови"
+      "modelsAndTypes": "Модели & Типови",
+      "reservations": "Резервации"
     },
     "users": {
       "title": "Корисници",

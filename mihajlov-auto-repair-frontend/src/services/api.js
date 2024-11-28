@@ -144,14 +144,25 @@ export const fetchTypes = async () => {
     try {
       var token = sessionStorage.getItem("token");
       const response = await axios.get(`${API_BASE_URL}/Reservation`, {
-        
         headers: {
           Authorization: `Bearer ${token}`, 
         },
       });
-      if(!response.ok){
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching reservations:", error);
+      throw error;
+    }
+  };
 
-      }
+  export const fetchUserReservations = async (id) => {
+    try {
+      var token = sessionStorage.getItem("token");
+      const response = await axios.get(`${API_BASE_URL}/Reservation/user/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, 
+        },
+      });
       return response.data;
     } catch (error) {
       console.error("Error fetching reservations:", error);
