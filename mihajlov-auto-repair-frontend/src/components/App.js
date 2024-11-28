@@ -4,14 +4,14 @@ import { Box } from '@mui/material';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
-import HomePage from './HomePage/HomePage';
-import ReservationPage from './ReservationPages/ReservationPage';
-import ReservationAdminPage from './ReservationPages/ReservationAdminPage';
-import LogInPage from './LogInPage';
-import RegisterPage from './RegisterPage';
+import HomePage from '../pages/HomePage/HomePage';
+import ReservationPage from '../pages/ReservationPages/ReservationPage';
+import ReservationAdminPage from '../pages/ReservationPages/ReservationAdminPage';
+import LogInPage from '../pages/LogInPage';
+import RegisterPage from '../pages/RegisterPage';
 import Toast from './CustomComponents/Toast'
-import ModelsAndTypesPage from './ReservationPages/ModelsAndTypesPage';
-import UsersPage from './ReservationPages/UsersPage';
+import ModelsAndTypesPage from '../pages/ReservationPages/ModelsAndTypesPage';
+import UsersPage from '../pages/ReservationPages/UsersPage';
 import { ConfirmationDialogProvider } from '../contexts/ConfirmationDialogContext';
 
 export const ToastContext = createContext();

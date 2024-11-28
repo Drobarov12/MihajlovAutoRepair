@@ -38,12 +38,13 @@ https://www.figma.com/design/Xh7lPJXVdbnZhUKbnSRCMx/MihajlovAutoRepair?node-id=0
     1. Create the Main page with location about and photos - done
     2. Create a Page for login/register - done
     3. Create a Page for adding reservation - done
-    4. Create a Page for the admin panel (managing the user roles and listing allreservations)
+    4. Create a Page for users to see their reservations - done
+    4. Create a Page for the admin panel (managing the user roles and listing allreservations) - done
 3. Crete Back-end
     1. Create the identity provider - done
     2. Create the connection with the databese - done
     3. Crete basic API calls for the front-end functionality - done
-    4. Handle the users
+    4. Handle the users - done
         - Handle the user role 
         - Change the controllers
         - Sinc with the front-end

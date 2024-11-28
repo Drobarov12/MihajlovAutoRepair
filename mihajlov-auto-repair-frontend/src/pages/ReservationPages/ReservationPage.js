@@ -6,9 +6,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
-import { fetchModels, fetchTypes, createReservation } from '../../api';
+import { fetchModels, fetchTypes, createReservation } from '../../services/api';
 import { useUser } from "../../contexts/UserContext";
-import { ToastContext } from "../App";
+import { ToastContext } from "../../components/App";
 
 dayjs.extend(customParseFormat);
 
@@ -96,7 +96,7 @@ const ReservationPage = () => {
   
     if (formData.dateTime.isValid()) {
       try {
-        const response = await createReservation(formData);
+        await createReservation(formData);
         showToast(t('messages.reservationCreated'), "success");
       } catch (error) {
         console.error("Error creating reservation:", error);

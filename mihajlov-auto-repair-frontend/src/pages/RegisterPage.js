@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import { ToastContext } from "./App";
+import { ToastContext } from "../components/App";
 import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
