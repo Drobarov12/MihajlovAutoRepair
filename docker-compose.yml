@@ -1,17 +1,50 @@
 version: '3.8'
 
 services:
+  mihajlovautorepairapi:
+    image: mihajlovautorepairapi
+    build:
+      context: ./MihajlovAutoRepairApi
+      dockerfile: MihajlovAutoRepairApi/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=${DB_USER}  
+      - DB_PASSWORD=${DB_PASSWORD} 
+      - DB_NAME=${DB_NAME}  
+    depends_on:
+      - postgres
+    networks:
+      - my_network
+
   postgres:
     image: postgres:latest
     container_name: my_postgres
     environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: mydb
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - my_network
+
+  react-app:
+    build:
+      context: ./mihajlov-auto-repair-frontend
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_BASE_URL=http://mihajlovautorepairapi:8080/api
+      - ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
+    depends_on:
+      - mihajlovautorepairapi
     networks:
       - my_network
 
