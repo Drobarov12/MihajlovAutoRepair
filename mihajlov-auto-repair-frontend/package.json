@@ -23,9 +23,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "REACT_APP_API_BASE_URL=http://127.0.0.1:5105/api react-scripts start",
-    "build": "REACT_APP_API_BASE_URL=http://127.0.0.1:5105/api react-scripts build",
-    "test": "REACT_APP_API_BASE_URL=http://127.0.0.1:5105/api react-scripts test",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

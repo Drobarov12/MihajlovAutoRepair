@@ -7,6 +7,8 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import { ToastContext } from "../components/App";
 import { useUser } from "../contexts/UserContext";
 import { useNavigate, useLocation } from "react-router-dom"; 
+import { loginUser } from '../services/user';
+
 
 
 const LogInPage = () => {
@@ -65,16 +67,7 @@ const LogInPage = () => {
     }
     
     try {
-      const response = await fetch('http://127.0.0.1:5105/api/Account/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          Email: formData.username,
-          Password: formData.password,
-        }),
-      });
+      const response = await loginUser(formData);
 
       console.log('Response status:', response.status);
 

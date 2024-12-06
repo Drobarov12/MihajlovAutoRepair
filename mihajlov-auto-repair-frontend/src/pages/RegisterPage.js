@@ -6,6 +6,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import { ToastContext } from "../components/App";
 import { useNavigate } from "react-router-dom";
+import { registerUser } from '../services/user';
 
 const RegisterPage = () => {
   const showToast = useContext(ToastContext);
@@ -39,17 +40,7 @@ const RegisterPage = () => {
     }
 
     try {
-      const response = await fetch('http://127.0.0.1:5105/api/Account/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          Email: formData.username,
-          Password: formData.password,
-          PhoneNumber: formData.phoneNumber,
-        }),
-      });
+      const response = await registerUser(formData);
 
       if (!response.ok) {
         showToast(`${t('messages.errorHappedn')}, ${t('messages.tryAgain')}.`, "error");

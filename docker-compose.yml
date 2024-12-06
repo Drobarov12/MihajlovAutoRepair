@@ -10,11 +10,16 @@ services:
       - "8080:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - DB_HOST=postgres
+      - DB_HOST=${DB_HOST}
       - DB_PORT=5432
       - DB_USER=${DB_USER}  
       - DB_PASSWORD=${DB_PASSWORD} 
-      - DB_NAME=${DB_NAME}  
+      - DB_NAME=${DB_NAME}
+      - JWT_ISSUER=${JWT_ISSUER}
+      - JWT_AUDIENCE=${JWT_AUDIENCE}
+      - JWT_KEY=${JWT_KEY}
+      - JWT_EXPIRYINMINUTES=${JWT_EXPIRYINMINUTES}
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS}
     depends_on:
       - postgres
     networks:
@@ -38,11 +43,10 @@ services:
     build:
       context: ./mihajlov-auto-repair-frontend
       dockerfile: ./Dockerfile
+      args:
+        REACT_APP_API_BASE_URL: ${REACT_APP_API_BASE_URL}
     ports:
-      - "3000:3000"
-    environment:
-      - REACT_APP_API_BASE_URL=http://mihajlovautorepairapi:8080/api
-      - ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
+      - "3000:80"
     depends_on:
       - mihajlovautorepairapi
     networks:
