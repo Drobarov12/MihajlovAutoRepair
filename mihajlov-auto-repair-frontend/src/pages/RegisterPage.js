@@ -6,6 +6,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import { ToastContext } from "../components/App";
 import { useNavigate } from "react-router-dom";
+import { registerUser } from '../services/user';
 
 const RegisterPage = () => {
   const showToast = useContext(ToastContext);
@@ -39,17 +40,7 @@ const RegisterPage = () => {
     }
 
     try {
-      const response = await fetch('http://127.0.0.1:5105/api/Account/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          Email: formData.username,
-          Password: formData.password,
-          PhoneNumber: formData.phoneNumber,
-        }),
-      });
+      const response = await registerUser(formData);
 
       if (!response.ok) {
         showToast(`${t('messages.errorHappedn')}, ${t('messages.tryAgain')}.`, "error");
@@ -173,7 +164,7 @@ const RegisterPage = () => {
                 }}
               />
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}> TODO: when we implement google facebook register.
               <Box sx={{ display: 'flex', alignItems: 'center', mt: 2, mb: 2 }}>
                 <Box sx={{ flex: 1, height: '1px', backgroundColor: 'white' }} />
                 <Typography sx={{ mx: 2, color: 'white' }}>{t('register.or')}</Typography>
@@ -201,7 +192,7 @@ const RegisterPage = () => {
                   <FacebookIcon fontSize="large" />
                 </IconButton>
               </Box>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12}>
               <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Button

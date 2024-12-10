@@ -94,6 +94,27 @@ The `Reservation` entity allows users to create and manage reservations. Only ad
    }
    ```
 
+2. **Get all for this user**: Get all reservations that this user has created.
+ - **Endpoint**: `GET /api/Reservation/user/{id}`
+ - **Access**: All logged in users.
+
+```csharp
+    [HttpGet("user/{id}")]
+    [Authorize]
+    public async Task<ActionResult<List<ReservationDto>>> GetAllUserReservations(long id)
+    {
+        var reservations = await _repository.GetAllForUserAsync(id);
+
+        if (reservations == null || !reservations.Any())
+        {
+            return NotFound("No reservations found.");
+        }
+
+        var reservationDto = _mapper.Map<List<ReservationDto>>(reservations);
+        return Ok(reservationDto);
+    }
+```
+
 2. **Get Reservation by ID**: Retrieves a specific reservation by ID.
    - **Endpoint**: `GET /api/Reservation/{id}`
    - **Access**: Admin only.
@@ -241,13 +262,11 @@ This API includes comprehensive CRUD functionality with strict role-based access
 
 ## Overview
 
-This API uses **ASP.NET Core Identity** with **JWT (JSON Web Tokens)** for secure authentication. Users register with their email and password, log in to receive a JWT token, and use that token to access protected API endpoints. The setup includes **PostgreSQL** as the database, running in a **Docker container**.
+This API uses **ASP.NET Core Identity** with **JWT (JSON Web Tokens)** for secure authentication. Users register with their email and password, log in to receive a JWT token, and use that token to access protected API endpoints.
 
 ### Components
 - **ASP.NET Core Identity** for user management and roles.
 - **JWT** for token-based authentication.
-- **PostgreSQL** database, managed with **Entity Framework Core** migrations.
-- **Docker** for running PostgreSQL in a container.
 
 ---
 
@@ -274,7 +293,7 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<long>, 
 
 ### 2. Registering Identity and JWT in `Program.cs`
 
-We added services for **ASP.NET Core Identity** and configured **JWT-based authentication** in `Program.cs`. Initially, we encountered an issue because `AddEntityFrameworkStores<ApplicationDbContext>()` was not recognized, which we fixed by ensuring the `Microsoft.AspNetCore.Identity.EntityFrameworkCore` package was installed.
+We added services for **ASP.NET Core Identity** and configured **JWT-based authentication** in `Program.cs`.
 
 #### Code:
 ```csharp
@@ -320,7 +339,7 @@ app.Run();
 
 ### 3. Generating a Secure JWT Key and Configuring `appsettings.json`
 
-For the JWT signing key, we generated a secure 32-character key to ensure it met the security requirements. We added this key along with the Issuer and Audience values in `appsettings.json`.
+For the JWT signing key, we generated a secure 32-character key to ensure it met the security requirements. We added this key along with the Issuer and Audience values in `appsettings.json` for development, but for distribution we get this values from the Envierment and we don't ever commit the `appsettings.json` file to the repo.
 
 #### `appsettings.json` Configuration:
 ```json
@@ -332,16 +351,14 @@ For the JWT signing key, we generated a secure 32-character key to ensure it met
     "ExpiryInMinutes": 60
   },
   "ConnectionStrings": {
-    "DefaultConnection": "Host=localhost;Database=mydb;Username=myuser;Password=mypassword"
+    "DefaultConnection": "Host=localhost;Database=db;Username=myuser;Password=mypassword"
   }
 }
 ```
 
 ### 4. User Registration and Login in `AccountController`
 
-We created endpoints for user registration and login in `AccountController`. During testing, we encountered some issues:
-- **Password Complexity Requirements**: We received errors when passwords didn’t meet ASP.NET Core Identity's default password requirements.
-- **Identity Tables Missing**: We encountered `relation "AspNetUsers" does not exist` errors, which we resolved by ensuring migrations were correctly applied to PostgreSQL.
+We created endpoints for user registration and login in `AccountController`. 
 
 #### User Registration Endpoint:
 ```csharp
@@ -403,15 +420,16 @@ private string GenerateJwtToken(ApplicationUser user)
         new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
     };
 
-    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_KEY") ?? _configuration["Jwt:Key"]));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-    var token = new JwtSecurityToken(
-        issuer: _configuration["Jwt:Issuer"],
-        audience: _configuration["Jwt:Audience"],
-        claims: claims,
-        expires: DateTime.Now.AddMinutes(Convert.ToDouble(_configuration["Jwt:ExpiryInMinutes"])),
-        signingCredentials: creds);
+        var token = new JwtSecurityToken(
+            issuer: Environment.GetEnvironmentVariable("JWT_ISSUER") ?? _configuration["Jwt:Issuer"],
+            audience: Environment.GetEnvironmentVariable("JWT_AUDIENCE") ?? _configuration["Jwt:Audience"],
+            claims: claims,
+            expires: DateTime.Now.AddMinutes(Convert.ToDouble(Environment.GetEnvironmentVariable("JWT_EXPIRYINMINUTES") ?? 
+            _configuration["Jwt:ExpiryInMinutes"])),
+            signingCredentials: creds);
 
     return new JwtSecurityTokenHandler().WriteToken(token);
 }
@@ -419,9 +437,7 @@ private string GenerateJwtToken(ApplicationUser user)
 
 ### 6. Protecting Endpoints with `[Authorize]`
 
-We secured specific endpoints with the `[Authorize]` attribute. During testing, we initially encountered `401 Unauthorized` errors when sending the token, which we resolved by ensuring:
-1. The token was formatted as `Bearer <token>`.
-2. `UseAuthentication()` and `UseAuthorization()` were in the correct order in `Program.cs`.
+We secured specific endpoints with the `[Authorize]` attribute. 
 
 #### Example of Protected Endpoint:
 ```csharp
@@ -438,7 +454,6 @@ public IActionResult SecureEndpoint()
 Throughout the implementation, we encountered and resolved several issues:
 - **401 Unauthorized Errors**: These were mostly due to missing `Bearer` prefixes or expired tokens.
 - **JWT Not Well Formed Error**: This error occurred when tokens were incorrectly formatted. We verified token generation using [jwt.io](https://jwt.io/) to inspect the header, payload, and signature.
-- **Database Connection Issues**: We ensured the Docker container running PostgreSQL was accessible and that migrations were properly applied.
 
 ### Final Workflow
 
