@@ -218,7 +218,7 @@ This is a short example on how to use the dialog in one page, we can allways cos
 
 ## What is i18next and why I use it
 
-i18next is an internationalization framework for JavaScript that provides tools for handling translations and localization in applications. It allows you to manage multiple languages, switch between them, and handle various localization features like pluralization, formatting, and more. It's widely used in React apps to create multilingual applications. Good sites to use i18next in a React app include apps that target multiple language regions or those offering content in different languages, such as e-commerce platforms, blogs, and global service platforms, where users from diverse linguistic backgrounds need to interact with the app in their preferred language.
+i18next is an framework for JavaScript that provides tools for handling translations and localization in applications. It allows you to manage multiple languages, switch between them, and handle various localization features like pluralization, formatting, and more. It's widely used in React apps to create multilingual applications. Good sites to use i18next in a React app include apps that target multiple language regions or those offering content in different languages, such as e-commerce platforms, blogs, and global service platforms, where users from diverse linguistic backgrounds need to interact with the app in their preferred language.
 
 ### **Explanation of the set up**
 
@@ -269,10 +269,7 @@ i18n
   .init({
     resources,
     lng: 'mk',  // Default language
-    fallbackLng: 'mk',  // Fallback language if the selected language is unavailable
-    interpolation: {
-      escapeValue: false,  // Disable escaping of interpolation values (usually for security)
-    },
+    fallbackLng: 'mk'  // Fallback language if the selected language is unavailable
   });
 ```
 
@@ -281,7 +278,6 @@ i18n
   - `resources`: Contains the translation files.
   - `lng`: The default language set for the app (in this case, Macedonian `mk`).
   - `fallbackLng`: The language to fallback to if a translation is missing in the selected language (here, it also defaults to Macedonian).
-  - `interpolation.escapeValue`: This is set to `false` because React already escapes HTML values for security, so you don't need to escape values again.
 
 #### **4. Exporting i18n**
 

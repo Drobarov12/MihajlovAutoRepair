@@ -10,7 +10,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+{
+    string connectionString = null;
+    if (Environment.GetEnvironmentVariable("DB_HOST") is not null)
+    {
+        connectionString = $"Host={Environment.GetEnvironmentVariable("DB_HOST")};" +
+                           $"Database={Environment.GetEnvironmentVariable("DB_NAME")};" +
+                           $"Username={Environment.GetEnvironmentVariable("DB_USER")};" +
+                           $"Password={Environment.GetEnvironmentVariable("DB_PASSWORD")}";
+    }
+    options.UseNpgsql(connectionString ??
+                      builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+        
 
 builder.Services.AddIdentity<User, IdentityRole<long>>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -29,9 +41,9 @@ builder.Services.AddAuthentication(options =>
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+            ValidIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER") ?? builder.Configuration["Jwt:Issuer"],
+            ValidAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE") ?? builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_KEY") ?? builder.Configuration["Jwt:Key"]))
         };
 
         options.Events = new JwtBearerEvents
@@ -60,10 +72,16 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalhost", policy =>
-        policy.WithOrigins("http://localhost:3000") 
-            .AllowAnyMethod() 
-            .WithHeaders("Authorization", "Content-Type") 
-            .AllowCredentials()); 
+    {
+        var allowedOrigins = Environment.GetEnvironmentVariable("ALLOWED_ORIGINS")?.Split(",") 
+                             ?? new[] { "http://localhost:3000" };
+
+        policy.WithOrigins(allowedOrigins)
+            .AllowAnyMethod()
+            .WithHeaders("Authorization", "Content-Type")
+            .AllowCredentials();
+    });
+       
 });
 
 
