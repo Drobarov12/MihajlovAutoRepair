@@ -164,7 +164,7 @@ const RegisterPage = () => {
                 }}
               />
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}> TODO: when we implement google facebook register.
               <Box sx={{ display: 'flex', alignItems: 'center', mt: 2, mb: 2 }}>
                 <Box sx={{ flex: 1, height: '1px', backgroundColor: 'white' }} />
                 <Typography sx={{ mx: 2, color: 'white' }}>{t('register.or')}</Typography>
@@ -192,7 +192,7 @@ const RegisterPage = () => {
                   <FacebookIcon fontSize="large" />
                 </IconButton>
               </Box>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12}>
               <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Button

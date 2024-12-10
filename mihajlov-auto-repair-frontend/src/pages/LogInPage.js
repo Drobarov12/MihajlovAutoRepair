@@ -168,7 +168,7 @@ const LogInPage = () => {
                 }}
               />
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}> TODO: Use the code when we implement logIn with google facebook ..
               <Box sx={{ display: 'flex', alignItems: 'center', mt: 2, mb: 2 }}>
                 <Box sx={{ flex: 1, height: '1px', backgroundColor: 'white' }} />
                 <Typography sx={{ mx: 2, color: 'white' }}>{t('login.or')}</Typography>
@@ -196,7 +196,7 @@ const LogInPage = () => {
                 <FacebookIcon fontSize="large" />
               </IconButton>
             </Box>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Button
