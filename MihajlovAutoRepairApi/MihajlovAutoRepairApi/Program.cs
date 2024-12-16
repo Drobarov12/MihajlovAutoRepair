@@ -134,10 +134,18 @@ async Task SeedRolesAndUsersAsync(RoleManager<IdentityRole<long>> roleManager, U
     // Ensure roles exist
     foreach (var role in roles)
     {
-        if (!await roleManager.RoleExistsAsync(role))
+        try
+        {
+            if (!await roleManager.RoleExistsAsync(role))
+            {
+                await roleManager.CreateAsync(new IdentityRole<long> { Name = role });
+            }
+        }
+        catch (Exception e)
         {
             await roleManager.CreateAsync(new IdentityRole<long> { Name = role });
         }
+        
     }
 
     // Seed an admin user (optional)
@@ -149,6 +157,7 @@ async Task SeedRolesAndUsersAsync(RoleManager<IdentityRole<long>> roleManager, U
         var adminUser = new User
         {
             Name = adminEmail,
+            UserName = adminEmail,
             Email = adminEmail,
             EmailConfirmed = true
         };
