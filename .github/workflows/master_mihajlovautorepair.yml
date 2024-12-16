@@ -3,11 +3,11 @@
 
 name: Build and deploy ASP.Net Core app to Azure Web App - mihajlovautorepair
 
-on:
-  push:
-    branches:
-      - master
-  workflow_dispatch:
+# on:
+#   push:
+#     branches:
+#       - master
+#   workflow_dispatch:
 
 jobs:
   build:
