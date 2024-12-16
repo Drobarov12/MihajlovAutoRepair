@@ -1,0 +1,50 @@
+name: Publish 🚀
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - master
+
+env:
+  AZURE_WEBAPP_NAME: mihajlovautorepair
+  AZURE_WEBAPP_PACKAGE_PATH: "./publish"
+  ALLOWED_ORIGINS: ${{ secrets.ALLOWED_ORIGINS }}
+  DB_HOST: ${{ secrets.DB_HOST }}
+  DB_NAME: ${{ secrets.DB_NAME }}
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  DB_USER: ${{ secrets.DB_USER }}
+  DB_PORT: 5432
+  JWT_AUDIENCE: ${{ secrets.JWT_AUDIENCE }}
+  JWT_ISSUER: ${{ secrets.JWT_ISSUER }}
+  JWT_KEY: ${{ secrets.JWT_KEY }}
+  JWT_EXPIRYINMINUTES: 60
+  
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
+          
+      - name: Restore
+        run: dotnet restore ./MihajlovAutoRepairApi/MihajlovAutoRepairApi.sln
+        
+      - name: Build
+        run: dotnet build ./MihajlovAutoRepairApi/MihajlovAutoRepairApi.sln --configuration Release --no-restore
+        
+      - name: Publish
+        run: dotnet publish ./MihajlovAutoRepairApi/MihajlovAutoRepairApi.sln --configuration Release --no-build --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
+        
+      - name: Deployment
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
