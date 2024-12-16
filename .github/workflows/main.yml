@@ -35,6 +35,12 @@ jobs:
           
       - name: Restore
         run: dotnet restore ./MihajlovAutoRepairApi/MihajlovAutoRepairApi.sln
+
+      - name: Set environment variable DB_HOST
+        run: echo "MY_ENV_VAR=some_value" >> $DB_NAME
+
+      - name: Set environment variable DB_PORT
+        run: echo "MY_ENV_VAR=some_value" >> $DB_PORT
         
       - name: Build
         run: dotnet build ./MihajlovAutoRepairApi/MihajlovAutoRepairApi.sln --configuration Release --no-restore
