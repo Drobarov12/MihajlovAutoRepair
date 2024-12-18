@@ -102,15 +102,15 @@ if (app.Environment.IsDevelopment())
 
 using (var scope = app.Services.CreateScope())
 {
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    context.Database.EnsureCreated(); // Ensure the database is created
+    context.Database.Migrate();
+    
     var services = scope.ServiceProvider;
     var roleManager = services.GetRequiredService<RoleManager<IdentityRole<long>>>();
     var userManager = services.GetRequiredService<UserManager<User>>();
 
     await SeedRolesAndUsersAsync(roleManager, userManager);
-
-    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    context.Database.EnsureCreated(); // Ensure the database is created
-    context.Database.Migrate();
 
     // File path to the JSON file
     var filePath = Path.Combine(AppContext.BaseDirectory, "bmw_models.json");
