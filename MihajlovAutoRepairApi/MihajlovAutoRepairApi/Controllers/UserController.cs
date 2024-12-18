@@ -97,7 +97,7 @@ public class UserController : ControllerBase
     
     [HttpPut("{id}/{role}")]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> UpdateUser(long id, string role)
+    public async Task<IActionResult> UpdateUserRole(long id, string role)
     {
         if (!ModelState.IsValid || id == 0)
         {

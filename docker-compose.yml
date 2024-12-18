@@ -8,6 +8,7 @@ services:
       dockerfile: MihajlovAutoRepairApi/Dockerfile
     ports:
       - "8080:8080"
+    restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - DB_HOST=${DB_HOST}
@@ -28,6 +29,7 @@ services:
   postgres:
     image: postgres:latest
     container_name: my_postgres
+    restart: always
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
