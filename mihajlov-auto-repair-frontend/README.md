@@ -1,4 +1,4 @@
-# React wirh Matirial UI
+# React with Material UI
 
 ## Project structure
 ```bash
